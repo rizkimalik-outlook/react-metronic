@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from '../menu/MenuItem'
+import axios from 'axios';
 
 function Aside() {
     const location = useLocation();
     const [menu, setMenu] = useState([]);
-    const menus = [{
-        name: 'general'
-    },{
-        name: 'dashboard'
-    }]
+  
+    async function getMenus() {
+        try {
+            const res = await axios.get('/menu')
+            const data = res.data;
+            console.log(data);
+            setMenu(data)
+            
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        setMenu(menus)
+        getMenus()
     }, [])
 
     return (
@@ -40,7 +49,8 @@ function Aside() {
                         {
                             menu.map((item, index) => {
                                 return (
-                                    <MenuItem to={item.name} active={item.name} isRoot={false} key={index}>
+                                    // <MenuItem to={item.menu_id} active={item.menu_name} isRoot={false} key={index}>
+                                    <MenuItem to='/dashboard' active={item.menu_name} isRoot={false} key={index}>
                                         <span className="svg-icon menu-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
@@ -50,7 +60,7 @@ function Aside() {
                                                 </g>
                                             </svg>
                                         </span>
-                                        <span className="menu-text">{item.name}</span>
+                                        <span className="menu-text">{item.menu_name}</span>
                                     </MenuItem>
                                 )
                             })

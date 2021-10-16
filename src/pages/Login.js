@@ -69,15 +69,6 @@ function Login() {
                 setAuthUser(data);
                 history.push("/dashboard")
             }
-
-            // setError(true);
-
-            // const res = await axios.get('/user', {
-            //     headers: {
-            //         'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZ2VudDEiLCJpYXQiOjE2MzQzMTczMzIsImV4cCI6MTYzNDQ5MDEzMn0.t_QKCJqvn0cQ6XaPMXbQRV9HkcXaw61eUVvPjmgxxbw'
-            //     }
-            // })
-            // console.log(res);
         }
         catch (error) {
             if (error.response) {
