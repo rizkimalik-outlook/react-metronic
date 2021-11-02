@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios';
 import { useSetRecoilState } from "recoil";
 import { AuthUser, SocketIO, socket } from "../store";
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import Icons from 'components/Icons';
 
 function Login() {
-    const history = useHistory()
+    let history = useHistory()
     const setGlobalSocketIO = useSetRecoilState(SocketIO);
     const setAuthUser = useSetRecoilState(AuthUser);
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
+    const [loading, setLoading] = useState('');
     const [fields, setFields] = useState({
         username: '',
         password: '',
@@ -26,9 +29,10 @@ function Login() {
         });
         setErrorUsername(false);
         setErrorPassword(false);
+        setLoading('');
     };
 
-    /* const onConnected = () => {
+    function onConnected() {
         socket.on('connect', function () {
             const data = {
                 "id": socket.id,
@@ -39,35 +43,38 @@ function Login() {
             setGlobalSocketIO(data);
         });
     }
-    onConnected(); */
-
-    useEffect(() => {
-        socket.on('connect', function () {
-            const data = {
-                "id": socket.id,
-                "connected": socket.connected
-            }
-            // socket.emit('join', socket.id);
-            setGlobalSocketIO(data);
-        });
-    }, [])
-
+    onConnected();
 
     const authLogin = async (e) => {
         e.preventDefault();
+        setLoading('spinner spinner-white spinner-left')
 
         try {
             const json = JSON.stringify(fields);
-            const res = await axios.post('/login', json, {
+            const res = await axios.post('/auth/login', json, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
             const data = res.data;
 
-            if (res.status == 200) {
+            if (res.status === 200) {
+                Swal.fire({
+                    title: "Login.",
+                    text: "Success into application!",
+                    buttonsStyling: false,
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    },
+                    timer: 1500
+                });
+                
+                setLoading('');
                 setAuthUser(data);
-                history.push("/dashboard")
+                history.push("/dashboard");
+                window.location.reload();
             }
         }
         catch (error) {
@@ -75,10 +82,10 @@ function Login() {
                 // console.log(error.response.status);
                 // console.log(error.response.headers);
                 const data = error.response.data;
-                if (data.value == 'username') {
+                if (data.value === 'username') {
                     setErrorUsername(true);
                 }
-                else if (data.value == 'password') {
+                else if (data.value === 'password') {
                     setErrorPassword(true);
                 }
 
@@ -105,7 +112,7 @@ function Login() {
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="la la-user" />
+                                    <Icons iconName="user" className="svg-icon svg-icon-primary svg-icon-sm" />
                                 </span>
                             </div>
                             <input
@@ -128,7 +135,7 @@ function Login() {
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="la la-key" />
+                                    <Icons iconName="key" className="svg-icon svg-icon-primary svg-icon-sm" />
                                 </span>
                             </div>
                             <input
@@ -152,14 +159,10 @@ function Login() {
                                 <span />Remember me
                             </label>
                         </div>
-
-                        {/* <Link href={route('register')} className="btn btn-link">
-                            Register
-                        </Link> */}
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center mt-5">
-                        <button type="submit" className="btn btn-lg btn-primary btn-block">
+                        <button type="submit" className={`btn btn-lg btn-primary btn-block ${loading}`}>
                             Sign In
                         </button>
                     </div>
