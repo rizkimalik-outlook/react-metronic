@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useSetRecoilState } from "recoil";
 import { AuthUser, SocketIO, socket } from "../store";
 import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import Icons from 'components/Icons';
 
 function Login() {
@@ -59,7 +59,7 @@ function Login() {
             const data = res.data;
 
             if (res.status === 200) {
-                Swal.fire({
+                /* Swal.fire({
                     title: "Login.",
                     text: "Success into application!",
                     buttonsStyling: false,
@@ -69,7 +69,7 @@ function Login() {
                         confirmButton: "btn btn-primary"
                     },
                     timer: 1500
-                });
+                }); */
                 
                 setLoading('');
                 setAuthUser(data);

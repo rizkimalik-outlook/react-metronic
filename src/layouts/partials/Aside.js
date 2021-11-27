@@ -12,7 +12,6 @@ function Aside() {
         try {
             const res = await axios.get('/menu')
             const data = res.data;
-            // console.log(data);
             setMenu(data)
 
         }
@@ -26,10 +25,10 @@ function Aside() {
     }, [])
 
     return (
-        <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+        <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
             <div className="brand flex-column-auto" id="kt_brand">
                 <NavLink to="/general" className="brand-logo">
-                    <img alt="Logo" src="/assets/media/logos/logo-hitam-50.png" />
+                    <img alt="Logo" src="/assets/media/logos/logo-hitam-50.png" height={40} />
                 </NavLink>
                 <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
                     <Icons iconName="angle-double-left" className="svg-icon svg-icon svg-icon-xl" />
@@ -53,13 +52,14 @@ function Aside() {
                             })
                         }
 
-                        <li className="menu-section">
-                            <h4 className="menu-text">Custom</h4>
-                            <i className="menu-icon ki ki-bold-more-hor icon-md" />
-                        </li>
+                        
 
 
                         {/* //?sample menu root */}
+                        {/* <li className="menu-section">
+                            <h4 className="menu-text">Custom</h4>
+                            <i className="menu-icon ki ki-bold-more-hor icon-md" />
+                        </li> */}
                         {/* <MenuItem to="/theme" active={location.pathname} isRoot={true}>
                             <span className="svg-icon menu-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -74,10 +74,9 @@ function Aside() {
                             <i className="menu-arrow" />
                         </MenuItem> */}
 
-                        <li className="menu-item menu-item-submenu" data-menu-toggle="hover">
+                        {/* <li className="menu-item menu-item-submenu" data-menu-toggle="hover">
                             <NavLink to="/dashboard" className="menu-link menu-toggle">
                                 <span className="svg-icon menu-icon">
-                                    {/*begin::Svg Icon | path:/assets/media/svg/icons/Home/Mirror.svg*/}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" fill="none" >
                                             <rect x={0} y={0} width={24} height={24} />
@@ -85,7 +84,6 @@ function Aside() {
                                             <path d="M12,14 C8.6862915,14 6,11.3137085 6,8 C6,4.6862915 8.6862915,2 12,2 C15.3137085,2 18,4.6862915 18,8 C18,11.3137085 15.3137085,14 12,14 Z M8.81595773,7.80077353 C8.79067542,7.43921955 8.47708263,7.16661749 8.11552864,7.19189981 C7.75397465,7.21718213 7.4813726,7.53077492 7.50665492,7.89232891 C7.62279197,9.55316612 8.39667037,10.8635466 9.79502238,11.7671393 C10.099435,11.9638458 10.5056723,11.8765328 10.7023788,11.5721203 C10.8990854,11.2677077 10.8117724,10.8614704 10.5073598,10.6647638 C9.4559885,9.98538454 8.90327706,9.04949813 8.81595773,7.80077353 Z" fill="#000000" opacity="0.3" />
                                         </g>
                                     </svg>
-                                    {/*end::Svg Icon*/}
                                 </span>
                                 <span className="menu-text">Miscellaneous</span>
                                 <i className="menu-arrow" />
@@ -133,7 +131,7 @@ function Aside() {
                                 </ul>
                             </div>
                         </li>
-
+ */}
 
                     </ul>
                 </div>

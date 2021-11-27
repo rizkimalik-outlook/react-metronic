@@ -27,7 +27,6 @@ function User() {
                 const data = res.data;
                 // console.log(data);
                 getUsers(data);
-
             }
             catch (error) {
                 console.log(error);
@@ -62,19 +61,17 @@ function User() {
         const { id, username } = data.row.data;
 
         return <>
-            <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm">
+            <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
                 <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
             </NavLink>
-            <NavLink to={`user/${username}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm">
+            <NavLink to={`user/${username}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>
-            <button type="button" onClick={(e) => deleteUser(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm">
+            <button type="button" onClick={(e) => deleteUser(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
                 <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
             </button>
         </>
     }
-
-
 
 
     return (
@@ -83,28 +80,15 @@ function User() {
 
             <div className="d-flex flex-column-fluid">
                 <div className="container-fluid">
-                    <div className="alert alert-custom alert-white alert-shadow fade show gutter-b" role="alert">
-                        <div className="alert-icon">
-                            <Icons iconName="sun" className="svg-icon svg-icon-primary svg-icon-xl" />
-                        </div>
-                        <div className="alert-text">
-                            List users data.
-                        </div>
-                    </div>
-
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="card card-custom card-stretch gutter-b">
+                            <div className="card card-custom card-stretch gutter-b card-border">
                                 <div className="card-header border-0 pt-5">
                                     <h3 className="card-title align-items-start flex-column">
                                         <span className="card-label font-weight-bolder text-dark">User Privillage</span>
                                         <span className="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
                                     </h3>
                                     <div className="card-toolbar">
-                                        <button type="button" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
-                                            <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
-                                            Export
-                                        </button>
                                         <button
                                             className="btn btn-primary font-weight-bolder btn-sm m-1"
                                             data-toggle="modal"
@@ -153,7 +137,6 @@ function User() {
 
                         </div>
                     </div>
-
                 </div>
             </div>
 
