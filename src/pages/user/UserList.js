@@ -5,8 +5,9 @@ import axios from 'axios';
 import DataGrid, { Column, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid';
 import { AuthUser } from 'store';
 import Icons from 'components/Icons';
-import SubHeader from 'layouts/partials/SubHeader';
+import { SubHeader, MainContent, Container } from 'layouts/partials';
 import Swal from 'sweetalert2';
+import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 // import CreateUser from './CreateUser';
 
 function UserList() {
@@ -46,7 +47,7 @@ function UserList() {
                 const res = await axios.delete(`/user/delete/${id}`)
                 const data = res.data;
 
-                setRefresh(key => key +1)
+                setRefresh(key => key + 1)
                 Swal.fire(
                     data.message,
                     "Your data has been deleted.",
@@ -74,70 +75,61 @@ function UserList() {
 
 
     return (
-        <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <MainContent>
             <SubHeader active_page="User Privillage" menu_name="Management User" modul_name="User Privillage" />
 
-            <div className="d-flex flex-column-fluid">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="card card-custom card-stretch gutter-b card-border">
-                                <div className="card-header border-0 pt-5">
-                                    <h3 className="card-title align-items-start flex-column">
-                                        <span className="card-label font-weight-bolder text-dark">User Privillage</span>
-                                        <span className="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
-                                    </h3>
-                                    <div className="card-toolbar">
-                                        <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
-                                            Create New User
-                                        </NavLink>
-                                        <NavLink to="/user/export" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
-                                            <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
-                                            Export
-                                        </NavLink>
-                                    </div>
-                                </div>
+            <Container>
+                <Card>
+                    <CardHeader>
+                        <CardTitle title="User Privillage" subtitle="List account users member login." />
+                        <CardToolbar>
+                            <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
+                                Create New User
+                            </NavLink>
+                            <NavLink to="/user/export" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
+                                <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
+                                Export
+                            </NavLink>
+                        </CardToolbar>
+                    </CardHeader>
+                    
 
-                                <div className="card-body">
-                                    <DataGrid
-                                        dataSource={users}
-                                        keyExpr="id"
-                                        allowColumnReordering={true}
-                                        allowColumnResizing={true}
-                                        columnAutoWidth={true}
-                                        showBorders={true}
-                                        showColumnLines={true}
-                                        showRowLines={true}
-                                        rowAlternationEnabled={true}
-                                    >
-                                        <HeaderFilter visible={true} />
-                                        <FilterRow visible={true} />
-                                        <Paging defaultPageSize={10} />
-                                        <Pager
-                                            visible={true}
-                                            allowedPageSizes={[10, 20, 50, 'all']}
-                                            displayMode='full'
-                                            showPageSizeSelector={true}
-                                            showInfo={true}
-                                            showNavigationButtons={true} />
+                    <CardBody>
+                        <DataGrid
+                            dataSource={users}
+                            keyExpr="id"
+                            allowColumnReordering={true}
+                            allowColumnResizing={true}
+                            columnAutoWidth={true}
+                            showBorders={true}
+                            showColumnLines={true}
+                            showRowLines={true}
+                            rowAlternationEnabled={true}
+                        >
+                            <HeaderFilter visible={true} />
+                            <FilterRow visible={true} />
+                            <Paging defaultPageSize={10} />
+                            <Pager
+                                visible={true}
+                                allowedPageSizes={[10, 20, 50, 'all']}
+                                displayMode='full'
+                                showPageSizeSelector={true}
+                                showInfo={true}
+                                showNavigationButtons={true} />
 
-                                        <Column caption="Username" dataField="username" />
-                                        <Column caption="Name" dataField="name" />
-                                        <Column caption="Email" dataField="email_address" />
-                                        <Column caption="Level" dataField="user_level" />
-                                        <Column caption="Actions" dataField="id" width={150} cellRender={buttonActions} />
-                                    </DataGrid>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                            <Column caption="Username" dataField="username" />
+                            <Column caption="Name" dataField="name" />
+                            <Column caption="Email" dataField="email_address" />
+                            <Column caption="Level" dataField="user_level" />
+                            <Column caption="Actions" dataField="id" width={150} cellRender={buttonActions} />
+                        </DataGrid>
+                    </CardBody>
+                </Card>
+            </Container>
 
             {/* <CreateUser stateChange={setRefresh} /> */}
-        </div>
+        </MainContent>
+
     )
 }
 
