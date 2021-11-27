@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function View() {
+function UserView() {
     let { username } = useParams();
     console.log(username);
 
@@ -58,4 +58,4 @@ function View() {
     )
 }
 
-export default View
+export default UserView;

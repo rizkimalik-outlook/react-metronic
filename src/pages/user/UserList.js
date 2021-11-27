@@ -7,10 +7,9 @@ import { AuthUser } from 'store';
 import Icons from 'components/Icons';
 import SubHeader from 'layouts/partials/SubHeader';
 import Swal from 'sweetalert2';
-import CreateUser from './CreateUser';
 // import CreateUser from './CreateUser';
 
-function User() {
+function UserList() {
     const { token } = useRecoilValue(AuthUser);
     const [users, getUsers] = useState([]);
     const [refresh, setRefresh] = useState(0);
@@ -89,14 +88,10 @@ function User() {
                                         <span className="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
                                     </h3>
                                     <div className="card-toolbar">
-                                        <button
-                                            className="btn btn-primary font-weight-bolder btn-sm m-1"
-                                            data-toggle="modal"
-                                            data-target="#modalCreateUser"
-                                        >
+                                        <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
                                             Create New User
-                                        </button>
-                                        <NavLink to="/user/create" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
+                                        </NavLink>
+                                        <NavLink to="/user/export" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
                                             <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
                                             Export
                                         </NavLink>
@@ -141,9 +136,9 @@ function User() {
             </div>
 
 
-            <CreateUser stateChange={setRefresh} />
+            {/* <CreateUser stateChange={setRefresh} /> */}
         </div>
     )
 }
 
-export default User
+export default UserList

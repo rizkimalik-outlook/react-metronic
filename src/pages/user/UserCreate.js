@@ -33,12 +33,10 @@ function UserCreate() {
                     'Content-Type': 'application/json'
                 }
             });
+            // const data = res.data;
             console.log(res);
 
-            // const data = res.data;
-            
-
-            // if (res.status === 200) {
+            if (res.status === 200) {
                 Swal.fire({
                     title: "Insert Success.",
                     text: "Success into application!",
@@ -50,8 +48,8 @@ function UserCreate() {
                     },
                     timer: 1500
                 });
-                history.push('/users')
-            // }
+                history.push('/user')
+            }
         }
         catch (error) {
             console.log(error);

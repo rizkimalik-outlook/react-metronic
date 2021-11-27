@@ -12,7 +12,7 @@ const routes = [
     },{
         path: 'user', 
         exact: true, 
-        component: lazy(() => import('../pages/user/ListUser')),
+        component: lazy(() => import('../pages/user/UserList')),
     },{
         path: 'user/create', 
         exact: false, 
@@ -20,7 +20,7 @@ const routes = [
     },{
         path: 'user/show/:username', 
         exact: false, 
-        component: lazy(() => import('../pages/user/ViewUser')),
+        component: lazy(() => import('../pages/user/UserView')),
     },{
         path: 'user/:username/edit', 
         exact: false, 
