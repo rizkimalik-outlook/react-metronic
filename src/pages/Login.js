@@ -73,7 +73,7 @@ function Login() {
                 
                 setLoading('');
                 setAuthUser(data);
-                history.push("/dashboard");
+                history.push("/todolist");
                 window.location.reload();
             }
         }

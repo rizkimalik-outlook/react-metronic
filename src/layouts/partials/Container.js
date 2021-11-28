@@ -5,7 +5,7 @@ function Container({ children }) {
         <div className="d-flex flex-column-fluid">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-lg-12">
                         {children}
                     </div>
                 </div>

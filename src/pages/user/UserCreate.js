@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { NavLink, useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'layouts/partials';
+import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'components/card';
 
 function UserCreate() {
     const history = useHistory();
@@ -61,12 +62,12 @@ function UserCreate() {
             <SubHeader active_page="User Create" menu_name="Management User" modul_name="User Create" />
 
             <Container>
-                <div className="card card-custom card-stretch gutter-b card-border">
+                <Card>
+                    <CardHeader>
+                        <CardTitle title="Create New User" />
+                    </CardHeader>
                     <form onSubmit={onSubmitCreateUser} className="form">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="modalCreateUserLabel">Create New User</h5>
-                        </div>
-                        <div className="modal-body">
+                        <CardBody>
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>Full Name:</label>
@@ -120,13 +121,13 @@ function UserCreate() {
                                         <span />Phone</label>
                                 </div>
                             </div>
-                        </div>
-                        <div className="modal-footer">
-                            <NavLink to="/user" className="btn btn-sm btn-secondary font-weight-bold">Close</NavLink>
-                            <button type="submit" className="btn btn-sm btn-primary font-weight-bold">Save changes</button>
-                        </div>
+                        </CardBody>
+                        <CardFooter>
+                            <NavLink to="/user" className="btn btn-sm btn-secondary mx-1">Close</NavLink>
+                            <button type="submit" className="btn btn-sm btn-primary font-weight-bold mx-1">Save changes</button>
+                        </CardFooter>
                     </form>
-                </div>
+                </Card>
             </Container>
         </MainContent>
     )
