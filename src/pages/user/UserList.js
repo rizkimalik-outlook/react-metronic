@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
-import DataGrid, { Column, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid';
+import Swal from 'sweetalert2';
 import { AuthUser } from 'store';
 import Icons from 'components/Icons';
 import { SubHeader, MainContent, Container } from 'layouts/partials';
-import Swal from 'sweetalert2';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
+import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
+import UserDetail from './UserDetail';
 // import CreateUser from './CreateUser';
 
 function UserList() {
@@ -60,17 +61,17 @@ function UserList() {
     function buttonActions(data) {
         const { id, username } = data.row.data;
 
-        return <>
-            <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+        return <div className="d-flex align-items-end justify-content-center">
+            {/* <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
                 <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
-            </NavLink>
+            </NavLink> */}
             <NavLink to={`user/${username}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>
             <button type="button" onClick={(e) => deleteUser(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
                 <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
             </button>
-        </>
+        </div>
     }
 
 
@@ -92,7 +93,7 @@ function UserList() {
                             </NavLink>
                         </CardToolbar>
                     </CardHeader>
-                    
+
 
                     <CardBody>
                         <DataGrid
@@ -104,8 +105,12 @@ function UserList() {
                             showBorders={true}
                             showColumnLines={true}
                             showRowLines={true}
-                            rowAlternationEnabled={true}
+                            // rowAlternationEnabled={true}
                         >
+                            <MasterDetail
+                                enabled={true}
+                                component={UserDetail}
+                            />
                             <HeaderFilter visible={true} />
                             <FilterRow visible={true} />
                             <Paging defaultPageSize={10} />
