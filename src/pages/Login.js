@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-
 import axios from 'axios';
 import { useSetRecoilState } from "recoil";
 import { AuthUser, SocketIO, socket } from "../store";
 import { useHistory } from 'react-router-dom';
-// import Swal from 'sweetalert2';
 import Icons from 'components/Icons';
 
 function Login() {
@@ -33,14 +31,12 @@ function Login() {
     };
 
     function onConnected() {
-        socket.auth = { username:fields.username };
+        socket.auth = { username: fields.username };
         socket.on('connect', function () {
             const data = {
                 "id": socket.id,
                 "connected": socket.connected
             }
-
-            // socket.emit('join', socket.id);
             setGlobalSocketIO(data);
         });
     }
@@ -60,18 +56,6 @@ function Login() {
             const data = res.data;
 
             if (res.status === 200) {
-                /* Swal.fire({
-                    title: "Login.",
-                    text: "Success into application!",
-                    buttonsStyling: false,
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    },
-                    timer: 1500
-                }); */
-                
                 setLoading('');
                 setAuthUser(data);
                 history.push("/todolist");
@@ -167,10 +151,7 @@ function Login() {
                             Sign In
                         </button>
                     </div>
-
                 </form>
-
-                {/* <ValidationErrors errors={errors} /> */}
 
             </div>
         </div>

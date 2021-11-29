@@ -3,19 +3,20 @@ import { socket, AuthUser } from 'store';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 import { Container, MainContent, SubHeader } from 'layouts/partials';
 import { useRecoilValue } from 'recoil';
+import { AskPermission } from 'components/Notification';
 
 function SocketClient() {
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
     const { username } = useRecoilValue(AuthUser);
     const [room, setRoom] = useState('');
-    // const [socketid, setSocketid] = useState('');
     const [status, setStatus] = useState('');
     const [to, setTo] = useState('');
 
     useEffect(() => {
         socket.auth = { username };
         socket.connect();
+        AskPermission();
 
         console.log(`${socket.auth.username} - connected : ${socket.id}`);
         let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
