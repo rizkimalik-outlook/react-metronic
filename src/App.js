@@ -1,10 +1,10 @@
 import { useEffect,Suspense } from "react";
 import Router from "./router";
 import SplashScreen from 'components/SplashScreen';
+import { AskPermission } from "components/Notification";
 
 // import 'devextreme/dist/css/dx.light.css';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
-import { AskPermission } from "components/Notification";
 
 function App() {
     useEffect(() => {
