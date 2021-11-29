@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { socket, AuthUser } from 'store';
-import { Card, CardBody, CardFooter, CardHeader, CardTitle, CardToolbar } from 'components/card';
+import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 import { Container, MainContent, SubHeader } from 'layouts/partials';
 import { useRecoilValue } from 'recoil';
 
@@ -9,27 +9,27 @@ function SocketClient() {
     const [conversation, setConversation] = useState([]);
     const { username } = useRecoilValue(AuthUser);
     const [room, setRoom] = useState('');
+    // const [socketid, setSocketid] = useState('');
     const [status, setStatus] = useState('');
+    const [to, setTo] = useState('');
 
     useEffect(() => {
-        console.log(`connected : ${socket.connected}`);
-        let getstatus = socket.connected === true ? 'Available' : 'Disconnect';
+        socket.auth = { username };
+        socket.connect();
+
+        console.log(`${socket.auth.username} - connected : ${socket.id}`);
+        let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
         setStatus(getstatus);
+        // setSocketid(socket.id);
 
         socket.on('return-message', (res) => {
-            let { room, message, socket_id, username } = res;
+            // let { room, message, socket_id, username, to } = res;
             console.log(res);
             setConversation(
-                conversation => [...conversation,
-                {
-                    room,
-                    socket_id,
-                    username,
-                    message
-                }]
+                conversation => [...conversation, res]
             );
         });
-    }, [])
+    }, [username]);
 
     function joinRoom(room_id) {
         setRoom(room_id);
@@ -37,15 +37,17 @@ function SocketClient() {
     }
 
     function sendMessage() {
-        let data_send = {
+        let content = {
             room: room,
             message: message,
             socket_id: socket.id,
-            username: username
+            username: username,
+            to: to,
+            from: socket.id
         }
-        socket.emit('send-message', data_send)
+        socket.emit('send-message', content)
         setConversation(
-            conversation => [...conversation, data_send]
+            conversation => [...conversation, content]
         );
         setMessage('');
     }
@@ -112,6 +114,8 @@ function SocketClient() {
                                 <button onClick={sendMessage} className="btn btn-primary mx-2 btn-sm">send</button>
                             </CardFooter> */}
                             <div className="card-footer p-2">
+                            <input type="text" name="to" onChange={(e) => setTo(e.target.value)} value={to} className="form-control" placeholder="to" />
+
                                 <textarea
                                     className="form-control form-control-flush mb-3"
                                     rows={1}

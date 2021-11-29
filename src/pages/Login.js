@@ -33,6 +33,7 @@ function Login() {
     };
 
     function onConnected() {
+        socket.auth = { username:fields.username };
         socket.on('connect', function () {
             const data = {
                 "id": socket.id,
