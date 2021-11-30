@@ -97,7 +97,6 @@ function SocketClient() {
                             <CardHeader className="border-bottom">
                                 <CardTitle title="Socket Client" subtitle={socket.id} />
                             </CardHeader>
-
                             <CardBody>
                                 {
                                     conversation.map((data, index) => {
