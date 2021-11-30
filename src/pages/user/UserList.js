@@ -81,7 +81,7 @@ function UserList() {
 
             <Container>
                 <Card>
-                    <CardHeader>
+                    <CardHeader className="border-0">
                         <CardTitle title="User Privillage" subtitle="List account users member login." />
                         <CardToolbar>
                             <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
@@ -93,8 +93,6 @@ function UserList() {
                             </NavLink>
                         </CardToolbar>
                     </CardHeader>
-
-
                     <CardBody>
                         <DataGrid
                             dataSource={users}
