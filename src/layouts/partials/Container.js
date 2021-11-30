@@ -2,7 +2,7 @@ import React from 'react';
 
 function Container({ children }) {
     return (
-        <div className="d-flex flex-column-fluid">
+        <div className="d-lg-flex flex-column-fluid">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-lg-12">

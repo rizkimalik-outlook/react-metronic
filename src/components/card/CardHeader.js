@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CardHeader({ children }) {
+function CardHeader({ children,className }) {
     return (
-        <div className="card-header border-0 pt-4">
+        <div className={`card-header pt-4 ${className}`}>
             { children }
         </div>
     )

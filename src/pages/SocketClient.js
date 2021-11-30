@@ -59,8 +59,8 @@ function SocketClient() {
             <SubHeader active_page="Socket Master" menu_name="Socket" modul_name="Socket Client" />
 
             <Container>
-                <div className="row">
-                    <div className="col-lg-3 p-0">
+                <div className="row d-lg-flex">
+                    <div className="col-lg-3 vh-100 pr-1">
                         <Card>
                             <CardHeader>
                                 <CardTitle title="Agent Status" subtitle={status} />
@@ -69,7 +69,7 @@ function SocketClient() {
                                     <span className="label label-rounded label-primary">10</span>
                                 </CardToolbar>
                             </CardHeader>
-                            <CardBody className="p-0 scroll-y h-600 h-lg-auto">
+                            <CardBody className="p-0 scroll-y h-100 h-lg-auto">
                                 <div className="table-responsive ">
                                     <div className="list list-hover border-bottom" onClick={(e) => joinRoom('200210022')}>
                                         <div className="d-flex align-items-start list-item card-spacer-x py-4">
@@ -92,9 +92,9 @@ function SocketClient() {
                             </CardBody>
                         </Card>
                     </div>
-                    <div className="col-lg-9 p-0">
+                    <div className="col-lg-9 pl-1">
                         <Card>
-                            <CardHeader>
+                            <CardHeader className="border-bottom">
                                 <CardTitle title="Socket Client" subtitle={socket.id} />
                             </CardHeader>
 
@@ -126,7 +126,7 @@ function SocketClient() {
                                     onChange={(e) => setMessage(e.target.value)}
                                     value={message}
                                 />
-                                <div className="d-flex flex-stack">
+                                <div className="d-flex justify-content-between">
                                     <div className="d-flex align-items-center">
                                         <button className="btn btn-sm btn-icon btn-active-light-primary" type="button" data-bs-toggle="tooltip"
                                             title="Coming soon"><i className="fa fa-home" /></button>
