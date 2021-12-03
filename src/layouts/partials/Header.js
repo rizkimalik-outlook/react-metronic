@@ -15,11 +15,7 @@ function Header() {
     async function onSignOut() {
         try {
             const json = JSON.stringify({ username: getAuthUser.username });
-            const res = await axios.post('/auth/logout', json, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const res = await axios.post('/auth/logout', json);
             const data = res.data;
             if (data.status === 'success') {
                 socket.disconnect();

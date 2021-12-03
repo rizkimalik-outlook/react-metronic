@@ -12,8 +12,8 @@ function Aside() {
         try {
             const res = await axios.get('/menu')
             const data = res.data;
+            // console.log(data);
             setMenu(data)
-
         }
         catch (error) {
             console.log(error);

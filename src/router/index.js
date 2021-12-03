@@ -12,7 +12,7 @@ const Login = lazy(() => import('../pages/Login'));
 
 function Router() {
     const getAuthUser = useRecoilValue(AuthUser);
-    const isAuth = getAuthUser.token;
+    const isAuth = Boolean(getAuthUser.token);
     // console.log(isAuth);
 
     return (
@@ -27,7 +27,6 @@ function Router() {
                 </PrivateRoute>
             </Switch>
         </Suspense>
-
     )
 
 }

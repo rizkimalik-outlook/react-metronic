@@ -48,11 +48,7 @@ function Login() {
 
         try {
             const json = JSON.stringify(fields);
-            const res = await axios.post('/auth/login', json, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const res = await axios.post('/auth/login', json);
             const data = res.data;
 
             if (res.status === 200) {

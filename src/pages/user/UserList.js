@@ -20,11 +20,7 @@ function UserList() {
     useEffect(() => {
         async function getDataUser() {
             try {
-                const res = await axios.get('/user', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
+                const res = await axios.get('/user')
                 const data = res.data;
                 // console.log(data);
                 getUsers(data);
