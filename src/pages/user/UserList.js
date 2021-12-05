@@ -39,7 +39,8 @@ function UserList() {
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yes, delete it!"
-        }).then(async function (result) {
+        })
+        .then(async function (result) {
             if (result.value) {
                 const res = await axios.delete(`/user/delete/${id}`)
                 const data = res.data;
@@ -55,18 +56,18 @@ function UserList() {
     }
 
     function buttonActions(data) {
-        const { id, username } = data.row.data;
+        const { id } = data.row.data;
 
         return <div className="d-flex align-items-end justify-content-center">
-            {/* <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
-                <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
-            </NavLink> */}
-            <NavLink to={`user/${username}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
+            <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>
             <button type="button" onClick={(e) => deleteUser(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
                 <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
             </button>
+            {/* <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
+                <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
+            </NavLink> */}
         </div>
     }
 

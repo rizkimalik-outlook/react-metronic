@@ -18,11 +18,11 @@ const routes = [
         exact: false, 
         component: lazy(() => import('../pages/user/UserCreate')),
     },{
-        path: 'user/show/:username', 
+        path: 'user/show/:id', 
         exact: false, 
         component: lazy(() => import('../pages/user/UserView')),
     },{
-        path: 'user/:username/edit', 
+        path: 'user/:id/edit', 
         exact: false, 
         component: lazy(() => import('../pages/user/UserEdit')),
     },
