@@ -14,11 +14,11 @@ function AskPermission() {
 function ShowNotification(Title, Tag) {
     function PushNotification() {
         let options = {
-            body: `Ticket Escalation to ${Title}, Ticket Number - ${Tag}`,
+            body: `${Title} : ${Tag}`,
             // icon: 'img/' + Icon,
             tag: Tag
         }
-        const notif = new Notification('Ticket Number - ' + Title, options);
+        const notif = new Notification(Title, options);
         notif.onclick = function (event) {
             event.preventDefault();
             // location.href = `${DomainUrl}/inhealth/HTML/TrxShowTicket.aspx?ticketid=${Title}`;

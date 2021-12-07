@@ -1,11 +1,11 @@
 import React from 'react'
-import Logo from 'assets/media/logos/logo-hitam-50.png';
+// import Logo from '../../public/assets/media/logos/logo-hitam-50.png';
 
 
 function MendawaiLogo({className}) {
     return (
         <>
-            <img src={Logo} alt="Mendawai-Icon" className={className} />
+            <img src="/assets/media/logos/logo-hitam-50.png" alt="Mendawai-Icon" className={className} />
         </>
     )
 }

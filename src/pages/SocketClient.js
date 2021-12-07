@@ -3,7 +3,7 @@ import { socket, AuthUser } from 'store';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 import { Container, MainContent, SubHeader } from 'layouts/partials';
 import { useRecoilValue } from 'recoil';
-import { AskPermission } from 'components/Notification';
+import { AskPermission, ShowNotification } from 'components/Notification';
 
 function SocketClient() {
     const [message, setMessage] = useState('');
@@ -11,7 +11,7 @@ function SocketClient() {
     const { username } = useRecoilValue(AuthUser);
     const [room, setRoom] = useState('');
     const [status, setStatus] = useState('');
-    const [to, setTo] = useState('');
+    const [clientid, setClientid] = useState('');
 
     useEffect(() => {
         socket.auth = { username };
@@ -21,11 +21,10 @@ function SocketClient() {
         console.log(`${socket.auth.username} - connected : ${socket.id}`);
         let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
         setStatus(getstatus);
-        // setSocketid(socket.id);
 
-        socket.on('return-message', (res) => {
-            // let { room, message, socket_id, username, to } = res;
-            console.log(res);
+        socket.on('return-message-client', (res) => {
+            let { message, username } = res;
+            ShowNotification(username,message);
             setConversation(
                 conversation => [...conversation, res]
             );
@@ -43,10 +42,10 @@ function SocketClient() {
             message: message,
             socket_id: socket.id,
             username: username,
-            to: to,
-            from: socket.id
+            agent_id: socket.id,
+            client_id: clientid
         }
-        socket.emit('send-message', content)
+        socket.emit('send-message-agent', content)
         setConversation(
             conversation => [...conversation, content]
         );
@@ -114,7 +113,7 @@ function SocketClient() {
                                 <button onClick={sendMessage} className="btn btn-primary mx-2 btn-sm">send</button>
                             </CardFooter> */}
                             <div className="card-footer p-2">
-                            <input type="text" name="to" onChange={(e) => setTo(e.target.value)} value={to} className="form-control" placeholder="to" />
+                            <input type="text" name="clientid" onChange={(e) => setClientid(e.target.value)} value={clientid} className="form-control" placeholder="to" />
 
                                 <textarea
                                     className="form-control form-control-flush mb-3"
