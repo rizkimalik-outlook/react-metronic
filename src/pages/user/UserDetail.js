@@ -25,7 +25,7 @@ function UserDetail(props) {
     )
 
     function renderFormItem(item) {
-        return <span>{item.editorOptions.value}</span>;
+        return <span className="p-3">{item.editorOptions.value}</span>;
     }
 }
 

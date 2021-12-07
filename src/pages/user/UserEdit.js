@@ -65,7 +65,7 @@ function UserEdit() {
             <Container>
                 <Card>
                     <CardHeader>
-                        <CardTitle title="Update User" />
+                        <CardTitle title="Update User" subtitle="Form update user login." />
                     </CardHeader>
                     <form onSubmit={handleSubmit(onSubmitUpdateUser)} className="form">
                         <CardBody>

@@ -32,21 +32,23 @@ const routes = [
         path: '/',
         component: lazy(() => import('../pages/General')),
         exact: true,
-    },{
-        path: 'dxreact', 
+    },/* {
+        path: '*',
+        component: lazy(() => import('../pages/NotFound')),
+        exact: false,
+    }, */{
+        path: 'dxgrid', 
         exact: true, 
         component: lazy(() => import('../pages/DxReact')),
-    },{
+    },/* {
+        path: 'dxreact', 
+        exact: true, 
+        component: lazy(() => import('../pages/GridReact')),
+    }, */{
         path: 'chat', 
         exact: true, 
         component: lazy(() => import('../pages/SocketClient')),
     },
-
-    /* {
-        path: '*',
-        component: lazy(() => import('../pages/NotFound')),
-        exact: true,
-    }, */
 ];
 
 export default routes;
