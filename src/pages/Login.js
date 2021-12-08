@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useSetRecoilState } from "recoil";
-import { AuthUser, SocketIO, socket } from "../store";
+import { AuthUser, SocketStore, socket } from "../store";
 import { useHistory } from 'react-router-dom';
 import Icons from 'components/Icons';
 
 function Login() {
     let history = useHistory()
-    const setGlobalSocketIO = useSetRecoilState(SocketIO);
+    const setGlobalSocketIO = useSetRecoilState(SocketStore);
     const setAuthUser = useSetRecoilState(AuthUser);
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
@@ -70,10 +70,8 @@ function Login() {
                     setErrorPassword(true);
                 }
 
-            } else if (error.request) {
-                console.log(error.request);
             } else {
-                console.log('Error', error.message);
+                console.log('Error', error);
             }
         }
     }

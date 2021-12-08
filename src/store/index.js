@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
-import { SocketIO, AuthUser } from "./atom";
+import { SocketStore, AuthUser } from "./atom";
 
-const endpoint = process.env.REACT_APP_API;
+const endpoint = process.env.REACT_APP_REST_API;
 const socket = io(endpoint);
 
 
-export { SocketIO, socket, AuthUser }
+export { socket, SocketStore, AuthUser }

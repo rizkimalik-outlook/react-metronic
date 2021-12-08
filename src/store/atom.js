@@ -3,8 +3,8 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist()
 
-const SocketIO = atom({
-    key: 'SocketIO',
+const SocketStore = atom({
+    key: 'SocketStore',
     default: {},
     effects_UNSTABLE: [persistAtom],
 });
@@ -15,4 +15,4 @@ const AuthUser = atom({
     effects_UNSTABLE: [persistAtom],
 });
 
-export { SocketIO, AuthUser }
+export { SocketStore, AuthUser }

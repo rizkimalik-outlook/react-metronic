@@ -6,9 +6,9 @@ const routes = [
         exact: true, 
         component: lazy(() => import('../pages/Dashboard')),
     },{
-        path: 'general', 
+        path: 'todolist', 
         exact: true, 
-        component: lazy(() => import('../pages/General')),
+        component: lazy(() => import('../pages/todolist/TodoList')),
     },{
         path: 'user', 
         exact: true, 
@@ -32,6 +32,10 @@ const routes = [
         path: '/',
         component: lazy(() => import('../pages/General')),
         exact: true,
+    },{
+        path: 'general', 
+        exact: true, 
+        component: lazy(() => import('../pages/General')),
     },/* {
         path: '*',
         component: lazy(() => import('../pages/NotFound')),
@@ -40,11 +44,7 @@ const routes = [
         path: 'dxgrid', 
         exact: true, 
         component: lazy(() => import('../pages/DxReact')),
-    },/* {
-        path: 'dxreact', 
-        exact: true, 
-        component: lazy(() => import('../pages/GridReact')),
-    }, */{
+    },{
         path: 'chat', 
         exact: true, 
         component: lazy(() => import('../pages/SocketClient')),
