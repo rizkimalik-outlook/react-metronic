@@ -15,7 +15,7 @@ function UserEdit() {
         async function getShowUser() {
             try {
                 const res = await axios.get(`/user/show/${id}`)
-                const { name, username, email_address, user_level, max_concurrent } = res.data[0];
+                const { name, username, email_address, user_level, max_concurrent } = res.data.data[0];
                 reset({
                     id:id,
                     name,
@@ -101,7 +101,7 @@ function UserEdit() {
                                 <div className="col-lg-6">
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
-                                        <option value="" selected>-- User Level --</option>
+                                        <option>-- User Level --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
                                         <option value="Agent">Agent</option>
@@ -111,7 +111,7 @@ function UserEdit() {
                                 <div className="col-lg-6">
                                     <label>Organization:</label>
                                     <select className="form-control" {...register("organization", { required: true })}>
-                                        <option value="" selected>-- User Organization --</option>
+                                        <option>-- User Organization --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
                                         <option value="Agent">Agent</option>

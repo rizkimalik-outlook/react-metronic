@@ -49,9 +49,9 @@ function Login() {
         try {
             const json = JSON.stringify(fields);
             const res = await axios.post('/auth/login', json);
-            const data = res.data;
+            const data = res.data.data;
 
-            if (res.status === 200) {
+            if (res.data.status === 200) {
                 setLoading('');
                 setAuthUser(data);
                 history.push("/todolist");

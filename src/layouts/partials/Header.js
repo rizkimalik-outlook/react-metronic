@@ -17,7 +17,7 @@ function Header() {
             const json = JSON.stringify({ username: getAuthUser.username });
             const res = await axios.post('/auth/logout', json);
             const data = res.data;
-            if (data.status === 'success') {
+            if (data.status === 200) {
                 socket.disconnect();
                 localStorage.clear();
                 resetSocketIO();

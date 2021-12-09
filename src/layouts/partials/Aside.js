@@ -12,7 +12,7 @@ function Aside() {
         async function getMenus() {
             try {
                 const res = await axios.get('/menu')
-                const data = res.data;
+                const data = res.data.data;
                 setMenu(data)
             }
             catch (error) {
@@ -20,7 +20,7 @@ function Aside() {
             }
         }
         getMenus()
-    }, [])
+    }, [menu])
 
     return (
         <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">

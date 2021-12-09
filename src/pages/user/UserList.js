@@ -21,8 +21,7 @@ function UserList() {
         async function getDataUser() {
             try {
                 const res = await axios.get('/user')
-                const data = res.data;
-                // console.log(data);
+                const data = res.data.data;
                 getUsers(data);
             }
             catch (error) {
@@ -43,7 +42,7 @@ function UserList() {
         .then(async function (result) {
             if (result.value) {
                 const res = await axios.delete(`/user/delete/${id}`)
-                const data = res.data;
+                const data = res.data.data;
 
                 setRefresh(key => key + 1)
                 Swal.fire(

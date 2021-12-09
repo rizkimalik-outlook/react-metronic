@@ -74,7 +74,7 @@ function UserCreate() {
                                 <div className="col-lg-6">
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
-                                        <option selected>-- User Level --</option>
+                                        <option>-- User Level --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
                                         <option value="Agent">Agent</option>
@@ -84,7 +84,7 @@ function UserCreate() {
                                 <div className="col-lg-6">
                                     <label>Organization:</label>
                                     <select className="form-control" {...register("organization", { required: true })}>
-                                        <option value="" selected>-- User Organization --</option>
+                                        <option>-- User Organization --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
                                         <option value="Agent">Agent</option>
