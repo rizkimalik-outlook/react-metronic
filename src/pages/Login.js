@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useSetRecoilState } from "recoil";
-import { AuthUser, SocketStore, socket } from "../store";
+import { AuthUser, socket } from "../store";
 import { useHistory } from 'react-router-dom';
 import Icons from 'components/Icons';
 
 function Login() {
     let history = useHistory()
-    const setGlobalSocketIO = useSetRecoilState(SocketStore);
     const setAuthUser = useSetRecoilState(AuthUser);
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
@@ -30,18 +29,6 @@ function Login() {
         setLoading('');
     };
 
-    function onConnected() {
-        socket.auth = { username: fields.username };
-        socket.on('connect', function () {
-            const data = {
-                "id": socket.id,
-                "connected": socket.connected
-            }
-            setGlobalSocketIO(data);
-        });
-    }
-    onConnected();
-
     const authLogin = async (e) => {
         e.preventDefault();
         setLoading('spinner spinner-white spinner-left')
@@ -52,6 +39,13 @@ function Login() {
             const data = res.data.data;
 
             if (res.data.status === 200) {
+                socket.auth = { 
+                    user_flag: 'agent',
+                    username:fields.username,
+                    email:''
+                }
+                socket.connect();
+
                 setLoading('');
                 setAuthUser(data);
                 history.push("/todolist");
@@ -60,8 +54,6 @@ function Login() {
         }
         catch (error) {
             if (error.response) {
-                // console.log(error.response.status);
-                // console.log(error.response.headers);
                 const data = error.response.data;
                 if (data.value === 'username') {
                     setErrorUsername(true);

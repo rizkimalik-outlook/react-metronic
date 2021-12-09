@@ -14,11 +14,15 @@ function SocketClient() {
     const [clientid, setClientid] = useState('');
 
     useEffect(() => {
-        socket.auth = { username };
-        socket.connect();
+        // socket.auth = { 
+        //     user_flag: 'agent',
+        //     username,
+        //     email:''
+        // };
+        // socket.connect();
         AskPermission();
 
-        console.log(`${socket.auth.username} - connected : ${socket.id}`);
+        // console.log(`${socket.auth.username} - connected : ${socket.id}`);
         let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
         setStatus(getstatus);
 
@@ -42,8 +46,8 @@ function SocketClient() {
             message: message,
             socket_id: socket.id,
             username: username,
-            agent_id: socket.id,
-            client_id: clientid
+            socket_agentid: socket.id,
+            socket_custid: clientid
         }
         socket.emit('send-message-agent', content)
         setConversation(
