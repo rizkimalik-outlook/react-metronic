@@ -5,6 +5,7 @@ import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'components/ca
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import UserResetPassword from './UserResetPassword';
 
 function UserEdit() {
     let { id } = useParams();
@@ -17,7 +18,7 @@ function UserEdit() {
                 const res = await axios.get(`/user/show/${id}`)
                 const { name, username, email_address, user_level, max_concurrent } = res.data.data[0];
                 reset({
-                    id:id,
+                    id: id,
                     name,
                     username,
                     email_address,
@@ -30,7 +31,7 @@ function UserEdit() {
             }
         }
         getShowUser();
-    }, [id,reset])
+    }, [id, reset])
 
 
     const onSubmitUpdateUser = async (data) => {
@@ -61,7 +62,6 @@ function UserEdit() {
     return (
         <MainContent>
             <SubHeader active_page="User Edit" menu_name="Management User" modul_name="User Edit" />
-
             <Container>
                 <Card>
                     <CardHeader>
@@ -73,7 +73,7 @@ function UserEdit() {
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>Full Name:</label>
-                                    <input type="text" className="form-control" placeholder="Enter full name" {...register("name", { required: true, maxLength: 100 })}  />
+                                    <input type="text" className="form-control" placeholder="Enter full name" {...register("name", { required: true, maxLength: 100 })} />
                                     {errors.name && <span className="form-text text-danger">Please enter your full name</span>}
                                 </div>
                                 <div className="col-lg-6">
@@ -91,7 +91,7 @@ function UserEdit() {
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Password:</label><br />
-                                    <button type="button" className="btn btn-dark">Reset Password</button>
+                                    <button type="button" className="btn btn-dark" data-toggle="modal" data-target="#modalResetPassword">Reset Password</button>
                                     {/* <input type="password" name="password" defaultValue={fields.password} required={true} onChange={onHandleChange} className="form-control" placeholder="Enter password" />
                                     <span className="form-text text-danger">Please enter your password</span> */}
                                 </div>
@@ -118,7 +118,7 @@ function UserEdit() {
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
-                                
+
                             </div>
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
@@ -166,7 +166,7 @@ function UserEdit() {
                                 </div>
 
                             </div>
-                            
+
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
                                 <div className="col-lg-4">
@@ -227,6 +227,8 @@ function UserEdit() {
                         </CardFooter>
                     </form>
                 </Card>
+
+                <UserResetPassword userid={id} />
             </Container>
         </MainContent>
     )
