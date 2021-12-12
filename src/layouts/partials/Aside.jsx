@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from './menu/MenuItem'
-import axios from 'axios';
 import Icons from 'components/Icons';
+import { getMenu } from 'api/menu';
 
 function Aside() {
     const location = useLocation();
@@ -11,12 +11,12 @@ function Aside() {
     useEffect(() => {
         async function getMenus() {
             try {
-                const res = await axios.get('/menu')
+                const res = await getMenu();
                 const data = res.data.data;
                 setMenu(data)
             }
             catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         }
         getMenus()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useSetRecoilState } from "recoil";
-import { AuthUser, socket } from "../store";
+import { AuthUser, socket } from "store";
 import { useHistory } from 'react-router-dom';
 import Icons from 'components/Icons';
 
@@ -40,7 +40,7 @@ function Login() {
 
             if (res.data.status === 200) {
                 socket.auth = { 
-                    user_flag: 'agent',
+                    flag_to: 'agent',
                     username:fields.username,
                     email:''
                 }

@@ -2,7 +2,7 @@ import React from 'react';
 import SubHeader from 'layouts/partials/SubHeader';
 import { NavLink } from 'react-router-dom';
 
-function Dashboard() {
+function DashboardTicket() {
     return (
         <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
             <SubHeader active_page="Dashboard Ticket" menu_name="Dashboard" modul_name="Ticket" />
@@ -52,7 +52,7 @@ function Dashboard() {
                                                             <td className="pl-0 py-4">
                                                                 <div className="symbol symbol-50 symbol-light">
                                                                     <span className="symbol-label">
-                                                                        <img src="/assets/media/svg/misc/014-kickstarter.svg" className="h-50 align-self-center" alt="simbol" />
+                                                                        <span>A</span>
                                                                     </span>
                                                                 </div>
                                                             </td>
@@ -133,4 +133,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard
+export default DashboardTicket

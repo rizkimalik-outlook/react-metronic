@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import React, { useEffect } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { AuthUser } from 'store';
 import Icons from 'components/Icons';
 import { SubHeader, MainContent, Container } from 'layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
 import UserDetail from './UserDetail';
-// import CreateUser from './CreateUser';
+import { loadDataUsers, UserStore } from 'store/users';
 
 function UserList() {
-    const { token } = useRecoilValue(AuthUser);
-    const [users, getUsers] = useState([]);
-    const [refresh, setRefresh] = useState(0);
-
-
+    const users = useRecoilValue(UserStore);
+    const setDataUsers = useSetRecoilState(loadDataUsers);
+    
     useEffect(() => {
-        async function getDataUser() {
-            try {
-                const res = await axios.get('/user')
-                const data = res.data.data;
-                getUsers(data);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-        getDataUser();
-    }, [token, refresh]);
+        setDataUsers(key => key + 1);
+    },[setDataUsers]);
 
     function deleteUser(id) {
         Swal.fire({
@@ -44,7 +31,7 @@ function UserList() {
                 const res = await axios.delete(`/user/delete/${id}`)
                 const data = res.data.data;
 
-                setRefresh(key => key + 1)
+                setDataUsers(key => key + 1);
                 Swal.fire(
                     data.message,
                     "Your data has been deleted.",

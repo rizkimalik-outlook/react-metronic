@@ -2,52 +2,50 @@ import React, { useState, useEffect } from 'react'
 import { socket, AuthUser } from 'store';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
 import { Container, MainContent, SubHeader } from 'layouts/partials';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { AskPermission, ShowNotification } from 'components/Notification';
+import { ListCustomerStore,loadListCustomers } from 'store/sosmed';
 
 function SocketClient() {
     const [message, setMessage] = useState('');
+    const list_customers = useRecoilValue(ListCustomerStore);
+    const setListCustomers = useResetRecoilState(loadListCustomers);
     const [conversation, setConversation] = useState([]);
-    const { username } = useRecoilValue(AuthUser);
-    const [room, setRoom] = useState('');
+    const { username,email_address } = useRecoilValue(AuthUser);
+    const [selected, getSelected] = useState('');
     const [status, setStatus] = useState('');
-    const [clientid, setClientid] = useState('');
+
+    
+    useEffect(() => {
+        setListCustomers(key => key + 1);
+    },[setListCustomers]);
 
     useEffect(() => {
-        // socket.auth = { 
-        //     user_flag: 'agent',
-        //     username,
-        //     email:''
-        // };
-        // socket.connect();
         AskPermission();
-
         // console.log(`${socket.auth.username} - connected : ${socket.id}`);
         let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
         setStatus(getstatus);
 
-        socket.on('return-message-client', (res) => {
-            let { message, username } = res;
-            ShowNotification(username,message);
+        socket.on('return-message-customer', (res) => {
+            let { message, name } = res;
+            ShowNotification(name, message);
             setConversation(
                 conversation => [...conversation, res]
             );
         });
-    }, [username]);
-
-    function joinRoom(room_id) {
-        setRoom(room_id);
-        socket.emit('join-room', ({ username, room_id }))
-    }
+    }, []);
 
     function sendMessage() {
         let content = {
-            room: room,
+            chat_id: selected.chat_id,
+            customer_id: selected.customer_id,
             message: message,
-            socket_id: socket.id,
-            username: username,
+            name: username,
+            email: email_address,
+            user_id: socket.id,
+            agent_handle: username,
             socket_agentid: socket.id,
-            socket_custid: clientid
+            socket_custid: selected.user_id
         }
         socket.emit('send-message-agent', content)
         setConversation(
@@ -62,8 +60,8 @@ function SocketClient() {
             <SubHeader active_page="Socket Master" menu_name="Socket" modul_name="Socket Client" />
 
             <Container>
-                <div className="row d-lg-flex">
-                    <div className="col-lg-3 vh-100 pr-1">
+                <div className="row">
+                    <div className="col-md-3 pr-1" style={{ height: '75vh' }}>
                         <Card>
                             <CardHeader>
                                 <CardTitle title="Agent Status" subtitle={status} />
@@ -72,30 +70,33 @@ function SocketClient() {
                                     <span className="label label-rounded label-primary">10</span>
                                 </CardToolbar>
                             </CardHeader>
-                            <CardBody className="p-0 scroll-y h-100 h-lg-auto">
+                            <CardBody className="p-0 scroll-y h-lg-auto">
                                 <div className="table-responsive ">
-                                    <div className="list list-hover border-bottom" onClick={(e) => joinRoom('200210022')}>
-                                        <div className="d-flex align-items-start list-item card-spacer-x py-4">
-                                            <div className="symbol symbol-45px symbol-circle mr-2">
-                                                {/* <img alt="Pic" src="/metronic8/react/demo1/media/avatars/150-2.jpg" /> */}
-                                                <span className="symbol-label font-weight-bolder">OJ</span>
-                                            </div>
-                                            <div className="flex-grow-1 mt-1 mr-2">
-                                                <div className="mr-2">Digital</div>
-                                                <div className="mt-2">
-                                                    <span className="label label-light-primary font-weight-bold label-inline">inbox</span>
+                                    {
+                                        list_customers.map((customer, index) => {
+                                            return <div className="list list-hover border-bottom" key={index} onClick={(e) => getSelected(customer)}>
+                                                <div className="d-flex align-items-start list-item card-spacer-x py-4">
+                                                    <div className="symbol symbol-45px symbol-circle mr-2">
+                                                        {/* <img alt="Pic" src="/metronic8/react/demo1/media/avatars/150-2.jpg" /> */}
+                                                        <span className="symbol-label font-weight-bolder">C</span>
+                                                    </div>
+                                                    <div className="flex-grow-1 mt-1 mr-2">
+                                                        <div className="mr-2">{customer.name}</div>
+                                                        <div className="mt-2">{customer.email}</div>
+                                                    </div>
+                                                    <div className="d-flex flex-column">
+                                                        <div className="text-mute mt-2">8:30 PM</div>
+                                                        <span className="label label-light-primary font-weight-bold label-inline mt-2">{customer.customer_id}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <span className="text-mute">8:30 PM</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        })
+                                    }
                                 </div>
                             </CardBody>
                         </Card>
                     </div>
-                    <div className="col-lg-9 pl-1">
+                    <div className="col-md-9 pl-1">
                         <Card>
                             <CardHeader className="border-bottom">
                                 <CardTitle title="Socket Client" subtitle={socket.id} />
@@ -117,8 +118,6 @@ function SocketClient() {
                                 <button onClick={sendMessage} className="btn btn-primary mx-2 btn-sm">send</button>
                             </CardFooter> */}
                             <div className="card-footer p-2">
-                            <input type="text" name="clientid" onChange={(e) => setClientid(e.target.value)} value={clientid} className="form-control" placeholder="to" />
-
                                 <textarea
                                     className="form-control form-control-flush mb-3"
                                     rows={1}
