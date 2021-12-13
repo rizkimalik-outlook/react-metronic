@@ -1,5 +1,5 @@
 
-import { usersIndex } from "api/users";
+import { userIndex } from "api/user";
 import { atom, selector } from "recoil";
 
 export const loadDataUsers = atom({
@@ -14,7 +14,7 @@ export const UserStore = selector({
         let users = []
 
         try {
-            const { data } = await usersIndex()
+            const { data } = await userIndex()
             if (data && data.status === 200) {
                 users = data.data
             }
