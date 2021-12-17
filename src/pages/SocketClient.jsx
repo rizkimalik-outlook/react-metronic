@@ -61,7 +61,7 @@ function SocketClient() {
 
             <Container>
                 <div className="row">
-                    <div className="col-md-3 pr-1" style={{ height: '75vh' }}>
+                    <div className="col-lg-4 pr-1" style={{ height: '75vh' }}>
                         <Card>
                             <CardHeader>
                                 <CardTitle title="Agent Status" subtitle={status} />
@@ -75,9 +75,9 @@ function SocketClient() {
                                     {
                                         list_customers.map((customer, index) => {
                                             return <div className="list list-hover border-bottom" key={index} onClick={(e) => getSelected(customer)}>
-                                                <div className="d-flex align-items-start list-item card-spacer-x py-4">
-                                                    <div className="symbol symbol-45px symbol-circle mr-2">
-                                                        {/* <img alt="Pic" src="/metronic8/react/demo1/media/avatars/150-2.jpg" /> */}
+                                                <div className="d-flex align-items-start list-item py-4">
+                                                    <div className="symbol symbol-45px symbol-circle mx-2">
+                                                        {/* <img alt="Pic" src="/media/avatars/150-2.jpg" /> */}
                                                         <span className="symbol-label font-weight-bolder">C</span>
                                                     </div>
                                                     <div className="flex-grow-1 mt-1 mr-2">
@@ -96,7 +96,7 @@ function SocketClient() {
                             </CardBody>
                         </Card>
                     </div>
-                    <div className="col-md-9 pl-1">
+                    <div className="col-lg-8 pl-1">
                         <Card>
                             <CardHeader className="border-bottom">
                                 <CardTitle title="Socket Client" subtitle={socket.id} />

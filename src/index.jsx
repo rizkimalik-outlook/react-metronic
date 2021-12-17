@@ -5,7 +5,7 @@ import { RecoilRoot } from 'recoil';
 
 import App from './App';
 
-//BrowserRouter to HashRouter --prod
+//BrowserRouter to HashRouter --build
 ReactDOM.render(
     <React.StrictMode>
         <RecoilRoot>

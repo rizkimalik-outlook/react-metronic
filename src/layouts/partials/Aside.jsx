@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from './menu/MenuItem'
 import Icons from 'components/Icons';
 import { getMenu } from 'api/menu';
+import MendawaiLogo from 'components/MendawaiLogo';
 
 function Aside() {
     const location = useLocation();
@@ -26,7 +27,7 @@ function Aside() {
         <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
             <div className="brand flex-column-auto" id="kt_brand">
                 <NavLink to="/general" className="brand-logo">
-                    <img alt="Logo" src="/assets/media/logos/logo-hitam-50.png" height={40} />
+                    <MendawaiLogo className="max-h-50px" />
                 </NavLink>
                 <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
                     <Icons iconName="angle-double-left" className="svg-icon svg-icon svg-icon-xl" />

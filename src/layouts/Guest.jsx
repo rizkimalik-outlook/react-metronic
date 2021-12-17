@@ -1,15 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// import MendawaiLogo from '../components/MendawaiLogo'
 import MendawaiLogo from 'components/MendawaiLogo';
 
-
-
-
-
 function Guest({children}) {
-
     return (
         <div className="flex-row align-items-center vh-100 bg-guest">
             <div className="container">
