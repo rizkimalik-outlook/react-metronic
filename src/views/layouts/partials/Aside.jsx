@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from './menu/MenuItem'
-import Icons from 'components/Icons';
+import Icons from 'views/components/Icons';
 import { getMenu } from 'api/menu';
-import MendawaiLogo from 'components/MendawaiLogo';
+import MendawaiLogo from 'views/components/MendawaiLogo';
 
 function Aside() {
     const location = useLocation();

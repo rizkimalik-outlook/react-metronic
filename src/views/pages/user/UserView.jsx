@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { SubHeader, MainContent, Container } from 'layouts/partials';
-import { Card, CardBody, CardHeader, CardTitle } from 'components/card';
+import { SubHeader, MainContent, Container } from 'views/layouts/partials';
+import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card';
 
 function UserView() {
     let { username } = useParams();

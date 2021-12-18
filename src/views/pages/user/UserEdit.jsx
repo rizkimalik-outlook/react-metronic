@@ -1,24 +1,48 @@
-import React from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { NavLink, useHistory } from 'react-router-dom';
-import { SubHeader, MainContent, Container } from 'layouts/partials';
-import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'components/card';
+import React, { useEffect } from 'react';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { SubHeader, MainContent, Container } from 'views/layouts/partials';
+import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import UserResetPassword from './UserResetPassword';
 
-function UserCreate() {
+function UserEdit() {
+    let { id } = useParams();
     const history = useHistory();
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const onSubmitCreateUser = async (data) => {
+    useEffect(() => {
+        async function getShowUser() {
+            try {
+                const res = await axios.get(`/user/show/${id}`)
+                const { name, username, email_address, user_level, max_concurrent } = res.data.data[0];
+                reset({
+                    id: id,
+                    name,
+                    username,
+                    email_address,
+                    user_level,
+                    max_concurrent
+                });
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        getShowUser();
+    }, [id, reset])
+
+
+    const onSubmitUpdateUser = async (data) => {
         try {
-            // const data_post = JSON.stringify(fields);
-            const res = await axios.post('/user/store', data);
+            // const data_post = JSON.stringify(data);
+            const res = await axios.put('/user/update', data);
 
             if (res.status === 200) {
                 Swal.fire({
-                    title: "Insert Success.",
-                    text: "Success into application!",
+                    title: "Update Success.",
+                    text: "Success user data!",
                     buttonsStyling: false,
                     icon: "success",
                     confirmButtonText: "Ok",
@@ -37,27 +61,28 @@ function UserCreate() {
 
     return (
         <MainContent>
-            <SubHeader active_page="User Create" menu_name="Management User" modul_name="User Create" />
-
+            <SubHeader active_page="User Edit" menu_name="Management User" modul_name="User Edit" />
             <Container>
                 <Card>
                     <CardHeader>
-                        <CardTitle title="Create New User" subtitle="Form add new user login application." />
+                        <CardTitle title="Update User" subtitle="Form update user login." />
                     </CardHeader>
-                    <form onSubmit={handleSubmit(onSubmitCreateUser)} className="form">
+                    <form onSubmit={handleSubmit(onSubmitUpdateUser)} className="form">
                         <CardBody>
+                            <input type="hidden" {...register("id")} />
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>Full Name:</label>
-                                    <input type="text" {...register("name", { required: true, maxLength: 100 })} className="form-control" placeholder="Enter full name" />
+                                    <input type="text" className="form-control" placeholder="Enter full name" {...register("name", { required: true, maxLength: 100 })} />
                                     {errors.name && <span className="form-text text-danger">Please enter your full name</span>}
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Email:</label>
-                                    <input type="email" {...register("email_address", { required: true, pattern: /^\S+@\S+$/i })} className="form-control" placeholder="Enter email" />
+                                    <input type="email" className="form-control" placeholder="Enter email" {...register("email_address", { required: true, pattern: /^\S+@\S+$/i })} />
                                     {errors.email_address && <span className="form-text text-danger">Please enter your email</span>}
                                 </div>
                             </div>
+
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>Username:</label>
@@ -65,11 +90,13 @@ function UserCreate() {
                                     {errors.username && <span className="form-text text-danger">Please enter your username</span>}
                                 </div>
                                 <div className="col-lg-6">
-                                    <label>Password:</label>
-                                    <input type="password" {...register("password", { required: true })} className="form-control" placeholder="Enter password" />
-                                    {errors.password && <span className="form-text text-muted">Please enter your password</span>}
+                                    <label>Password:</label><br />
+                                    <button type="button" className="btn btn-dark" data-toggle="modal" data-target="#modalResetPassword">Reset Password</button>
+                                    {/* <input type="password" name="password" defaultValue={fields.password} required={true} onChange={onHandleChange} className="form-control" placeholder="Enter password" />
+                                    <span className="form-text text-danger">Please enter your password</span> */}
                                 </div>
                             </div>
+
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>User Level:</label>
@@ -91,7 +118,7 @@ function UserCreate() {
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
-                                
+
                             </div>
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
@@ -139,7 +166,7 @@ function UserCreate() {
                                 </div>
 
                             </div>
-                            
+
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
                                 <div className="col-lg-4">
@@ -195,14 +222,16 @@ function UserCreate() {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <NavLink to="/user" className="btn btn-sm btn-secondary mx-1">Back</NavLink>
+                            <NavLink to="/user" className="btn btn-sm btn-secondary mx-1">Cancel</NavLink>
                             <button type="submit" className="btn btn-sm btn-primary font-weight-bold mx-1">Save changes</button>
                         </CardFooter>
                     </form>
                 </Card>
+
+                <UserResetPassword userid={id} />
             </Container>
         </MainContent>
     )
 }
 
-export default UserCreate
+export default UserEdit

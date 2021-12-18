@@ -3,7 +3,7 @@ import { Link, NavLink, useHistory } from 'react-router-dom'
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { socket, SocketStore, AuthUser } from 'store';
 
-import Icons from 'components/Icons';
+import Icons from 'views/components/Icons';
 import axios from 'axios';
 
 function Header() {

@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
-import Guest from 'layouts/Guest';
+import Guest from 'views/layouts/Guest';
 
 
 function PublicRoute({ children, isAuth, ...rest }) {

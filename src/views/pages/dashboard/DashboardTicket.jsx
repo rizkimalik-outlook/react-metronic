@@ -1,5 +1,5 @@
 import React from 'react';
-import SubHeader from 'layouts/partials/SubHeader';
+import SubHeader from 'views/layouts/partials/SubHeader';
 import { NavLink } from 'react-router-dom';
 
 function DashboardTicket() {

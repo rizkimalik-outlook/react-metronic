@@ -1,5 +1,5 @@
-import { Card, CardBody, CardHeader, CardTitle } from 'components/card'
-import { Container, MainContent, SubHeader } from 'layouts/partials'
+import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card'
+import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import React from 'react'
 import DataTable from 'react-data-table-component';
 

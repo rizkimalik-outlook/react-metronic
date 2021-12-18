@@ -1,4 +1,4 @@
-import { Container, MainContent, SubHeader } from 'layouts/partials'
+import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import React from 'react'
 
 function NotFound() {

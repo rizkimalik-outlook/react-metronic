@@ -1,7 +1,7 @@
 import { useEffect,Suspense } from "react";
 import Router from "./router";
-import SplashScreen from 'components/SplashScreen';
-import { AskPermission } from "components/Notification";
+import SplashScreen from 'views/components/SplashScreen';
+import { AskPermission } from "views/components/Notification";
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { AuthUser } from 'store';

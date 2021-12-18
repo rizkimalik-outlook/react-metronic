@@ -3,9 +3,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Icons from 'components/Icons';
-import { SubHeader, MainContent, Container } from 'layouts/partials';
-import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
+import Icons from 'views/components/Icons';
+import { SubHeader, MainContent, Container } from 'views/layouts/partials';
+import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
 import UserDetail from './UserDetail';
 import { loadDataUsers, UserStore } from 'store/users';

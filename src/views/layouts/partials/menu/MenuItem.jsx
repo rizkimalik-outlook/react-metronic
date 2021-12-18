@@ -1,4 +1,4 @@
-import Icons from 'components/Icons';
+import Icons from 'views/components/Icons';
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ModulItem from './ModulItem';

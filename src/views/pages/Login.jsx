@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSetRecoilState } from "recoil";
 import { AuthUser, socket } from "store";
 import { useHistory } from 'react-router-dom';
-import Icons from 'components/Icons';
+import Icons from 'views/components/Icons';
 
 function Login() {
     let history = useHistory()

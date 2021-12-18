@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { socket, AuthUser } from 'store';
-import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'components/card';
-import { Container, MainContent, SubHeader } from 'layouts/partials';
+import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
+import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { AskPermission, ShowNotification } from 'components/Notification';
+import { AskPermission, ShowNotification } from 'views/components/Notification';
 import { ListCustomerStore,loadListCustomers } from 'store/sosmed';
 
 function SocketClient() {

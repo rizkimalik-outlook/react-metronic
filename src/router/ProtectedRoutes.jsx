@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routes from './routes'; // Route list
-import SplashScreen from 'components/SplashScreen';
+import SplashScreen from 'views/components/SplashScreen';
 
 const ProtectedRoutes = () => (
     <Switch>

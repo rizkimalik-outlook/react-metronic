@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MendawaiLogo from 'components/MendawaiLogo';
+import MendawaiLogo from 'views/components/MendawaiLogo';
 
 function Guest({children}) {
     return (

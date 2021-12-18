@@ -6,9 +6,9 @@ import { AuthUser } from 'store'
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute'; //Auth Route
 import ProtectedRoutes from './ProtectedRoutes';
-import SplashScreen from 'components/SplashScreen';
+import SplashScreen from 'views/components/SplashScreen';
 
-const Login = lazy(() => import('../pages/Login'));
+const Login = lazy(() => import('../views/pages/Login'));
 
 function Router() {
     const getAuthUser = useRecoilValue(AuthUser);

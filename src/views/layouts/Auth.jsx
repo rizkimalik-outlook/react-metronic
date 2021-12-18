@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Footer from './partials/Footer';
 import Header from './partials/Header';
 import { socket } from 'store';
-import { AskPermission, ShowNotification } from 'components/Notification';
+import { AskPermission, ShowNotification } from 'views/components/Notification';
 
 function Auth({ children }) {
 
