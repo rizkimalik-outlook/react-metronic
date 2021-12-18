@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { Switch } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { AuthUser } from 'store'
+import { useSelector } from 'react-redux';
+import { authUser } from 'app/reducer/authSlice'
 
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute'; //Auth Route
@@ -11,7 +11,7 @@ import SplashScreen from 'views/components/SplashScreen';
 const Login = lazy(() => import('../views/pages/Login'));
 
 function Router() {
-    const getAuthUser = useRecoilValue(AuthUser);
+    const getAuthUser = useSelector(authUser);
     const isAuth = Boolean(getAuthUser.token);
     // console.log(isAuth);
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // import Aside from './partials/Aside';
 import Footer from './partials/Footer';
 import Header from './partials/Header';
-import { socket } from 'store';
+import { socket } from 'app/config';
 import { AskPermission, ShowNotification } from 'views/components/Notification';
 
 function Auth({ children }) {

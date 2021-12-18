@@ -1,32 +1,28 @@
-import React from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom'
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { socket, SocketStore, AuthUser } from 'store';
-
+import React from 'react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import { socket } from 'app/config';
+import { authUser } from 'app/reducer/authSlice';
+import { useSelector } from 'react-redux';
 import Icons from 'views/components/Icons';
-import axios from 'axios';
+import { useLogoutMutation } from 'app/services/auth';
 
 function Header() {
-    const getAuthUser = useRecoilValue(AuthUser);
-    const resetSocketIO = useResetRecoilState(SocketStore);
-    const resetAuthUser = useResetRecoilState(AuthUser);
-    let history = useHistory();
+    const history = useHistory();
+    const getAuthUser = useSelector(authUser);
+    const [logout] = useLogoutMutation();
 
     async function onSignOut() {
         try {
-            const json = JSON.stringify({ username: getAuthUser.username });
-            const res = await axios.post('/auth/logout', json);
-            const data = res.data;
-            if (data.status === 200) {
+            const response = await logout({ username: getAuthUser.username });
+            if (response.data.status === 200) {
                 socket.disconnect();
                 localStorage.clear();
-                resetSocketIO();
-                resetAuthUser();
                 history.push('/login');
+                window.location.reload();
             }
         }
         catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import axios from 'axios';
-import { useSetRecoilState } from "recoil";
-import { AuthUser, socket } from "store";
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Icons from 'views/components/Icons';
+import { setAuth } from 'app/reducer/authSlice';
+import { socket } from 'app/config';
+import { useLoginMutation } from 'app/services/auth';
 
 function Login() {
     let history = useHistory()
-    const setAuthUser = useSetRecoilState(AuthUser);
+    const dispatch = useDispatch();
+    const [login] = useLoginMutation();
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
     const [loading, setLoading] = useState('');
@@ -29,25 +31,24 @@ function Login() {
         setLoading('');
     };
 
-    const authLogin = async (e) => {
+    const AuthLogin = async (e) => {
         e.preventDefault();
-        setLoading('spinner spinner-white spinner-left')
+        setLoading('spinner spinner-white spinner-left');
 
         try {
-            const json = JSON.stringify(fields);
-            const res = await axios.post('/auth/login', json);
-            const data = res.data.data;
+            const response = await login(fields);
+            const data = response.data.data;
 
-            if (res.data.status === 200) {
-                socket.auth = { 
+            if (response.data.status === 200) {
+                socket.auth = {
                     flag_to: 'agent',
-                    username:fields.username,
-                    email:''
+                    username: fields.username,
+                    email: ''
                 }
                 socket.connect();
 
                 setLoading('');
-                setAuthUser(data);
+                dispatch(setAuth(data));
                 history.push("/todolist");
                 window.location.reload();
             }
@@ -77,7 +78,7 @@ function Login() {
                     <div className="text-muted font-weight-bold">Enter your details to login to your account:</div>
                 </div>
 
-                <form onSubmit={authLogin} className="form">
+                <form onSubmit={AuthLogin} className="form">
                     <div className="form-group validated">
                         <label>Username / Email</label>
                         <div className="input-group">

@@ -1,30 +1,20 @@
-import { useEffect,Suspense } from "react";
+import { useEffect, Fragment } from "react";
 import Router from "./router";
-import SplashScreen from 'views/components/SplashScreen';
 import { AskPermission } from "views/components/Notification";
-import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { AuthUser } from 'store';
+// import SplashScreen from 'views/components/SplashScreen';
 
 // import 'devextreme/dist/css/dx.light.css';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 
-axios.defaults.baseURL = process.env.REACT_APP_REST_API;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-// axios.defaults.withCredentials = true;
-
 function App() {
-    const {token} = useRecoilValue(AuthUser);
-
     useEffect(() => {
         AskPermission();
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }, [token]);
+    }, []);
     
     return (
-        <Suspense fallback={<SplashScreen />}>
+        <Fragment>
             <Router />
-        </Suspense>
+        </Fragment>
     );
 }
 
