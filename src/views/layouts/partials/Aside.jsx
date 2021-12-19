@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from './menu/MenuItem'
 import Icons from 'views/components/Icons';
-import { getMenu } from 'api/menu';
 import MendawaiLogo from 'views/components/MendawaiLogo';
+import { getMenu } from 'app/services/menuApi'
 
 function Aside() {
     const location = useLocation();
@@ -13,7 +13,7 @@ function Aside() {
         async function getMenus() {
             try {
                 const res = await getMenu();
-                const data = res.data.data;
+                const data = res.data;
                 setMenu(data)
                 console.log('load menu.')
             }
@@ -41,9 +41,9 @@ function Aside() {
                         {
                             menu.map((item, index) => {
                                 return (
-                                    <MenuItem 
-                                        item={item} 
-                                        active={location.pathname} 
+                                    <MenuItem
+                                        item={item}
+                                        active={location.pathname}
                                         key={index}
                                     >
                                     </MenuItem>

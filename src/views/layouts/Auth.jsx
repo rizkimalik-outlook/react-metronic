@@ -2,19 +2,22 @@ import React, { useEffect } from 'react';
 // import Aside from './partials/Aside';
 import Footer from './partials/Footer';
 import Header from './partials/Header';
-// import { socket } from 'app/config';
-import { AskPermission/* , ShowNotification */ } from 'views/components/Notification';
+import { socket, axiosDefault } from 'app/config';
+import { AskPermission, ShowNotification } from 'views/components/Notification';
+import { authUser } from 'app/slice/authSlice';
+import { useSelector } from 'react-redux';
 
 function Auth({ children }) {
-
+    const { token } = useSelector(authUser);
     useEffect(() => {
         AskPermission();
-        // console.log(`connected: ${socket.connected}, id: ${socket.id}`);
-        // socket.on('return-message-customer', (res) => {
-        //     let { message, name } = res;
-        //     ShowNotification(name, message);
-        // });
-    }, []);
+        axiosDefault(token);
+        console.log(`connected: ${socket.connected}, id: ${socket.id}`);
+        socket.on('return-message-customer', (res) => {
+            let { message, name } = res;
+            ShowNotification(name, message);
+        });
+    }, [token]);
 
     return (
         <div className="d-flex flex-row flex-column-fluid page">

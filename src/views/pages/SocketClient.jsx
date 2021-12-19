@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { socket, AuthUser } from 'store';
+import { useDispatch, useSelector } from 'react-redux';
+import { socket } from 'app/config';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { AskPermission, ShowNotification } from 'views/components/Notification';
-import { ListCustomerStore,loadListCustomers } from 'store/sosmed';
+import { authUser } from 'app/slice/authSlice';
+import { getListCustomer } from 'app/services/sosmedApi';
 
 function SocketClient() {
     const [message, setMessage] = useState('');
-    const list_customers = useRecoilValue(ListCustomerStore);
-    const setListCustomers = useResetRecoilState(loadListCustomers);
     const [conversation, setConversation] = useState([]);
-    const { username,email_address } = useRecoilValue(AuthUser);
+    const dispatch = useDispatch();
+    const getListCustomers = useSelector(state => state.sosialmedia.list_customers);
+    const { username, email_address } = useSelector(authUser);
     const [selected, getSelected] = useState('');
     const [status, setStatus] = useState('');
-
-    
-    useEffect(() => {
-        setListCustomers(key => key + 1);
-    },[setListCustomers]);
+    const list_customers = getListCustomers.data;
 
     useEffect(() => {
         AskPermission();
-        // console.log(`${socket.auth.username} - connected : ${socket.id}`);
+        console.log(`connected : ${socket.id}`);
         let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
         setStatus(getstatus);
 
@@ -33,7 +30,9 @@ function SocketClient() {
                 conversation => [...conversation, res]
             );
         });
-    }, []);
+
+        dispatch(getListCustomer())
+    }, [dispatch]);
 
     function sendMessage() {
         let content = {

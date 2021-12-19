@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getListCustomer } from 'app/services/sosmedApi';
+
 
 function General() {
+    const dispatch = useDispatch();
+    const list_customers = useSelector(state => state.sosialmedia.list_customers);
+
+    useEffect(() => {
+        dispatch(getListCustomer())
+    }, [dispatch]);
+
+    console.log(list_customers)
+
     return (
         <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
 
