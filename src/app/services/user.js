@@ -5,7 +5,18 @@ const queryRequest = (url) => ({ url, headers: apiHeaders })
 
 export const user = createApi({
     reducerPath: 'user',
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: fetchBaseQuery({
+        baseUrl, 
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().persistedReducer.authUser.token;
+            // If we have a token set in state, let's assume that we should be passing it.
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`)
+            }
+
+            return headers
+        }
+    }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
         getUsers: builder.query({

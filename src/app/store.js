@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from "redux";
 import thunk from 'redux-thunk';
 
-import authSlice from './reducer/authSlice';
+import authSlice from './slice/authSlice';
 import { auth } from './services/auth';
 import { user } from './services/user';
 

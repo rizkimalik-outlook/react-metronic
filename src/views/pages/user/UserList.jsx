@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import React from 'react'
+// import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Icons from 'views/components/Icons';
+import { useGetUsersQuery } from 'app/services/user';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
 import UserDetail from './UserDetail';
-import { loadDataUsers, UserStore } from 'store/users';
 
 function UserList() {
-    const users = useRecoilValue(UserStore);
-    const setDataUsers = useSetRecoilState(loadDataUsers);
-    
-    useEffect(() => {
-        setDataUsers(key => key + 1);
-    },[setDataUsers]);
+    const { data, error, isLoading } = useGetUsersQuery();
+    // const dispatch = useDispatch();
+    if (error) return 'error..';
+    if (isLoading) return 'Loading..';
 
     function deleteUser(id) {
         Swal.fire({
@@ -31,7 +29,7 @@ function UserList() {
                 const res = await axios.delete(`/user/delete/${id}`)
                 const data = res.data.data;
 
-                setDataUsers(key => key + 1);
+                // setDataUsers(key => key + 1);
                 Swal.fire(
                     data.message,
                     "Your data has been deleted.",
@@ -78,7 +76,7 @@ function UserList() {
                     </CardHeader>
                     <CardBody>
                         <DataGrid
-                            dataSource={users}
+                            dataSource={data.data}
                             keyExpr="id"
                             allowColumnReordering={true}
                             allowColumnResizing={true}

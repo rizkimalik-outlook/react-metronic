@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 const routes = [
-    /* {
+    {
         path: 'dash_ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/dashboard/DashboardTicket')),
@@ -26,7 +26,7 @@ const routes = [
         exact: false, 
         component: lazy(() => import('views/pages/user/UserEdit')),
     },
-     */
+    
     //? custom route
     {
         path: '/',

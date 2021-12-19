@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Icons from 'views/components/Icons';
-import { setAuth } from 'app/reducer/authSlice';
+import { setAuth } from 'app/slice/authSlice';
 import { socket } from 'app/config';
 import { useLoginMutation } from 'app/services/auth';
 
