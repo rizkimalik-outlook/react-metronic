@@ -15,13 +15,14 @@ function Aside() {
                 const res = await getMenu();
                 const data = res.data.data;
                 setMenu(data)
+                console.log('load menu.')
             }
             catch (error) {
                 console.log(error.message);
             }
         }
         getMenus()
-    }, [menu])
+    }, [])
 
     return (
         <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">

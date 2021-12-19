@@ -1,35 +1,33 @@
 import React from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Icons from 'views/components/Icons';
-import { useGetUsersQuery } from 'app/services/user';
+import { useGetUsersQuery, useDeleteUserMutation } from 'app/services/user';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
 import UserDetail from './UserDetail';
+import SplashScreen from 'views/components/SplashScreen';
 
 function UserList() {
-    const { data, error, isLoading } = useGetUsersQuery();
-    // const dispatch = useDispatch();
-    if (error) return 'error..';
-    if (isLoading) return 'Loading..';
+    const { data, error, isFetching, refetch } = useGetUsersQuery();
+    const [deleteUser] = useDeleteUserMutation();
+    if (error) return 'connection error..';
+    if (isFetching) return <SplashScreen />;
 
-    function deleteUser(id) {
+    async function deleteUserHandler(id) {
         Swal.fire({
             title: "Are you sure?",
             text: "You wont be able to delete this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yes, delete it!"
-        })
-        .then(async function (result) {
-            if (result.value) {
-                const res = await axios.delete(`/user/delete/${id}`)
+        }).then(async function (res) {
+            if (res.value) {
+                const res = await deleteUser(id)
                 const data = res.data.data;
+                refetch();
 
-                // setDataUsers(key => key + 1);
                 Swal.fire(
                     data.message,
                     "Your data has been deleted.",
@@ -46,7 +44,7 @@ function UserList() {
             <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>
-            <button type="button" onClick={(e) => deleteUser(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
+            <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
                 <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
             </button>
             {/* <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
@@ -84,7 +82,7 @@ function UserList() {
                             showBorders={true}
                             showColumnLines={true}
                             showRowLines={true}
-                            // rowAlternationEnabled={true}
+                        // rowAlternationEnabled={true}
                         >
                             <MasterDetail
                                 enabled={true}

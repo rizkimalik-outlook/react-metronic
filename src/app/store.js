@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 import authSlice from './slice/authSlice';
 import { auth } from './services/auth';
+import { menu } from './services/menu';
 import { user } from './services/user';
 
 const reducers = combineReducers({ 
@@ -24,7 +25,16 @@ export default configureStore({
     reducer: {
         persistedReducer,
         [auth.reducerPath]: auth.reducer,
+        [menu.reducerPath]: menu.reducer,
         [user.reducerPath]: user.reducer,
     },
     middleware: [thunk]
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user.middleware)
+    // middleware: (getDefaultMiddleware) =>
+    // getDefaultMiddleware({
+    //   serializableCheck: {
+    //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    //   },
+    // }),
+
 })

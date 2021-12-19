@@ -1,9 +1,11 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { useResetPasswordMutation } from 'app/services/user';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 function UserResetPassword({ userid }) {
+    const [resetPassword] = useResetPasswordMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [match,setMatch] = useState(true)
 
@@ -11,8 +13,8 @@ function UserResetPassword({ userid }) {
         try {
             if (data.new_password === data.password) {
                 setMatch(true)
-                const res = await axios.put('/user/reset_password', data);
-                if (res.status === 200) {
+                const res = await resetPassword(data);
+                if (res.data.status === 200) {
                     Swal.fire({
                         title: "Update Success.",
                         text: "Success reset password!",

@@ -3,20 +3,36 @@ import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import UserResetPassword from './UserResetPassword';
+import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/user';
+// import SplashScreen from 'views/components/SplashScreen';
+import { useSelector } from 'react-redux';
+import { authUser } from 'app/slice/authSlice';
+import { baseUrl } from 'app/config';
+
 
 function UserEdit() {
     let { id } = useParams();
     const history = useHistory();
+    const {token} = useSelector(authUser);
+    const { refetch } = useGetUsersQuery();
+    // const { data, isFetching } = useGetUserShowQuery(id);
+    const [updateUser] = useUpdateUserMutation();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-
+  
     useEffect(() => {
         async function getShowUser() {
             try {
-                const res = await axios.get(`/user/show/${id}`)
-                const { name, username, email_address, user_level, max_concurrent } = res.data.data[0];
+                const res = await fetch(`${baseUrl}/user/show/${id}`,{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                const json = await res.json();
+                const { name, username, email_address, user_level, max_concurrent } = json.data[0];
                 reset({
                     id: id,
                     name,
@@ -31,15 +47,12 @@ function UserEdit() {
             }
         }
         getShowUser();
-    }, [id, reset])
-
+    }, [id, reset,token]);
 
     const onSubmitUpdateUser = async (data) => {
         try {
-            // const data_post = JSON.stringify(data);
-            const res = await axios.put('/user/update', data);
-
-            if (res.status === 200) {
+            const res = await updateUser(data);
+            if (res.data.status === 200) {
                 Swal.fire({
                     title: "Update Success.",
                     text: "Success user data!",
@@ -51,6 +64,7 @@ function UserEdit() {
                     },
                     timer: 1500
                 });
+                refetch();
                 history.push('/user')
             }
         }
@@ -92,8 +106,6 @@ function UserEdit() {
                                 <div className="col-lg-6">
                                     <label>Password:</label><br />
                                     <button type="button" className="btn btn-dark" data-toggle="modal" data-target="#modalResetPassword">Reset Password</button>
-                                    {/* <input type="password" name="password" defaultValue={fields.password} required={true} onChange={onHandleChange} className="form-control" placeholder="Enter password" />
-                                    <span className="form-text text-danger">Please enter your password</span> */}
                                 </div>
                             </div>
 

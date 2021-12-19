@@ -1,21 +1,22 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { NavLink, useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useForm } from 'react-hook-form';
+import { useGetUsersQuery, useCreateUserMutation } from 'app/services/user';
 
 function UserCreate() {
     const history = useHistory();
+    const { refetch } = useGetUsersQuery();
+    const [createUser] = useCreateUserMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmitCreateUser = async (data) => {
         try {
-            // const data_post = JSON.stringify(fields);
-            const res = await axios.post('/user/store', data);
-
-            if (res.status === 200) {
+            const res = await createUser(data);
+            if (res.data.status === 200) {
+                refetch();
                 Swal.fire({
                     title: "Insert Success.",
                     text: "Success into application!",
@@ -91,7 +92,7 @@ function UserCreate() {
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
-                                
+
                             </div>
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
@@ -139,7 +140,7 @@ function UserCreate() {
                                 </div>
 
                             </div>
-                            
+
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">
                                 <div className="col-lg-4">
