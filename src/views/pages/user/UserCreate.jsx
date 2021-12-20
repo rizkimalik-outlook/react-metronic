@@ -5,9 +5,11 @@ import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useForm } from 'react-hook-form';
 import { useGetUsersQuery, useCreateUserMutation } from 'app/services/user';
+import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 
 function UserCreate() {
     const history = useHistory();
+    const { data, isFetching} = useGetUserLevelQuery();
     const { refetch } = useGetUsersQuery();
     const [createUser] = useCreateUserMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -76,9 +78,15 @@ function UserCreate() {
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
                                         <option>-- User Level --</option>
-                                        <option value="Administrator">Administrator</option>
+                                        {isFetching && <div>loading..</div>}
+                                        {
+                                            data?.data.map((item)=>{
+                                                return <option value={item.level_name} key={item.id}>{item.level_name}</option>
+                                            })
+                                        }
+                                        {/* <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
-                                        <option value="Agent">Agent</option>
+                                        <option value="Agent">Agent</option> */}
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
@@ -102,39 +110,39 @@ function UserCreate() {
                                 <div className="col-lg-4">
                                     <div className="checkbox-list">
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Inbound
+                                            <input type="checkbox" {...register("inbound")} /><span />Inbound
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Outbound
+                                            <input type="checkbox" {...register("outbound")} /><span />Outbound
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />SMS
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="checkbox-list">
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Email
-                                        </label>
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Chat
-                                        </label>
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Facebook
+                                            <input type="checkbox"{...register("sms")} /><span />SMS
                                         </label>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="checkbox-list">
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Twitter
+                                            <input type="checkbox" {...register("email")} /><span />Email
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Instagram
+                                            <input type="checkbox" {...register("chat")} /><span />Chat
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Whatsapp
+                                            <input type="checkbox" {...register("facebook")} /><span />Facebook
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="checkbox-list">
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("twitter")} /><span />Twitter
+                                        </label>
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("instagram")} /><span />Instagram
+                                        </label>
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("whatsapp")} /><span />Whatsapp
                                         </label>
                                     </div>
                                 </div>

@@ -37,7 +37,7 @@ function UserList() {
         });
     }
 
-    function buttonActions(data) {
+    function componentButtonActions(data) {
         const { id } = data.row.data;
 
         return <div className="d-flex align-items-end justify-content-center">
@@ -103,7 +103,7 @@ function UserList() {
                             <Column caption="Name" dataField="name" />
                             <Column caption="Email" dataField="email_address" />
                             <Column caption="Level" dataField="user_level" />
-                            <Column caption="Actions" dataField="id" width={150} cellRender={buttonActions} />
+                            <Column caption="Actions" dataField="id" width={150} cellRender={componentButtonActions} />
                         </DataGrid>
                     </CardBody>
                 </Card>

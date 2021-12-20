@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 
 function MediaStream() {
-    const myVideo = useRef();
+    const refMyVideo = useRef();
 
     function getMedia(){
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -24,7 +24,7 @@ function MediaStream() {
                         <div className="col-md-12">
                             <div className="card card-custom card-stretch gutter-b">
                                 <div className="card-body pt-2 pb-0 mt-n3">
-                                    <video name="video" autoPlay playsInline ref={myVideo}></video>
+                                    <video name="video" autoPlay playsInline ref={refMyVideo}></video>
                                 </div>
                             </div>
 

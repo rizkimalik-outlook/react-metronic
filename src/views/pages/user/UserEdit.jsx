@@ -10,21 +10,23 @@ import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/user';
 import { useSelector } from 'react-redux';
 import { authUser } from 'app/slice/authSlice';
 import { baseUrl } from 'app/config';
+import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 
 
 function UserEdit() {
     let { id } = useParams();
     const history = useHistory();
-    const {token} = useSelector(authUser);
+    const { token } = useSelector(authUser);
+    const { data, isFetching} = useGetUserLevelQuery();
     const { refetch } = useGetUsersQuery();
     // const { data, isFetching } = useGetUserShowQuery(id);
     const [updateUser] = useUpdateUserMutation();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-  
+
     useEffect(() => {
         async function getShowUser() {
             try {
-                const res = await fetch(`${baseUrl}/user/show/${id}`,{
+                const res = await fetch(`${baseUrl}/user/show/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -32,13 +34,60 @@ function UserEdit() {
                     }
                 })
                 const json = await res.json();
-                const { name, username, email_address, user_level, max_concurrent } = json.data[0];
+                const { 
+                    name,
+                    username,
+                    email_address,
+                    password,
+                    user_level,
+                    inbound,
+                    outbound,
+                    sms,
+                    email,
+                    chat,
+                    facebook,
+                    twitter,
+                    instagram,
+                    whatsapp,
+                    max_inbound,
+                    max_outbound,
+                    max_sms,
+                    max_email,
+                    max_chat,
+                    max_facebook,
+                    max_twitter,
+                    max_instagram,
+                    max_whatsapp,
+                    max_queue,
+                    max_concurrent
+                } = json.data[0];
+
                 reset({
                     id: id,
                     name,
                     username,
                     email_address,
+                    password,
                     user_level,
+                    inbound,
+                    outbound,
+                    sms,
+                    email,
+                    chat,
+                    facebook,
+                    twitter,
+                    instagram,
+                    whatsapp,
+                    max_inbound,
+                    max_outbound,
+                    max_sms,
+                    max_email,
+                    max_chat,
+                    max_facebook,
+                    max_twitter,
+                    max_instagram,
+                    max_whatsapp,
+                    max_queue,
                     max_concurrent
                 });
             }
@@ -47,7 +96,7 @@ function UserEdit() {
             }
         }
         getShowUser();
-    }, [id, reset,token]);
+    }, [id, reset, token]);
 
     const onSubmitUpdateUser = async (data) => {
         try {
@@ -114,15 +163,18 @@ function UserEdit() {
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
                                         <option>-- User Level --</option>
-                                        <option value="Administrator">Administrator</option>
-                                        <option value="Supervisor">Supervisor</option>
-                                        <option value="Agent">Agent</option>
+                                        {isFetching && <div>loading..</div>}
+                                        {
+                                            data?.data.map((item)=>{
+                                                return <option value={item.level_name} key={item.id}>{item.level_name}</option>
+                                            })
+                                        }
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Organization:</label>
-                                    <select className="form-control" {...register("organization", { required: true })}>
+                                    <select className="form-control" {...register("organization")}>
                                         <option>-- User Organization --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
@@ -140,39 +192,39 @@ function UserEdit() {
                                 <div className="col-lg-4">
                                     <div className="checkbox-list">
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Inbound
+                                            <input type="checkbox" {...register("inbound")} /><span />Inbound
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Outbound
+                                            <input type="checkbox" {...register("outbound")} /><span />Outbound
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />SMS
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="checkbox-list">
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Email
-                                        </label>
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Chat
-                                        </label>
-                                        <label className="checkbox">
-                                            <input type="checkbox" /><span />Facebook
+                                            <input type="checkbox" {...register("sms")} /><span />SMS
                                         </label>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="checkbox-list">
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Twitter
+                                            <input type="checkbox" {...register("email")} /><span />Email
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Instagram
+                                            <input type="checkbox" {...register("chat")} /><span />Chat
                                         </label>
                                         <label className="checkbox">
-                                            <input type="checkbox" /><span />Whatsapp
+                                            <input type="checkbox" {...register("facebook")} /><span />Facebook
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="checkbox-list">
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("twitter")} /><span />Twitter
+                                        </label>
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("instagram")} /><span />Instagram
+                                        </label>
+                                        <label className="checkbox">
+                                            <input type="checkbox" {...register("whatsapp")} /><span />Whatsapp
                                         </label>
                                     </div>
                                 </div>
