@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useForm } from 'react-hook-form';
-import { useGetUsersQuery, useCreateUserMutation } from 'app/services/user';
+import { useGetUsersQuery, useCreateUserMutation } from 'app/services/apiUser';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 
 function UserCreate() {

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Icons from 'views/components/Icons';
 import { setAuth } from 'app/slice/authSlice';
 import { socket } from 'app/config';
-import { useLoginMutation } from 'app/services/auth';
+import { useLoginMutation } from 'app/services/apiAuth';
 
 function Login() {
     let history = useHistory()

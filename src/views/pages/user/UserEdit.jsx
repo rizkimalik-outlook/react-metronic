@@ -5,7 +5,7 @@ import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/compone
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import UserResetPassword from './UserResetPassword';
-import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/user';
+import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
 // import SplashScreen from 'views/components/SplashScreen';
 import { useSelector } from 'react-redux';
 import { authUser } from 'app/slice/authSlice';

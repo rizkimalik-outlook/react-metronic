@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { useResetPasswordMutation } from 'app/services/user';
+import { useResetPasswordMutation } from 'app/services/apiUser';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';

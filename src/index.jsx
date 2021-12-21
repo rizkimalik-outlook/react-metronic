@@ -7,7 +7,6 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import App from "./App";
 import store from "./app/store";
-import SplashScreen from 'views/components/SplashScreen';
 
 let persistor = persistStore(store);
 
@@ -16,7 +15,7 @@ ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-                <PersistGate loading={<SplashScreen />} persistor={persistor}>
+                <PersistGate loading={null} persistor={persistor}>
                     <App />
                 </PersistGate>
             </Provider>

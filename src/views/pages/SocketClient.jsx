@@ -5,7 +5,7 @@ import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/compon
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 import { AskPermission, ShowNotification } from 'views/components/Notification';
 import { authUser } from 'app/slice/authSlice';
-import { getListCustomer } from 'app/services/sosmedApi';
+import { getListCustomer } from 'app/services/apiSosmed';
 
 function SocketClient() {
     const [message, setMessage] = useState('');
@@ -72,7 +72,7 @@ function SocketClient() {
                             <CardBody className="p-0 scroll-y h-lg-auto">
                                 <div className="table-responsive ">
                                     {
-                                        list_customers.map((customer, index) => {
+                                        list_customers?.map((customer, index) => {
                                             return <div className="list list-hover border-bottom" key={index} onClick={(e) => getSelected(customer)}>
                                                 <div className="d-flex align-items-start list-item py-4">
                                                     <div className="symbol symbol-45px symbol-circle mx-2">

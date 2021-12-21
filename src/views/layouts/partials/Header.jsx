@@ -4,7 +4,7 @@ import { socket } from 'app/config';
 import { authUser } from 'app/slice/authSlice';
 import { useSelector } from 'react-redux';
 import Icons from 'views/components/Icons';
-import { useLogoutMutation } from 'app/services/auth';
+import { useLogoutMutation } from 'app/services/apiAuth';
 
 function Header() {
     const history = useHistory();

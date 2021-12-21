@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import Icons from 'views/components/Icons';
-import { useGetUsersQuery, useDeleteUserMutation } from 'app/services/user';
+import { useGetUsersQuery, useDeleteUserMutation } from 'app/services/apiUser';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';

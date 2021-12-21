@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getListCustomer } from 'app/services/sosmedApi';
+import { getListCustomer } from 'app/services/apiSosmed';
 
 
 function General() {

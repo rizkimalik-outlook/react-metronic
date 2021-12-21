@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import MenuItem from './menu/MenuItem'
 import Icons from 'views/components/Icons';
 import MendawaiLogo from 'views/components/MendawaiLogo';
-import { getMenu } from 'app/services/menuApi'
+import { getMenu } from 'app/services/apiMenu'
 
 function Aside() {
     const location = useLocation();

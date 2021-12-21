@@ -1,10 +1,3 @@
-// import axios from "axios";
-
-// export const getUserLevel = async () => {
-//     const res = await axios.get('/user_level');
-//     return res.data;
-// }
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl, apiHeaders } from "app/config";
 

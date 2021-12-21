@@ -1,21 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer } from 'redux-persist';
-// import {
-//     persistReducer,
-//     FLUSH,
-//     REHYDRATE,
-//     PAUSE,
-//     PERSIST,
-//     PURGE,
-//     REGISTER,
-//   } from 'redux-persist'
+// import { persistReducer } from 'redux-persist';
+import {
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+  } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from "redux";
 
 import authSlice from './slice/authSlice';
 import sosmedSlice from './slice/sosmedSlice';
-import { auth } from './services/auth';
-import { user } from './services/user';
+import { auth } from './services/apiAuth';
+import { user } from './services/apiUser';
 import { user_level } from './services/apiUserLevel';
 
 const reducers = combineReducers({ 
@@ -40,11 +40,11 @@ export default configureStore({
     },
     // middleware: [thunk]
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(user.middleware)
-    // middleware: (getDefaultMiddleware) =>
-    // getDefaultMiddleware({
-    //   serializableCheck: {
-    //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    //   },
-    // }),
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 
 })
