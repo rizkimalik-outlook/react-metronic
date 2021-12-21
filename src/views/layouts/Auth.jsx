@@ -13,11 +13,12 @@ function Auth({ children }) {
     useEffect(() => {
         AskPermission();
         axiosDefault(token);
-        SocketIO();
+        // SocketIO();
     }, [token]);
 
     return (
         <div className="d-flex flex-row flex-column-fluid page">
+            <SocketIO />
             {/* <Aside /> */}
             <div className="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <Header />

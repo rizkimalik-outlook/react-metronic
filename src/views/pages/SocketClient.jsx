@@ -3,26 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { socket } from 'app/config';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
-import { AskPermission, ShowNotification } from 'views/components/Notification';
+import { ShowNotification } from 'views/components/Notification';
 import { authUser } from 'app/slice/authSlice';
 import { getListCustomer } from 'app/services/apiSosmed';
+import { setSelectedCustomer } from 'app/slice/sosmedSlice';
 
 function SocketClient() {
+    const dispatch = useDispatch();
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
-    const dispatch = useDispatch();
-    const getListCustomers = useSelector(state => state.sosialmedia.list_customers);
+    const { list_customers, status, selected_customer } = useSelector(state => state.sosialmedia);
     const { username, email_address } = useSelector(authUser);
-    const [selected, getSelected] = useState('');
-    const [status, setStatus] = useState('');
-    const list_customers = getListCustomers.data;
+    const get_list_customers = list_customers.data;
 
     useEffect(() => {
-        AskPermission();
-        console.log(`connected : ${socket.id}`);
-        let getstatus = socket.id !== '' ? 'Available' : 'Disconnect';
-        setStatus(getstatus);
-
         socket.on('return-message-customer', (res) => {
             let { message, name } = res;
             ShowNotification(name, message);
@@ -36,15 +30,15 @@ function SocketClient() {
 
     function sendMessage() {
         let content = {
-            chat_id: selected.chat_id,
-            customer_id: selected.customer_id,
+            chat_id: selected_customer.chat_id,
+            customer_id: selected_customer.customer_id,
             message: message,
             name: username,
             email: email_address,
             user_id: socket.id,
             agent_handle: username,
             socket_agentid: socket.id,
-            socket_custid: selected.user_id
+            socket_custid: selected_customer.user_id
         }
         socket.emit('send-message-agent', content)
         setConversation(
@@ -63,7 +57,7 @@ function SocketClient() {
                     <div className="col-lg-4 pr-1" style={{ height: '75vh' }}>
                         <Card>
                             <CardHeader>
-                                <CardTitle title="Agent Status" subtitle={status} />
+                                <CardTitle title="Agent Status" subtitle={status.socket_id !== null ? 'Available' : 'Disconnect'} />
                                 <CardToolbar>
                                     <span className="text-muted font-weight-bold font-size-sm mr-2">Live</span><br />
                                     <span className="label label-rounded label-primary">10</span>
@@ -72,8 +66,8 @@ function SocketClient() {
                             <CardBody className="p-0 scroll-y h-lg-auto">
                                 <div className="table-responsive ">
                                     {
-                                        list_customers?.map((customer, index) => {
-                                            return <div className="list list-hover border-bottom" key={index} onClick={(e) => getSelected(customer)}>
+                                        get_list_customers?.map((customer, index) => {
+                                            return <div className="list list-hover border-bottom" key={index} onClick={(e) => dispatch(setSelectedCustomer(customer))}>
                                                 <div className="d-flex align-items-start list-item py-4">
                                                     <div className="symbol symbol-45px symbol-circle mx-2">
                                                         {/* <img alt="Pic" src="/media/avatars/150-2.jpg" /> */}

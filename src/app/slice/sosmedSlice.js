@@ -4,8 +4,10 @@ import { getListCustomer } from 'app/services/apiSosmed'
 const sosmedSlice = createSlice({
     name: "sosialmedia",
     initialState: {
-        status: 'disconnect',
-        connected: false,
+        status: {
+            connected: false,
+            socket_id: null
+        },
         send_message: {
             chat_id: '',
             customer_id: '',
@@ -17,31 +19,34 @@ const sosmedSlice = createSlice({
             socket_agentid: '',
             socket_custid: ''
         },
+        selected_customer: {
+            chat_id: '',
+            customer_id: '',
+            user_id: ''
+        },
         list_customers: [],
     },
     reducers: {
         setSocketStatus: (state, action) => {
-            state.status = action.payload.status;
-            state.connected = action.payload.connected;
+            state.status = action.payload;
+        },
+        setSelectedCustomer: (state, action) => {
+            state.selected_customer = action.payload;
         },
         setSendMessage: (state, action) => {
             state.send_message = action.payload;
         },
     },
     extraReducers: {
-        // [getListCustomer.pending]: (state, action) => {
-        //     state.status = 'loading'
-        // },
         [getListCustomer.fulfilled]: (state, action) => {
             state.list_customers = action.payload
-            // state.status = 'success'
         },
-        // [getListCustomer.rejected]: (state, action) => {
-        //     state.status = 'failed'
-        // },
     },
 });
 
 //export actions & reducer
-export const { setSocketStatus, setSendMessage } = sosmedSlice.actions;
+export const { 
+    setSocketStatus, 
+    setSelectedCustomer, 
+    setSendMessage } = sosmedSlice.actions;
 export default sosmedSlice.reducer;
