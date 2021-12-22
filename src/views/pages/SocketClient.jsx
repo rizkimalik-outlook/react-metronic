@@ -4,9 +4,9 @@ import { socket } from 'app/config';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 import { ShowNotification } from 'views/components/Notification';
-import { authUser } from 'app/slice/authSlice';
+import { authUser } from 'app/slice/sliceAuth';
 import { getListCustomer } from 'app/services/apiSosmed';
-import { setSelectedCustomer } from 'app/slice/sosmedSlice';
+import { setSelectedCustomer } from 'app/slice/sliceSosmed';
 
 function SocketClient() {
     const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import Footer from './partials/Footer';
 import Header from './partials/Header';
 import { axiosDefault } from 'app/config';
 import { AskPermission } from 'views/components/Notification';
-import { authUser } from 'app/slice/authSlice';
+import { authUser } from 'app/slice/sliceAuth';
 import { useSelector } from 'react-redux';
 import SocketIO from 'views/components/SocketIO';
 

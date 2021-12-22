@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { authUser } from 'app/slice/authSlice'
+import { authUser } from 'app/slice/sliceAuth'
 
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute'; //Auth Route

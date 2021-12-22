@@ -8,7 +8,7 @@ import UserResetPassword from './UserResetPassword';
 import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
 // import SplashScreen from 'views/components/SplashScreen';
 import { useSelector } from 'react-redux';
-import { authUser } from 'app/slice/authSlice';
+import { authUser } from 'app/slice/sliceAuth';
 import { baseUrl } from 'app/config';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 

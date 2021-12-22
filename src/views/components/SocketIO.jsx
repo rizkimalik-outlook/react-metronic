@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { socket } from 'app/config';
 import { useDispatch } from 'react-redux';
 import { ShowNotification } from 'views/components/Notification';
-import {setSocketStatus} from 'app/slice/sosmedSlice';
+import {setSocketStatus} from 'app/slice/sliceSosmed';
 
 const SocketIO = () => {
     const dispatch = useDispatch();
