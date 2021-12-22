@@ -13,7 +13,6 @@ function Auth({ children }) {
     useEffect(() => {
         AskPermission();
         axiosDefault(token);
-        // SocketIO();
     }, [token]);
 
     return (

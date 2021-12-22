@@ -106,26 +106,21 @@ function SocketClient() {
                                     })
                                 }
                             </CardBody>
-                            {/* <CardFooter>
-                                <input type="text" name="message" onChange={(e) => setMessage(e.target.value)} value={message} className="form-control" placeholder="Msg" />
-                                <button onClick={sendMessage} className="btn btn-primary mx-2 btn-sm">send</button>
-                            </CardFooter> */}
                             <div className="card-footer p-2">
-                                <textarea
-                                    className="form-control form-control-flush mb-3"
-                                    rows={1}
-                                    data-kt-element="input"
-                                    placeholder="Type a message"
+                                <input
+                                    type="text"
                                     name="message"
                                     onChange={(e) => setMessage(e.target.value)}
                                     value={message}
+                                    className="form-control"
+                                    placeholder="Type a message"
                                 />
                                 <div className="d-flex justify-content-between">
                                     <div className="d-flex align-items-center">
                                         <button className="btn btn-sm btn-icon btn-active-light-primary" type="button" data-bs-toggle="tooltip"
-                                            title="Coming soon"><i className="fa fa-home" /></button>
+                                            title="Coming soon"><i className="fa fa-link" /></button>
                                         <button className="btn btn-sm btn-icon btn-active-light-primary" type="button" data-bs-toggle="tooltip"
-                                            title="Coming soon"><i className="fa fa-home" /></button>
+                                            title="Coming soon"><i className="fa fa-camera" /></button>
                                     </div>
                                     <button onClick={sendMessage} className="btn btn-primary" type="button" data-kt-element="send">Send</button>
                                 </div>
