@@ -8,23 +8,9 @@ const sosmedSlice = createSlice({
             connected: false,
             socket_id: null
         },
-        send_message: {
-            chat_id: '',
-            customer_id: '',
-            message: '',
-            name: '',
-            email: '',
-            user_id: '',
-            agent_handle: '',
-            socket_agentid: '',
-            socket_custid: ''
-        },
-        selected_customer: {
-            chat_id: '',
-            customer_id: '',
-            user_id: ''
-        },
+        selected_customer: {},
         list_customers: [],
+        conversations: [],
     },
     reducers: {
         setSocketStatus: (state, action) => {
@@ -33,8 +19,8 @@ const sosmedSlice = createSlice({
         setSelectedCustomer: (state, action) => {
             state.selected_customer = action.payload;
         },
-        setSendMessage: (state, action) => {
-            state.send_message = action.payload;
+        setConversation: (state, action) => {
+            state.conversations = action.payload;
         },
     },
     extraReducers: {
@@ -48,5 +34,6 @@ const sosmedSlice = createSlice({
 export const { 
     setSocketStatus, 
     setSelectedCustomer, 
-    setSendMessage } = sosmedSlice.actions;
+    setConversation 
+} = sosmedSlice.actions;
 export default sosmedSlice.reducer;

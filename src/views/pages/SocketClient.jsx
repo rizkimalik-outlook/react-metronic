@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { socket } from 'app/config';
+import Datetime from 'views/components/Datetime';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
-import { ShowNotification } from 'views/components/Notification';
 import { authUser } from 'app/slice/sliceAuth';
 import { getListCustomer } from 'app/services/apiSosmed';
 import { setSelectedCustomer } from 'app/slice/sliceSosmed';
@@ -18,8 +18,6 @@ function SocketClient() {
 
     useEffect(() => {
         socket.on('return-message-customer', (res) => {
-            let { message, name } = res;
-            ShowNotification(name, message);
             setConversation(
                 conversation => [...conversation, res]
             );
@@ -38,7 +36,8 @@ function SocketClient() {
             user_id: socket.id,
             agent_handle: username,
             socket_agentid: socket.id,
-            socket_custid: selected_customer.user_id
+            socket_custid: selected_customer.user_id,
+            datetime: Datetime()
         }
         socket.emit('send-message-agent', content)
         setConversation(
@@ -59,7 +58,7 @@ function SocketClient() {
                             <CardHeader>
                                 <CardTitle title="Agent Status" subtitle={status.socket_id !== null ? 'Available' : 'Disconnect'} />
                                 <CardToolbar>
-                                    <span className="text-muted font-weight-bold font-size-sm mr-2">Live</span><br />
+                                    <span className="text-muted font-weight-bold font-size-sm mr-2">Live</span>
                                     <span className="label label-rounded label-primary">10</span>
                                 </CardToolbar>
                             </CardHeader>
@@ -100,7 +99,7 @@ function SocketClient() {
                                         return (
                                             <div key={index}>
                                                 <h5>{data.username}</h5>
-                                                <p>{data.room} - {data.message}</p>
+                                                <p>{data.datetime} - {data.message}</p>
                                             </div>
                                         )
                                     })

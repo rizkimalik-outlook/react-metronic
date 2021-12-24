@@ -14,6 +14,7 @@ import { combineReducers } from "redux";
 
 import sliceAuth from './slice/sliceAuth';
 import sliceSosmed from './slice/sliceSosmed';
+import sliceMenu from './slice/sliceMenu';
 import { auth } from './services/apiAuth';
 import { user } from './services/apiUser';
 import { user_level } from './services/apiUserLevel';
@@ -33,6 +34,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 export default configureStore({
     reducer: {
         persistedReducer,
+        mainmenu: sliceMenu,
         sosialmedia: sliceSosmed,
         [auth.reducerPath]: auth.reducer,
         [user.reducerPath]: user.reducer,
