@@ -24,11 +24,15 @@ const routes = [
     },{
         path: 'user/show/:id', 
         exact: false, 
-        component: lazy(() => import('views/pages/user/UserPrivillage')),
+        component: lazy(() => import('views/pages/user/UserDetail')),
     },{
         path: 'user/:id/edit', 
         exact: false, 
         component: lazy(() => import('views/pages/user/UserEdit')),
+    },{
+        path: 'user_privillage', 
+        exact: true, 
+        component: lazy(() => import('views/pages/settings/privillage/UserPrivillage')),
     },
     
     //? custom route

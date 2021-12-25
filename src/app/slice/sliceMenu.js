@@ -9,7 +9,8 @@ import { getMenu } from "app/services/apiMenu";
 const sliceMenu = createSlice({
     name: "mainmenu",
     initialState: {
-        menu: []
+        menu: [],
+        menu_access: [],
     },
     extraReducers: {
         [getMenu.fulfilled]: (state, action) => {
@@ -18,4 +19,4 @@ const sliceMenu = createSlice({
     },
 });
 
-export default sliceMenu.reducer;
+export default sliceMenu;

@@ -41,9 +41,9 @@ function UserList() {
         const { id } = data.row.data;
 
         return <div className="d-flex align-items-end justify-content-center">
-            <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
+            {/* <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
                 <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
-            </NavLink>
+            </NavLink> */}
             <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="User Edit">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>

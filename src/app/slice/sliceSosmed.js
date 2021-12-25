@@ -36,4 +36,4 @@ export const {
     setSelectedCustomer, 
     setConversation 
 } = sosmedSlice.actions;
-export default sosmedSlice.reducer;
+export default sosmedSlice;
