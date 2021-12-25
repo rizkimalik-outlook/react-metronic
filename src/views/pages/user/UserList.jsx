@@ -41,15 +41,15 @@ function UserList() {
         const { id } = data.row.data;
 
         return <div className="d-flex align-items-end justify-content-center">
-            <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1">
+            <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
+                <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
+            </NavLink>
+            <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="User Edit">
                 <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
             </NavLink>
-            <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1">
+            <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1" data-toggle="tooltip" title="User Delete">
                 <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
             </button>
-            {/* <NavLink to={`user/show/${username}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1">
-                <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
-            </NavLink> */}
         </div>
     }
 

@@ -10,6 +10,10 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
     },{
+        path: 'channel_socmed', 
+        exact: true, 
+        component: lazy(() => import('views/pages/channel/socmed/SocialMedia')),
+    },{
         path: 'user', 
         exact: true, 
         component: lazy(() => import('views/pages/user/UserList')),
@@ -20,7 +24,7 @@ const routes = [
     },{
         path: 'user/show/:id', 
         exact: false, 
-        component: lazy(() => import('views/pages/user/UserView')),
+        component: lazy(() => import('views/pages/user/UserPrivillage')),
     },{
         path: 'user/:id/edit', 
         exact: false, 
