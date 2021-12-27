@@ -26,6 +26,15 @@ export const menu_access = createApi({
         }
     }),
     endpoints: (builder) => ({
+        getMenu: builder.query({
+            query: () => queryRequest(`/menu`),
+        }),
+        getMenuModul: builder.query({
+            query: (menu_id) => queryRequest(`/menu_modul/${menu_id}`),
+        }),
+        getMenuSubModul: builder.query({
+            query: (menu_modul_id) => queryRequest(`/menu_submodul/${menu_modul_id}`),
+        }),
         getMenuAccess: builder.query({
             query: (user_level) => queryRequest(`/menu_access/${user_level}`),
         }),
@@ -48,6 +57,9 @@ export const menu_access = createApi({
 });
 
 export const {
+    useGetMenuQuery,
+    useGetMenuModulQuery,
+    useGetMenuSubModulQuery,
     useGetMenuAccessQuery,
     useCreateMenuAccessMutation,
     useDeleteMenuAccessMutation,

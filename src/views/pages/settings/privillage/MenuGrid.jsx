@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useGetMenuAccessQuery, useCreateMenuAccessMutation, useDeleteMenuAccessMutation } from 'app/services/apiMenu';
+import React from 'react';
+import { useGetMenuAccessQuery, useCreateMenuAccessMutation, useDeleteMenuAccessMutation, useGetMenuQuery } from 'app/services/apiMenu';
 import DataGrid, { Column, Paging, MasterDetail } from 'devextreme-react/data-grid';
 import Icons from 'views/components/Icons';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
-import { getMainMenu } from 'app/services/apiMenu';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { authUser } from 'app/slice/sliceAuth';
 
 const MenuGrid = (props) => {
     const { level_name } = props.data.data;
@@ -59,20 +59,19 @@ const MenuGrid = (props) => {
 }
 
 //? component Form Create
-function FormCreate({user_level}) {
+function FormCreate({ user_level }) {
     const { register, handleSubmit } = useForm();
     const [createMenuAccess] = useCreateMenuAccessMutation();
     const { refetch } = useGetMenuAccessQuery(user_level);
-    const dispatch = useDispatch();
-    const { main_menu } = useSelector(state => state.mainmenu);
+    const { data, isFetching } = useGetMenuQuery();
+    const { username } = useSelector(authUser);
 
-    useEffect(() => {
-        dispatch(getMainMenu())
-    }, [dispatch]);
-    
 
     const onSubmitCreate = async (data) => {
         try {
+            data.user_level = user_level;
+            data.user_create = username;
+            data.access = 'menu';
             const res = await createMenuAccess(data);
             if (res.data.status === 200) {
                 refetch();
@@ -97,14 +96,15 @@ function FormCreate({user_level}) {
     return (
         <form onSubmit={handleSubmit(onSubmitCreate)}>
             <div className="form-group row">
-                <input type="hidden" {...register("user_level")} className="form-control" value={user_level} />
-                <input type="hidden" {...register("user_create")} className="form-control" value="admin" />
+                {/* <input type="hidden" {...register("user_level")} className="form-control" value={user_level} /> */}
+                {/* <input type="hidden" {...register("user_create")} className="form-control" value={username} /> */}
                 <div className="col-lg-3">
                     <label>Menu:</label>
+                    {isFetching && <div>loading..</div>}
                     <select className="form-control" {...register("menu_id", { required: true })}>
                         <option>-- Select Menu --</option>
                         {
-                            main_menu?.map((item) => {
+                            data?.data.map((item) => {
                                 return <option value={item.menu_id} key={item.menu_id}>{item.menu_name}</option>
                             })
                         }
