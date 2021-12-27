@@ -5,10 +5,10 @@ import axios from "axios";
 
 const queryRequest = (url) => ({ url, headers: apiHeaders })
 
-export const getMenu = createAsyncThunk(
-    "mainmenu/menu",
+export const getMainMenu = createAsyncThunk(
+    "mainmenu/main_menu",
     async () => {
-        const res = await axios.get('/menu');
+        const res = await axios.get('/main_menu');
         return res.data;
     }
 );

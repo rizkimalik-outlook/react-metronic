@@ -1,16 +1,31 @@
-import { Form, Item } from 'devextreme-react/form';
 import React from 'react'
+import { Form, Item } from 'devextreme-react/form';
+import { useGetUserShowQuery } from 'app/services/apiUser';
 
 function UserDetail(props) {
-    const data = props.data.data;
-    const items = ['max_concurrent', 'aux', 'organization', 'role', 'department', 'created_at'];
+    const user = props.data.data;
+    const { data, isFetching } = useGetUserShowQuery(user.id);
+    const items = [
+        'max_concurrent', 
+        'aux', 
+        'organization', 
+        'department', 
+        'max_queue', 
+        'facebook', 
+        'twitter', 
+        'instagram', 
+        'whatsapp', 
+        'chat', 
+        'created_at'
+    ];
 
     return (
         <div>
-            <h5>{data.username}</h5>
+            {isFetching && <div>loading..</div>}
+            <h5>{user.username}</h5>
             <Form
-                formData={data}
-                colCount={2}
+                formData={data?.data}
+                colCount={3}
                 className="bg-white border p-4"
             >
                 {

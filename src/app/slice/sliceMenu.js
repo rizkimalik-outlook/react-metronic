@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMenu } from "app/services/apiMenu";
+import { getMainMenu } from "app/services/apiMenu";
 
 // export const getMenu = async () => {
 //     const res = await axios.get('/menu');
@@ -9,12 +9,12 @@ import { getMenu } from "app/services/apiMenu";
 const sliceMenu = createSlice({
     name: "mainmenu",
     initialState: {
-        menu: [],
+        main_menu: [],
         menu_access: [],
     },
     extraReducers: {
-        [getMenu.fulfilled]: (state, action) => {
-            state.menu = action.payload.data
+        [getMainMenu.fulfilled]: (state, action) => {
+            state.main_menu = action.payload.data
         },
     },
 });

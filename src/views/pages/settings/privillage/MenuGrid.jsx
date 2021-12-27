@@ -4,7 +4,7 @@ import DataGrid, { Column, Paging, MasterDetail } from 'devextreme-react/data-gr
 import Icons from 'views/components/Icons';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
-import { getMenu } from 'app/services/apiMenu';
+import { getMainMenu } from 'app/services/apiMenu';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MenuGrid = (props) => {
@@ -58,15 +58,16 @@ const MenuGrid = (props) => {
     )
 }
 
+//? component Form Create
 function FormCreate({user_level}) {
     const { register, handleSubmit } = useForm();
     const [createMenuAccess] = useCreateMenuAccessMutation();
     const { refetch } = useGetMenuAccessQuery(user_level);
     const dispatch = useDispatch();
-    const { menu } = useSelector(state => state.mainmenu);
+    const { main_menu } = useSelector(state => state.mainmenu);
 
     useEffect(() => {
-        dispatch(getMenu())
+        dispatch(getMainMenu())
     }, [dispatch]);
     
 
@@ -103,7 +104,7 @@ function FormCreate({user_level}) {
                     <select className="form-control" {...register("menu_id", { required: true })}>
                         <option>-- Select Menu --</option>
                         {
-                            menu?.map((item) => {
+                            main_menu?.map((item) => {
                                 return <option value={item.menu_id} key={item.menu_id}>{item.menu_name}</option>
                             })
                         }

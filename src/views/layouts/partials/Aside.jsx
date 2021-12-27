@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from './menu/MenuItem'
 import Icons from 'views/components/Icons';
 import MendawaiLogo from 'views/components/MendawaiLogo';
-import { getMenu } from 'app/services/apiMenu'
+import { getMainMenu } from 'app/services/apiMenu'
 
 function Aside() {
     const location = useLocation();
     const dispatch = useDispatch();
-    const { menu } = useSelector(state => state.mainmenu);
+    const { main_menu } = useSelector(state => state.mainmenu);
 
     useEffect(() => {
         console.log('load menu.')
-        dispatch(getMenu())
+        dispatch(getMainMenu())
     }, [dispatch]);
 
     return (
@@ -31,7 +31,7 @@ function Aside() {
                 <div id="kt_aside_menu" className="aside-menu my-4" data-menu-vertical={1} data-menu-scroll={1} data-menu-dropdown-timeout={500}>
                     <ul className="menu-nav">
                         {
-                            menu?.map((item, index) => {
+                            main_menu?.map((item, index) => {
                                 return (
                                     <MenuItem
                                         item={item}
