@@ -96,8 +96,6 @@ function FormCreate({ user_level }) {
     return (
         <form onSubmit={handleSubmit(onSubmitCreate)}>
             <div className="form-group row">
-                {/* <input type="hidden" {...register("user_level")} className="form-control" value={user_level} /> */}
-                {/* <input type="hidden" {...register("user_create")} className="form-control" value={username} /> */}
                 <div className="col-lg-3">
                     <label>Menu:</label>
                     {isFetching && <div>loading..</div>}

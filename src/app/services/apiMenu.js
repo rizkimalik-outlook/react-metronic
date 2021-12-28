@@ -13,6 +13,7 @@ export const getMainMenu = createAsyncThunk(
     }
 );
 
+
 export const menu_access = createApi({
     reducerPath: 'menu_access',
     baseQuery: fetchBaseQuery({
@@ -36,7 +37,10 @@ export const menu_access = createApi({
             query: (menu_modul_id) => queryRequest(`/menu_submodul/${menu_modul_id}`),
         }),
         getMenuAccess: builder.query({
-            query: (user_level) => queryRequest(`/menu_access/${user_level}`),
+            query: (user_level) => queryRequest(`/menu_access?user_level=${user_level}`),
+        }),
+        getModulAccess: builder.query({
+            query: ({user_level, menu_id}) => queryRequest(`/modul_access?user_level=${user_level}&menu_id=${menu_id}`),
         }),
         createMenuAccess: builder.mutation({
             query: (body) => ({
@@ -61,6 +65,7 @@ export const {
     useGetMenuModulQuery,
     useGetMenuSubModulQuery,
     useGetMenuAccessQuery,
+    useGetModulAccessQuery,
     useCreateMenuAccessMutation,
     useDeleteMenuAccessMutation,
 } = menu_access;

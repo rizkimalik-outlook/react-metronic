@@ -10,12 +10,15 @@ const sliceMenu = createSlice({
     name: "mainmenu",
     initialState: {
         main_menu: [],
-        menu_access: [],
+        // menu_access: [],
     },
     extraReducers: {
         [getMainMenu.fulfilled]: (state, action) => {
             state.main_menu = action.payload.data
         },
+        // [getMenuAccessData.fulfilled]: (state, action) => {
+        //     state.menu_access = action.payload.data
+        // },
     },
 });
 
