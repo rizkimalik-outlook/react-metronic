@@ -64,18 +64,18 @@ const SocialMedia = () => {
                                     get_list_customers?.map((customer, index) => {
                                         return (
                                             <div className="list list-hover border-bottom" key={index} onClick={(e) => dispatch(setSelectedCustomer(customer))}>
-                                                <div className="list-item d-flex align-items-center justify-content-between py-4 mx-2">
-                                                    <div className="d-flex align-items-center w-50">
+                                                <div className={`list-item d-flex align-items-center justify-content-between ${customer.chat_id === selected_customer?.chat_id ? 'active' : ''}`}>
+                                                    <div className="d-flex align-items-center w-50 py-4 mx-2">
                                                         <div className="symbol symbol-45px symbol-circle">
                                                             {/* <img alt="Pic" src="/media/avatars/150-2.jpg" /> */}
-                                                            <span className="symbol-label font-weight-bolder">C</span>
+                                                            <span className="symbol-label bg-light-success font-weight-bolder">C</span>
                                                         </div>
                                                         <div className="flex-grow-1 mx-2">
                                                             <div className="mr-2">{customer.name}</div>
                                                             <div className="mt-2">{customer.email}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="d-flex flex-column align-items-end">
+                                                    <div className="d-flex flex-column align-items-end mx-2">
                                                         <div className="text-mute">8:30 PM</div>
                                                         <span className="label label-light-primary font-weight-bold label-inline mt-2">{customer.customer_id}</span>
                                                     </div>
