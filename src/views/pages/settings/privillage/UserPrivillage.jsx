@@ -3,7 +3,7 @@ import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card';
 import DataGrid, { Column, MasterDetail } from 'devextreme-react/data-grid';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
-import MenuGrid from './MenuGrid';
+import Menu from './Menu';
 
 function UserPrivillage() {
     const { data, isFetching } = useGetUserLevelQuery();
@@ -30,7 +30,7 @@ function UserPrivillage() {
                         >
                             <MasterDetail
                                 enabled={true}
-                                component={MenuGrid}
+                                component={Menu}
                             />
                             <Column dataField="level_name" caption="Level User" />
                             <Column dataField="description" />

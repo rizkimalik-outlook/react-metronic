@@ -6,8 +6,9 @@ import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { authUser } from 'app/slice/sliceAuth';
+import MenuModul from './MenuModul';
 
-const MenuGrid = (props) => {
+const Menu = (props) => {
     const { level_name } = props.data.data;
     const { data, isFetching, refetch } = useGetMenuAccessQuery(level_name);
     const [deleteMenuAccess] = useDeleteMenuAccessMutation();
@@ -47,7 +48,7 @@ const MenuGrid = (props) => {
             >
                 <MasterDetail
                     enabled={true}
-                    component=""
+                    component={MenuModul}
                 />
                 <Paging enabled={false} />
                 <Column dataField="menu_id" caption="ID" width={100} />
@@ -97,7 +98,7 @@ function FormCreate({ user_level }) {
         <form onSubmit={handleSubmit(onSubmitCreate)}>
             <div className="form-group row">
                 <div className="col-lg-3">
-                    <label>Menu:</label>
+                    <label>Menu { user_level }:</label>
                     {isFetching && <div>loading..</div>}
                     <select className="form-control" {...register("menu_id", { required: true })}>
                         <option>-- Select Menu --</option>
@@ -116,4 +117,4 @@ function FormCreate({ user_level }) {
     )
 }
 
-export default MenuGrid
+export default Menu
