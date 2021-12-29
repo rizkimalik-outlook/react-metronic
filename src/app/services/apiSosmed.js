@@ -7,4 +7,12 @@ export const getListCustomer = createAsyncThunk(
         const res = await axios.get('/sosmed/list_customers');
         return res.data;
     }
-);
+)
+
+export const getLoadConversation = createAsyncThunk(
+    "sosialmedia/getLoadConversation",
+    async ({ chat_id }) => {
+        const res = await axios.post('/sosmed/conversation_chats', { chat_id });
+        return res.data;
+    }
+)

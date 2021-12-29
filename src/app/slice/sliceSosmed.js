@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getListCustomer } from 'app/services/apiSosmed'
+import { getListCustomer, getLoadConversation } from 'app/services/apiSosmed'
 
 const sosmedSlice = createSlice({
     name: "sosialmedia",
@@ -19,21 +19,20 @@ const sosmedSlice = createSlice({
         setSelectedCustomer: (state, action) => {
             state.selected_customer = action.payload;
         },
-        setConversation: (state, action) => {
-            state.conversations = action.payload;
-        },
     },
     extraReducers: {
         [getListCustomer.fulfilled]: (state, action) => {
             state.list_customers = action.payload
         },
+        [getLoadConversation.fulfilled]: (state, action) => {
+            state.conversations = action.payload
+        },
     },
 });
 
 //export actions & reducer
-export const { 
-    setSocketStatus, 
-    setSelectedCustomer, 
-    setConversation 
+export const {
+    setSocketStatus,
+    setSelectedCustomer,
 } = sosmedSlice.actions;
 export default sosmedSlice;
