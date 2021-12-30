@@ -19,9 +19,12 @@ const SocialMedia = () => {
 
     useEffect(() => {
         socket.on('return-message-customer', (res) => {
-            setConversation(
-                conversation => [...conversation, res]
-            );
+            //? if customer active, show message to container chat
+            if (res.chat_id === selected_customer?.chat_id) {
+                setConversation(
+                    conversation => [...conversation, res]
+                );
+            }
         });
         dispatch(getListCustomer())
     }, [dispatch]);
@@ -88,7 +91,7 @@ const SocialMedia = () => {
                                                             </div>
                                                         </div>
                                                         <div className="d-flex flex-column align-items-end mx-2">
-                                                            <div className="text-mute">8:30 PM</div>
+                                                            <div className="text-mute">{customer.date_create}</div>
                                                             <span className="label label-light-primary font-weight-bold label-inline mt-2">{customer.customer_id}</span>
                                                         </div>
                                                     </div>
@@ -97,7 +100,6 @@ const SocialMedia = () => {
                                         })
                                     }
                                 </div>
-
                             </CardBody>
                         </Card>
                     </div>
