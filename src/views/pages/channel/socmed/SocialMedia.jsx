@@ -27,11 +27,12 @@ const SocialMedia = () => {
             }
         });
         dispatch(getListCustomer())
-    }, [dispatch]);
+    }, [dispatch,selected_customer]);
     
     useEffect(() => {
         setConversation(conversations.data)
     }, [conversations]);
+
 
     function sendMessage() {
         let content = {

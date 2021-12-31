@@ -21,10 +21,19 @@ export const auth = createApi({
                 body: user,
             })
         }),
+        userSocket: builder.mutation({
+            query: (body) => ({
+                url: '/auth/user_socket',
+                method: 'PUT',
+                headers: apiHeaders,
+                body,
+            })
+        }),
     })
 })
 
 export const {
     useLoginMutation,
-    useLogoutMutation
+    useLogoutMutation,
+    useUserSocketMutation
 } = auth;
