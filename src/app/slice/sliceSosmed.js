@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getListCustomer, getLoadConversation } from 'app/services/apiSosmed'
+import { getListCustomer, getLoadConversation, getEndChat } from 'app/services/apiSosmed'
 
 const sosmedSlice = createSlice({
     name: "sosialmedia",
@@ -26,6 +26,9 @@ const sosmedSlice = createSlice({
         },
         [getLoadConversation.fulfilled]: (state, action) => {
             state.conversations = action.payload
+        },
+        [getEndChat.fulfilled]: (state, action) => {
+            state.conversations = []
         },
     },
 });

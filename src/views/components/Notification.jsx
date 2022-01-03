@@ -14,8 +14,8 @@ function AskPermission() {
 function ShowNotification(Title, Tag) {
     function PushNotification() {
         let options = {
-            body: `${Title} : ${Tag}`,
-            // icon: 'img/' + Icon,
+            body: `${Tag}`,
+            icon: '/assets/media/icons/notification.png',
             tag: Tag
         }
         const notif = new Notification(Title, options);

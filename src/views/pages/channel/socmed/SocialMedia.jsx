@@ -5,7 +5,7 @@ import Datetime from 'views/components/Datetime';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 import { authUser } from 'app/slice/sliceAuth';
-import { getListCustomer, getLoadConversation } from 'app/services/apiSosmed';
+import { getListCustomer, getLoadConversation, getEndChat } from 'app/services/apiSosmed';
 import { setSelectedCustomer } from 'app/slice/sliceSosmed';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
@@ -19,6 +19,8 @@ const SocialMedia = () => {
 
     useEffect(() => {
         socket.on('return-message-customer', (res) => {
+            dispatch(getListCustomer())
+
             //? if customer active, show message to container chat
             if (res.chat_id === selected_customer?.chat_id) {
                 setConversation(
@@ -27,8 +29,8 @@ const SocialMedia = () => {
             }
         });
         dispatch(getListCustomer())
-    }, [dispatch,selected_customer]);
-    
+    }, [dispatch, selected_customer]);
+
     useEffect(() => {
         setConversation(conversations.data)
     }, [conversations]);
@@ -59,6 +61,13 @@ const SocialMedia = () => {
         dispatch(getLoadConversation({
             chat_id: customer.chat_id
         }))
+    }
+
+    function handlerEndChat(chat_id) {
+        dispatch(getEndChat({ chat_id }))
+        dispatch(getListCustomer())
+        dispatch(setSelectedCustomer({}))
+        dispatch(getLoadConversation({ chat_id }))
     }
 
     return (
@@ -109,8 +118,13 @@ const SocialMedia = () => {
                         <Card>
                             <CardHeader className="border-bottom">
                                 <CardTitle title={selected_customer?.name} subtitle={selected_customer?.email} />
+                                {selected_customer?.chat_id &&
+                                    <CardToolbar>
+                                        <button type="button" className="btn btn-danger btn-sm" onClick={(e) => handlerEndChat(selected_customer.chat_id)}>End Chat</button>
+                                    </CardToolbar>}
+
                             </CardHeader>
-                            <CardBody className="p-0">
+                            <CardBody className="p-4">
                                 <div data-mobile-height={350} style={{ height: 'calc(75vh - 160px)', overflow: 'auto' }}>
                                     <ScrollToBottom className="messages p-4">
                                         {
@@ -135,7 +149,7 @@ const SocialMedia = () => {
                                     className="form-control"
                                     placeholder="Type a message"
                                 />
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex justify-content-between mt-2">
                                     <div className="d-flex align-items-center">
                                         <button className="btn btn-sm btn-icon btn-active-light-primary" type="button" data-bs-toggle="tooltip"
                                             title="Coming soon"><i className="fa fa-link" /></button>
