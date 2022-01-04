@@ -8,6 +8,8 @@ import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/compon
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
 import UserDetail from './UserDetail';
 import SplashScreen from 'views/components/SplashScreen';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver';
 
 function UserList() {
     const { data, error, isFetching, refetch } = useGetUsersQuery();
@@ -37,6 +39,43 @@ function UserList() {
         });
     }
 
+    function onExportExcel() {
+        const workbook = new Workbook();
+        const worksheet = workbook.addWorksheet('Main sheet');
+        worksheet.columns = [
+            { header: 'Username', key: 'username' },
+            { header: 'Name', key: 'name' },
+            { header: 'Email', key: 'email_address' },
+            { header: 'Level', key: 'user_level' },
+        ]
+        worksheet.addRows(data.data);
+        worksheet.autoFilter = 'A1:D1';
+        worksheet.eachRow(function (row, rowNumber) {
+            row.eachCell((cell, colNumber) => {
+                if (rowNumber === 1) {
+                    // First set the background of header row
+                    cell.fill = {
+                        type: 'pattern',
+                        pattern: 'solid',
+                        fgColor: { argb: 'f5b914' }
+                    }
+                }
+                // Set border of each cell 
+                cell.border = {
+                    top: { style: 'thin' },
+                    left: { style: 'thin' },
+                    bottom: { style: 'thin' },
+                    right: { style: 'thin' }
+                };
+            })
+            row.commit();
+        });
+
+        workbook.xlsx.writeBuffer().then((buffer) => {
+            saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'ExcelUsersGrid.xlsx');
+        });
+    }
+
     function componentButtonActions(data) {
         const { id } = data.row.data;
 
@@ -57,7 +96,6 @@ function UserList() {
     return (
         <MainContent>
             <SubHeader active_page="User Privillage" menu_name="Management User" modul_name="User Privillage" />
-
             <Container>
                 <Card>
                     <CardHeader className="border-0">
@@ -66,10 +104,10 @@ function UserList() {
                             <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
                                 Create New User
                             </NavLink>
-                            <NavLink to="/user/export" className="btn btn-light-primary font-weight-bolder btn-sm m-1">
+                            <button type="button" onClick={onExportExcel} className="btn btn-light-primary font-weight-bolder btn-sm m-1">
                                 <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
                                 Export
-                            </NavLink>
+                            </button>
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>
@@ -108,10 +146,7 @@ function UserList() {
                     </CardBody>
                 </Card>
             </Container>
-
-            {/* <CreateUser stateChange={setRefresh} /> */}
         </MainContent>
-
     )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Form, Item } from 'devextreme-react/form';
-import { useGetUserShowQuery } from 'app/services/apiUser';
+// import { useGetUserShowQuery } from 'app/services/apiUser';
 
 function UserDetail(props) {
     const user = props.data.data;
-    const { data, isFetching } = useGetUserShowQuery(user.id);
+    // const { data, isFetching } = useGetUserShowQuery(user.id);
     const items = [
         'max_concurrent', 
         'aux', 
@@ -21,10 +21,10 @@ function UserDetail(props) {
 
     return (
         <div>
-            {isFetching && <div>loading..</div>}
-            <h5>{user.username}</h5>
+            {/* {isFetching && <div>loading..</div>} */}
+            <h5>{user.name}</h5>
             <Form
-                formData={data?.data}
+                formData={user}
                 colCount={3}
                 className="bg-white border p-4"
             >

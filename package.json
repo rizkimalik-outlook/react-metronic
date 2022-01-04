@@ -12,6 +12,8 @@
     "axios": "^0.23.0",
     "devextreme": "^21.2.4-build-21328-1434",
     "devextreme-react": "21.1",
+    "exceljs": "^4.3.0",
+    "file-saver": "^2.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.20.5",
