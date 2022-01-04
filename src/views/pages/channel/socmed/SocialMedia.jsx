@@ -120,9 +120,12 @@ const SocialMedia = () => {
                                 <CardTitle title={selected_customer?.name} subtitle={selected_customer?.email} />
                                 {selected_customer?.chat_id &&
                                     <CardToolbar>
-                                        <button type="button" className="btn btn-danger btn-sm" onClick={(e) => handlerEndChat(selected_customer.chat_id)}>End Chat</button>
-                                    </CardToolbar>}
-
+                                        <button type="button" className="btn btn-light-primary btn-sm ml-2" 
+                                            onClick="">Profile</button>
+                                        <button type="button" className="btn btn-light-danger btn-sm ml-2" 
+                                            onClick={(e) => handlerEndChat(selected_customer.chat_id)}>End Chat</button>
+                                    </CardToolbar>
+                                }
                             </CardHeader>
                             <CardBody className="p-4">
                                 <div data-mobile-height={350} style={{ height: 'calc(75vh - 160px)', overflow: 'auto' }}>

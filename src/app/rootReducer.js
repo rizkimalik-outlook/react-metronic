@@ -5,6 +5,7 @@ import { combineReducers } from "redux";
 import sliceAuth from './slice/sliceAuth';
 import sliceSosmed from './slice/sliceSosmed';
 import sliceMenu from './slice/sliceMenu';
+import sliceCustomer from './slice/sliceCustomer';
 import { auth } from './services/apiAuth';
 import { user } from './services/apiUser';
 import { user_level } from './services/apiUserLevel';
@@ -26,6 +27,7 @@ const rootReducer = {
     persistedReducer,
     mainmenu: sliceMenu.reducer,
     sosialmedia: sliceSosmed.reducer,
+    customer: sliceCustomer.reducer,
     auth: auth.reducer,
     user: user.reducer,
     user_level: user_level.reducer,

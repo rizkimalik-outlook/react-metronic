@@ -1,5 +1,9 @@
-import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import Icons from 'views/components/Icons'
+import { Container, MainContent, SubHeader } from 'views/layouts/partials'
+import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card'
+
 
 function TodoList() {
     return (
@@ -83,6 +87,27 @@ function TodoList() {
                     </div>
                 </div>
 
+                <div className="row">
+                    <div className="col-lg-12">
+                        <Card>
+                            <CardHeader className="border-0">
+                                <CardTitle title="Data To Do List" subtitle="Data Todolist Ticket."/>
+                                <CardToolbar>
+                                    <button type="button" className="btn btn-light-primary font-weight-bolder btn-sm ml-2">
+                                        <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
+                                        Export
+                                    </button>
+                                    <NavLink to="/customer/create" className="btn btn-primary font-weight-bolder btn-sm ml-2">
+                                        Create New Customer
+                                    </NavLink>
+                                </CardToolbar>
+                            </CardHeader>
+                            <CardBody>
+                                grid todolist
+                            </CardBody>
+                        </Card>
+                    </div>
+                </div>
             </Container>
         </MainContent>
     )

@@ -14,6 +14,10 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/channel/socmed/SocialMedia')),
     },{
+        path: 'customer', 
+        exact: true, 
+        component: lazy(() => import('views/pages/customer/CustomerList')),
+    },{
         path: 'user', 
         exact: true, 
         component: lazy(() => import('views/pages/user/UserList')),
@@ -49,7 +53,6 @@ const routes = [
         component: lazy(() => import('../pages/NotFound')),
         exact: false,
     }, */
-    
     {
         path: 'dxgrid', 
         exact: true, 

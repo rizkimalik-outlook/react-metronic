@@ -19,7 +19,8 @@ function PublicRoute({ children, isAuth, ...rest }) {
                                 state: { from: location }
                             }}
                         />
-                    ))
+                    )
+                )
             }
         />
     );

@@ -78,18 +78,19 @@ function UserList() {
 
     function componentButtonActions(data) {
         const { id } = data.row.data;
-
-        return <div className="d-flex align-items-end justify-content-center">
-            {/* <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
-                <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
-            </NavLink> */}
-            <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="User Edit">
-                <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
-            </NavLink>
-            <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light btn-hover-danger btn-sm mx-1" data-toggle="tooltip" title="User Delete">
-                <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
-            </button>
-        </div>
+        return (
+            <div className="d-flex align-items-end justify-content-center">
+                {/* <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
+                    <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
+                </NavLink> */}
+                <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light-warning btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="User Edit">
+                    <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
+                </NavLink>
+                <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light-danger btn-hover-danger btn-sm mx-1" data-toggle="tooltip" title="User Delete">
+                    <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
+                </button>
+            </div>
+        )
     }
 
 
@@ -136,12 +137,11 @@ function UserList() {
                                 showPageSizeSelector={true}
                                 showInfo={true}
                                 showNavigationButtons={true} />
-
+                            <Column caption="Actions" dataField="id" width={100} cellRender={componentButtonActions} />
                             <Column caption="Username" dataField="username" />
                             <Column caption="Name" dataField="name" />
                             <Column caption="Email" dataField="email_address" />
                             <Column caption="Level" dataField="user_level" />
-                            <Column caption="Actions" dataField="id" width={150} cellRender={componentButtonActions} />
                         </DataGrid>
                     </CardBody>
                 </Card>
