@@ -34,6 +34,7 @@ function UserEdit() {
                     }
                 })
                 const json = await res.json();
+                console.log(json.data)
                 const { 
                     name,
                     username,

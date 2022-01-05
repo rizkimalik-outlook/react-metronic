@@ -1,14 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCustomerList } from "app/services/apiCustomer";
+import {
+    apiCustomerList,
+    apiCustomerShow,
+    apiCustomerStore,
+    apiCustomerUpdate,
+    apiCustomerDelete
+} from "app/services/apiCustomer";
 
 const sliceCustomer = createSlice({
     name: "customer",
     initialState: {
         customers: [],
+        customer: {},
+        response: {},
     },
     extraReducers: {
-        [getCustomerList.fulfilled]: (state, action) => {
+        [apiCustomerList.fulfilled]: (state, action) => {
             state.customers = action.payload.data
+        },
+        [apiCustomerShow.fulfilled]: (state, action) => {
+            state.customer = action.payload.data
+        },
+        [apiCustomerStore.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiCustomerUpdate.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiCustomerDelete.fulfilled]: (state, action) => {
+            state.response = action.payload
         },
     },
 });

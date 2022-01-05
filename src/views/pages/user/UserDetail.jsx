@@ -9,14 +9,12 @@ function UserDetail(props) {
         'max_concurrent', 
         'aux', 
         'organization', 
-        'department', 
         'max_queue', 
         'facebook', 
         'twitter', 
         'instagram', 
         'whatsapp', 
         'chat', 
-        'created_at'
     ];
 
     return (
@@ -40,7 +38,7 @@ function UserDetail(props) {
     )
 
     function renderFormItem(item) {
-        return <span className="p-3">{item.editorOptions.value}</span>;
+        return <span className="p-3">{item.editorOptions.value === true ? 'True' : item.editorOptions.value}</span>;
     }
 }
 
