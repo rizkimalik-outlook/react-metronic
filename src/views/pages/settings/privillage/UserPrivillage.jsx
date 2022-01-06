@@ -1,4 +1,5 @@
 import React from 'react';
+import SplashScreen from 'views/components/SplashScreen';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card';
 import DataGrid, { Column, MasterDetail } from 'devextreme-react/data-grid';
@@ -17,7 +18,7 @@ function UserPrivillage() {
                         <CardTitle title="User Privillage" subtitle="Menu access user." />
                     </CardHeader>
                     <CardBody>
-                        {isFetching && <div>loading..</div>}
+                        {isFetching && <SplashScreen />}
                         <DataGrid
                             dataSource={data?.data}
                             keyExpr="id"

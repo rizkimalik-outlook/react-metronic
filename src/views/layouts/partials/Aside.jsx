@@ -17,7 +17,7 @@ function Aside() {
     }, [dispatch]);
 
     return (
-        <div className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
+        <aside className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
             <div className="brand flex-column-auto" id="kt_brand">
                 <NavLink to="/general" className="brand-logo">
                     <MendawaiLogo className="max-h-50px" />
@@ -28,7 +28,7 @@ function Aside() {
             </div>
 
             <div className="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-                <div id="kt_aside_menu" className="aside-menu my-4" data-menu-vertical={1} data-menu-scroll={1} data-menu-dropdown-timeout={500}>
+                <nav id="kt_aside_menu" className="aside-menu my-4" data-menu-vertical={1} data-menu-scroll={1} data-menu-dropdown-timeout={500}>
                     <ul className="menu-nav">
                         {
                             main_menu?.map((item, index) => {
@@ -43,9 +43,9 @@ function Aside() {
                             })
                         }
                     </ul>
-                </div>
+                </nav>
             </div>
-        </div>
+        </aside>
     )
 }
 

@@ -12,10 +12,8 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 
 function UserList() {
-    const { data, error, isFetching, refetch } = useGetUsersQuery();
+    const { data, isFetching, refetch } = useGetUsersQuery();
     const [deleteUser] = useDeleteUserMutation();
-    if (error) return 'connection error..';
-    if (isFetching) return <SplashScreen />;
 
     async function deleteUserHandler(id) {
         Swal.fire({
@@ -93,7 +91,6 @@ function UserList() {
         )
     }
 
-
     return (
         <MainContent>
             <SubHeader active_page="User Privillage" menu_name="Management User" modul_name="User Privillage" />
@@ -112,8 +109,9 @@ function UserList() {
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>
+                        {isFetching && <SplashScreen />}
                         <DataGrid
-                            dataSource={data.data}
+                            dataSource={data?.data}
                             keyExpr="id"
                             allowColumnReordering={true}
                             allowColumnResizing={true}

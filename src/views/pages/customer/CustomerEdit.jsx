@@ -1,24 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useDispatch } from 'react-redux'
-import { apiCustomerStore } from 'app/services/apiCustomer'
+import { apiCustomerUpdate, apiCustomerShow } from 'app/services/apiCustomer'
 
-const CustomerCreate = () => {
-    const history = useHistory();
+const CustomerEdit = () => {
+    let { customer_id } = useParams();
     const dispatch = useDispatch();
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const onSubmitCreateCustomer = async (data) => {
+    useEffect(() => {
+        async function getShowCustomer() {
+            try {
+                const { payload } = await dispatch(apiCustomerShow({ customer_id }))
+                if (payload.status === 200) {
+                    const {
+                        customer_id,
+                        name,
+                        email,
+                        no_ktp,
+                        birth,
+                        gender,
+                        telephone,
+                        address
+                    } = payload.data[0];
+                    reset({
+                        customer_id,
+                        name,
+                        email,
+                        no_ktp,
+                        birth: birth?.slice(0, 10),
+                        gender,
+                        telephone,
+                        address
+                    });
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        getShowCustomer();
+    }, [customer_id, reset, dispatch]);
+
+    const onSubmitUpdateCustomer = async (data) => {
         try {
-            const { payload } = await dispatch(apiCustomerStore(data))
+            const { payload } = await dispatch(apiCustomerUpdate(data))
             if (payload.status === 200) {
                 Swal.fire({
-                    title: "Insert Success.",
-                    text: "Success into application!",
+                    title: "Update Success.",
+                    text: "Success update data customer!",
                     buttonsStyling: false,
                     icon: "success",
                     confirmButtonText: "Ok",
@@ -27,19 +61,6 @@ const CustomerCreate = () => {
                     },
                     timer: 1500
                 });
-                history.push('/customer')
-            }
-            else if (payload.status === 201) {
-                Swal.fire({
-                    title: "Already Exists.",
-                    text: payload.data,
-                    buttonsStyling: false,
-                    icon: "warning",
-                    confirmButtonText: "Ok",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
             }
         }
         catch (error) {
@@ -47,18 +68,23 @@ const CustomerCreate = () => {
         }
     }
 
+
     return (
         <MainContent>
-            <SubHeader active_page="Customer Create" menu_name="Customer" modul_name="Customer Create" />
+            <SubHeader active_page="Customer Edit" menu_name="Customer" modul_name="Customer Edit" />
             <Container>
                 <Card>
                     <CardHeader>
-                        <CardTitle title="Form New Customer" subtitle="Form add new customer." />
+                        <CardTitle title="Form Edit Customer" subtitle="Form add Edit customer." />
                     </CardHeader>
-                    <form onSubmit={handleSubmit(onSubmitCreateCustomer)} className="form">
+                    <form onSubmit={handleSubmit(onSubmitUpdateCustomer)} className="form">
                         <CardBody>
                             <div className="form-group row">
-                                <div className="col-lg-12">
+                                <div className="col-lg-6">
+                                    <label>CustomerID:</label>
+                                    <input type="text" {...register("customer_id", { required: true, maxLength: 100 })} className="form-control" placeholder="Enter full name" readOnly />
+                                </div>
+                                <div className="col-lg-6">
                                     <label>Full Name:</label>
                                     <input type="text" {...register("name", { required: true, maxLength: 100 })} className="form-control" placeholder="Enter full name" />
                                     {errors.name && <span className="form-text text-danger">Please enter full name</span>}
@@ -117,4 +143,4 @@ const CustomerCreate = () => {
     )
 }
 
-export default CustomerCreate
+export default CustomerEdit

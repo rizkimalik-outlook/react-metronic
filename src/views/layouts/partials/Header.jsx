@@ -14,6 +14,7 @@ function Header() {
     async function onSignOut() {
         try {
             const response = await logout({ username: getAuthUser.username });
+            console.log(response)
             if (response.data.status === 200) {
                 socket.disconnect();
                 localStorage.clear();
@@ -27,7 +28,7 @@ function Header() {
     }
 
     return (
-        <div id="kt_header" className="header header-fixed">
+        <header id="kt_header" className="header header-fixed">
             <div className="container-fluid d-flex align-items-stretch justify-content-between">
                 <div className="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
                     <div id="kt_header_menu" className="header-menu header-menu-mobile header-menu-layout-default">
@@ -219,7 +220,7 @@ function Header() {
 
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 

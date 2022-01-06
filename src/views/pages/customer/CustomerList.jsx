@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import Icons from 'views/components/Icons'
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
-import { Column, DataGrid, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid'
+import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 import CustomerChannel from './CustomerChannel'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiCustomerList, apiCustomerDelete } from 'app/services/apiCustomer'
@@ -14,11 +14,11 @@ import { apiCustomerList, apiCustomerDelete } from 'app/services/apiCustomer'
 
 const CustomerList = () => {
     const dispatch = useDispatch();
-    const { customers, response } = useSelector(state => state.customer);
+    const { customers } = useSelector(state => state.customer);
 
     useEffect(() => {
         dispatch(apiCustomerList())
-    }, [dispatch, response]);
+    }, [dispatch]);
 
 
     function handlerExportExcel() {
@@ -31,9 +31,10 @@ const CustomerList = () => {
             { header: 'Phone Number', key: 'telephone' },
             { header: 'NIK', key: 'no_ktp' },
             { header: 'Address', key: 'address' },
+            { header: 'Status', key: 'status' },
         ]
         worksheet.addRows(customers);
-        worksheet.autoFilter = 'A1:E1';
+        worksheet.autoFilter = 'A1:G1';
         worksheet.eachRow(function (row, rowNumber) {
             row.eachCell((cell, colNumber) => {
                 if (rowNumber === 1) {
@@ -44,13 +45,6 @@ const CustomerList = () => {
                         fgColor: { argb: 'f5b914' }
                     }
                 }
-                // Set border of each cell 
-                cell.border = {
-                    top: { style: 'thin' },
-                    left: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                    right: { style: 'thin' }
-                };
             })
             row.commit();
         });
@@ -69,11 +63,23 @@ const CustomerList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async function (res) {
             if (res.value) {
-                dispatch(apiCustomerDelete({ customer_id }))
+                const { payload } = await dispatch(apiCustomerDelete({ customer_id }));
+                if (payload.status === 200) {
+                    Swal.fire({
+                        title: "Success Delete.",
+                        text: `${customer_id} deleted from database!`,
+                        buttonsStyling: false,
+                        icon: "success",
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                    dispatch(apiCustomerList())
+                }
             }
         });
     }
-
 
     function componentButtonActions(data) {
         const { customer_id } = data.row.data;
@@ -138,10 +144,6 @@ const CustomerList = () => {
                                     showColumnLines={true}
                                     showRowLines={true}
                                 >
-                                    <MasterDetail
-                                        enabled={true}
-                                        component=''
-                                    />
                                     <HeaderFilter visible={true} />
                                     <FilterRow visible={true} />
                                     <Paging defaultPageSize={10} />
@@ -159,6 +161,9 @@ const CustomerList = () => {
                                     <Column caption="Phone Number" dataField="telephone" />
                                     <Column caption="NIK" dataField="no_ktp" />
                                     <Column caption="Address" dataField="address" />
+                                    <Column caption="Status" dataField="status" cellRender={(data) => {
+                                        return <span className={`label label-md label-light-${data.value === 'Registered' ? 'success' : 'warning'} label-inline`}>{data.value}</span>
+                                    }} />
                                 </DataGrid>
                             </div>
                             <div className="tab-pane fade" id="tabDataChannel" role="tabpanel" aria-labelledby="tabDataChannel">

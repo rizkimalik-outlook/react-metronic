@@ -18,6 +18,14 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/customer/CustomerList')),
     },{
+        path: 'customer/create', 
+        exact: false, 
+        component: lazy(() => import('views/pages/customer/CustomerCreate')),
+    },{
+        path: 'customer/:customer_id/edit', 
+        exact: false, 
+        component: lazy(() => import('views/pages/customer/CustomerEdit')),
+    },{
         path: 'user', 
         exact: true, 
         component: lazy(() => import('views/pages/user/UserList')),

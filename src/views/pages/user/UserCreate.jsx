@@ -1,9 +1,9 @@
 import React from 'react';
 import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
-import { useForm } from 'react-hook-form';
 import { useGetUsersQuery, useCreateUserMutation } from 'app/services/apiUser';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 
@@ -41,7 +41,6 @@ function UserCreate() {
     return (
         <MainContent>
             <SubHeader active_page="User Create" menu_name="Management User" modul_name="User Create" />
-
             <Container>
                 <Card>
                     <CardHeader>

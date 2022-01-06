@@ -29,8 +29,7 @@ export const apiCustomerStore = createAsyncThunk(
 export const apiCustomerUpdate = createAsyncThunk(
     "customer/apiCustomerUpdate",
     async (customer) => {
-        const json = JSON.stringify(customer);
-        const res = await axios.put('/customer/update', json);
+        const res = await axios.put('/customer/update', customer);
         return res.data;
     }
 )
