@@ -4,7 +4,8 @@ import {
     apiCustomerShow,
     apiCustomerStore,
     apiCustomerUpdate,
-    apiCustomerDelete
+    apiCustomerDelete,
+    apiCustomerChannel
 } from "app/services/apiCustomer";
 
 const sliceCustomer = createSlice({
@@ -13,6 +14,7 @@ const sliceCustomer = createSlice({
         customers: [],
         customer: {},
         response: {},
+        channels: [],
     },
     extraReducers: {
         [apiCustomerList.fulfilled]: (state, action) => {
@@ -29,6 +31,9 @@ const sliceCustomer = createSlice({
         },
         [apiCustomerDelete.fulfilled]: (state, action) => {
             state.response = action.payload
+        },
+        [apiCustomerChannel.fulfilled]: (state, action) => {
+            state.channels = action.payload.data
         },
     },
 });

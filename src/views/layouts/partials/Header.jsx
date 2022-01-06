@@ -125,7 +125,7 @@ function Header() {
 
                     <div className="dropdown">
                         <div className="topbar-item" data-offset="10px,0px">
-                            <NavLink to="/chat" className="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
+                            <NavLink to="/channel_socmed" className="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
                                 <Icons iconName="group-chat" className="svg-icon svg-icon-xl svg-icon-primary" />
                                 <span className="pulse-ring" />
                             </NavLink>

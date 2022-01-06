@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { Workbook } from 'exceljs';
@@ -15,6 +15,7 @@ import { apiCustomerList, apiCustomerDelete } from 'app/services/apiCustomer'
 const CustomerList = () => {
     const dispatch = useDispatch();
     const { customers } = useSelector(state => state.customer);
+    const [isChannel, setIsChannel] = useState(false);
 
     useEffect(() => {
         dispatch(apiCustomerList())
@@ -104,7 +105,7 @@ const CustomerList = () => {
                         <CardToolbar>
                             <ul className="nav nav-light-primary nav-bold nav-pills">
                                 <li className="nav-item">
-                                    <a className="nav-link active" data-toggle="tab" href="#tabDataCustomer">
+                                    <a className="nav-link active" data-toggle="tab" href="#tabDataCustomer" onClick={(e) => setIsChannel(false)}>
                                         <span className="nav-icon">
                                             <Icons iconName="layer" className="svg-icon svg-icon-sm" />
                                         </span>
@@ -112,7 +113,7 @@ const CustomerList = () => {
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" data-toggle="tab" href="#tabDataChannel">
+                                    <a className="nav-link" data-toggle="tab" href="#tabDataChannel" onClick={(e) => setIsChannel(true)}>
                                         <span className="nav-icon">
                                             <Icons iconName="layout-4-block" className="svg-icon svg-icon-sm" />
                                         </span>
@@ -167,7 +168,7 @@ const CustomerList = () => {
                                 </DataGrid>
                             </div>
                             <div className="tab-pane fade" id="tabDataChannel" role="tabpanel" aria-labelledby="tabDataChannel">
-                                <CustomerChannel />
+                                {isChannel && <CustomerChannel />}
                             </div>
                         </div>
                     </CardBody>

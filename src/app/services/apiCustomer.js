@@ -41,3 +41,11 @@ export const apiCustomerDelete = createAsyncThunk(
         return res.data;
     }
 )
+
+export const apiCustomerChannel = createAsyncThunk(
+    "customer/apiCustomerChannel",
+    async () => {
+        const res = await axios.get('/customer/channel');
+        return res.data;
+    }
+)
