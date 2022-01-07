@@ -2,14 +2,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import Icons from 'views/components/Icons';
-import { useGetUsersQuery, useDeleteUserMutation } from 'app/services/apiUser';
+import { ButtonCreate, ButtonExport } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
-import UserDetail from './UserDetail';
 import SplashScreen from 'views/components/SplashScreen';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
+import UserDetail from './UserDetail';
+import { useGetUsersQuery, useDeleteUserMutation } from 'app/services/apiUser';
 
 function UserList() {
     const { data, isFetching, refetch } = useGetUsersQuery();
@@ -99,13 +100,8 @@ function UserList() {
                     <CardHeader className="border-0">
                         <CardTitle title="User Privillage" subtitle="List account users member login." />
                         <CardToolbar>
-                            <NavLink to="/user/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
-                                Create New User
-                            </NavLink>
-                            <button type="button" onClick={onExportExcel} className="btn btn-light-primary font-weight-bolder btn-sm m-1">
-                                <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
-                                Export
-                            </button>
+                            <ButtonExport onClick={onExportExcel} />
+                            <ButtonCreate to="/user/create" />
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>

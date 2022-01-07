@@ -214,6 +214,44 @@ function Icons({ iconName, className }) {
             </span>
         )
     }
+    else if (iconName === 'search') {
+        return (
+            <span className={className}>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
+                        <rect x={0} y={0} width={24} height={24} />
+                        <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fillRule="nonzero" opacity="0.3" />
+                        <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fillRule="nonzero" />
+                    </g>
+                </svg>
+            </span>
+        )
+    }
+    else if (iconName === 'plus') {
+        return (
+            <span className={className}>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
+                        <rect fill="#000000" x={4} y={11} width={16} height={2} rx={1} />
+                        <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x={4} y={11} width={16} height={2} rx={1} />
+                    </g>
+                </svg>
+            </span>
+        )
+    }
+    else if (iconName === 'save') {
+        return (
+            <span className={className}>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24" />
+                        <path d="M17,4 L6,4 C4.79111111,4 4,4.7 4,6 L4,18 C4,19.3 4.79111111,20 6,20 L18,20 C19.2,20 20,19.3 20,18 L20,7.20710678 C20,7.07449854 19.9473216,6.94732158 19.8535534,6.85355339 L17,4 Z M17,11 L7,11 L7,4 L17,4 L17,11 Z" fill="#000000" fillRule="nonzero" />
+                        <rect fill="#000000" opacity="0.3" x={12} y={4} width={3} height={5} rx="0.5" />
+                    </g>
+                </svg>
+            </span>
+        )
+    }
     else { }
 }
 

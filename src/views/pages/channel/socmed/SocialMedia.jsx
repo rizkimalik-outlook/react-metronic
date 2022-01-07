@@ -114,7 +114,7 @@ const SocialMedia = () => {
                         </Card>
                     </div>
                     <div className="offcanvas-mobile-overlay" />
-                    <div className="flex-row-fluid ml-lg-8" id="kt_chat_content">
+                    <div className="flex-row-fluid ml-lg-4" id="kt_chat_content">
                         <Card>
                             <CardHeader className="border-bottom">
                                 <CardTitle title={selected_customer?.name} subtitle={selected_customer?.email} />

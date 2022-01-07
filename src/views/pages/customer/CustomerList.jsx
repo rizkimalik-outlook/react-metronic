@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import Icons from 'views/components/Icons'
+import { ButtonCreate, ButtonExport } from 'views/components/button';
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
@@ -123,13 +124,8 @@ const CustomerList = () => {
                             </ul>
                         </CardToolbar>
                         <CardToolbar>
-                            <NavLink to="/customer/create" className="btn btn-primary font-weight-bolder btn-sm m-1">
-                                Create New Customer
-                            </NavLink>
-                            <button type="button" onClick={handlerExportExcel} className="btn btn-light-primary font-weight-bolder btn-sm m-1">
-                                <Icons iconName="pen-and-rules" className="svg-icon svg-icon-sm" />
-                                Export
-                            </button>
+                            <ButtonExport onClick={handlerExportExcel} />
+                            <ButtonCreate to="/customer/create" />
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>

@@ -10,6 +10,10 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
     },{
+        path: 'ticket_create', 
+        exact: true, 
+        component: lazy(() => import('views/pages/ticket/TicketCreate')),
+    },{
         path: 'channel_socmed', 
         exact: true, 
         component: lazy(() => import('views/pages/channel/socmed/SocialMedia')),
