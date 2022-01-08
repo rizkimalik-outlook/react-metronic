@@ -1,11 +1,12 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useDispatch } from 'react-redux'
 import { apiCustomerStore } from 'app/services/apiCustomer'
+import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 
 const CustomerCreate = () => {
     const history = useHistory();
@@ -107,8 +108,8 @@ const CustomerCreate = () => {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <NavLink to="/customer" className="btn btn-sm btn-secondary mx-1">Back</NavLink>
-                            <button type="submit" className="btn btn-sm btn-primary font-weight-bold mx-1">Save changes</button>
+                            <ButtonCancel to="/customer" />
+                            <ButtonSubmit />
                         </CardFooter>
                     </form>
                 </Card>

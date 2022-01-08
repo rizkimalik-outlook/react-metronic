@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import Icons from 'views/components/Icons'
-import { ButtonCreate, ButtonExport } from 'views/components/button';
+import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport } from 'views/components/button';
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
@@ -87,12 +86,8 @@ const CustomerList = () => {
         const { customer_id } = data.row.data;
         return (
             <div className="d-flex align-items-end justify-content-center">
-                <NavLink to={`customer/${customer_id}/edit`} className="btn btn-icon btn-light-warning btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="Button Edit">
-                    <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
-                </NavLink>
-                <button onClick={(e) => handlerCustomerDelete(customer_id)} type="button" className="btn btn-icon btn-light-danger btn-hover-danger btn-sm mx-1" data-toggle="tooltip" title="Button Delete">
-                    <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
-                </button>
+                <ButtonEdit to={`customer/${customer_id}/edit`} />
+                <ButtonDelete onClick={(e) => handlerCustomerDelete(customer_id)} />
             </div>
         )
     }

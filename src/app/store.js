@@ -18,6 +18,6 @@ export default configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }),
+        })
 
 })
