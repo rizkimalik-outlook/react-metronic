@@ -1,8 +1,12 @@
 import React from 'react'
 import Icons from 'views/components/Icons'
-import FormGroup from 'views/components/FormGroup'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card'
+import TicketInformation from './TicketInformation'
+import TicketHistoryTransaction from './TicketHistoryTransaction'
+import TicketReportingInformation from './TicketReportingInformation'
+import TicketChannelInformation from './TicketChannelInformation'
+import TicketBankAccount from './TicketBankAccount'
 
 const TicketCreate = () => {
     return (
@@ -11,51 +15,24 @@ const TicketCreate = () => {
             <Container>
                 <main className="row">
                     <section className="col-lg-4">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle title="Customer Information" subtitle="Data Customer" />
-                                <CardToolbar>
-                                    <button className="btn btn-icon btn-sm btn-light-primary btn-circle" data-toggle="tooltip" title="Search Customer">
-                                        <Icons iconName="search" className="svg-icon svg-icon-sm" />
-                                    </button>
-                                </CardToolbar>
-                            </CardHeader>
-                            <CardBody className="p-4">
-                                <FormGroup label="Full Name">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="Phone Number">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="Email Address">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="Gender">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="Date of birth">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="NIK">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                                <FormGroup label="Address">
-                                    <input type="text" className="form-control form-control-sm" />
-                                </FormGroup>
-                            </CardBody>
-                        </Card>
+                        <TicketInformation />
                     </section>
                     <section className="col-lg-8 pl-1">
                         <Card>
                             <CardHeader className="border-bottom">
-                                <CardTitle title="Customer Detail" subtitle="Information Customer Detail." />
+                                <CardTitle title="Ticket Detail" subtitle="Information Customer Detail." />
+                                <CardToolbar>
+                                    <button className="btn btn-sm btn-primary font-weight-bolder" data-toggle="tooltip" title="Create Ticket">
+                                        <Icons iconName="plus" className="svg-icon svg-icon" />
+                                        Create Ticket
+                                    </button>
+                                </CardToolbar>
                             </CardHeader>
                             <CardBody className="p-4">
-                                <Card>
-                                    <CardBody>
-                                        sda
-                                    </CardBody>
-                                </Card>
+                                <TicketChannelInformation />
+                                <TicketReportingInformation />
+                                <TicketBankAccount />
+                                <TicketHistoryTransaction />
                             </CardBody>
                         </Card>
                     </section>

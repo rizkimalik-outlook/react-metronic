@@ -14,7 +14,6 @@ function Header() {
     async function onSignOut() {
         try {
             const response = await logout({ username: getAuthUser.username });
-            console.log(response)
             if (response.data.status === 200) {
                 socket.disconnect();
                 localStorage.clear();
@@ -146,7 +145,7 @@ function Header() {
                         <div className="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                             <ul className="navi navi-hover py-4">
                                 <li className="navi-item active">
-                                    <Link to="/empty" className="navi-item">
+                                    <Link to={`/user/${getAuthUser.id}/edit`} className="navi-item">
                                         <div className="navi-link">
                                             <div className="symbol symbol-20 mr-3">
                                                 <div className="symbol-label">
@@ -183,7 +182,7 @@ function Header() {
                                                 </div>
                                             </div>
                                             <div className="navi-text">
-                                                <div className="font-weight-bold">My Task</div>
+                                                <div className="font-weight-bold">My Todolist</div>
                                             </div>
                                         </div>
                                     </Link>

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useParams, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
-import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
 import UserResetPassword from './UserResetPassword';
-import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
-// import SplashScreen from 'views/components/SplashScreen';
 import { useSelector } from 'react-redux';
 import { authUser } from 'app/slice/sliceAuth';
 import { baseUrl } from 'app/config';
+import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
 
 
@@ -286,8 +286,8 @@ function UserEdit() {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <NavLink to="/user" className="btn btn-sm btn-secondary mx-1">Cancel</NavLink>
-                            <button type="submit" className="btn btn-sm btn-primary font-weight-bold mx-1">Save changes</button>
+                            <ButtonCancel to="/user" />
+                            <ButtonSubmit />
                         </CardFooter>
                     </form>
                 </Card>

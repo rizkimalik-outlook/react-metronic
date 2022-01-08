@@ -1,8 +1,6 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2';
-import Icons from 'views/components/Icons';
-import { ButtonCreate, ButtonExport } from 'views/components/button';
+import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
@@ -82,12 +80,8 @@ function UserList() {
                 {/* <NavLink to={`user/show/${id}`} className="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" data-toggle="tooltip" title="User Privillage">
                     <Icons iconName="setting" className="svg-icon svg-icon-sm svg-icon-primary" />
                 </NavLink> */}
-                <NavLink to={`user/${id}/edit`} className="btn btn-icon btn-light-warning btn-hover-warning btn-sm mx-1" data-toggle="tooltip" title="User Edit">
-                    <Icons iconName="write" className="svg-icon svg-icon-sm svg-icon-warning" />
-                </NavLink>
-                <button type="button" onClick={(e) => deleteUserHandler(id)} className="btn btn-icon btn-light-danger btn-hover-danger btn-sm mx-1" data-toggle="tooltip" title="User Delete">
-                    <Icons iconName="trash" className="svg-icon svg-icon-sm svg-icon-danger" />
-                </button>
+                <ButtonEdit to={`user/${id}/edit`} />
+                <ButtonDelete onclick={(e) => deleteUserHandler(id)} />
             </div>
         )
     }

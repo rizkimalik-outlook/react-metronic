@@ -1,15 +1,16 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useGetUsersQuery, useCreateUserMutation } from 'app/services/apiUser';
 import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
+import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 
 function UserCreate() {
     const history = useHistory();
-    const { data, isFetching} = useGetUserLevelQuery();
+    const { data, isFetching } = useGetUserLevelQuery();
     const { refetch } = useGetUsersQuery();
     const [createUser] = useCreateUserMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -76,23 +77,20 @@ function UserCreate() {
                                 <div className="col-lg-6">
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
-                                        <option>-- User Level --</option>
+                                        <option value="">-- User Level --</option>
                                         {isFetching && <div>loading..</div>}
                                         {
                                             data?.data.map((item)=>{
                                                 return <option value={item.level_name} key={item.id}>{item.level_name}</option>
                                             })
                                         }
-                                        {/* <option value="Administrator">Administrator</option>
-                                        <option value="Supervisor">Supervisor</option>
-                                        <option value="Agent">Agent</option> */}
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Organization:</label>
                                     <select className="form-control" {...register("organization", { required: true })}>
-                                        <option>-- User Organization --</option>
+                                        <option value="">-- User Organization --</option>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Supervisor">Supervisor</option>
                                         <option value="Agent">Agent</option>
@@ -203,8 +201,8 @@ function UserCreate() {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <NavLink to="/user" className="btn btn-sm btn-secondary mx-1">Back</NavLink>
-                            <button type="submit" className="btn btn-sm btn-primary font-weight-bold mx-1">Save changes</button>
+                            <ButtonCancel to="/user" />
+                            <ButtonSubmit />
                         </CardFooter>
                     </form>
                 </Card>
