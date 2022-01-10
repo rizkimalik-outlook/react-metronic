@@ -1,7 +1,7 @@
 import React from 'react'
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 
-const TicketHistoryTransaction = () => {
+const TicketHistory = () => {
     return (
         <div className="border rounded p-4 my-2">
             <h4>History Transactions</h4>
@@ -20,9 +20,7 @@ const TicketHistoryTransaction = () => {
                 <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
-                    allowedPageSizes={[10, 20, 50, 'all']}
                     displayMode='full'
-                    showPageSizeSelector={true}
                     showInfo={true}
                     showNavigationButtons={true} />
                 <Column caption="CustomerID" dataField="customer_id" />
@@ -34,4 +32,4 @@ const TicketHistoryTransaction = () => {
     )
 }
 
-export default TicketHistoryTransaction
+export default TicketHistory

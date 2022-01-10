@@ -12,7 +12,7 @@ const routes = [
     },{
         path: 'ticket_create', 
         exact: true, 
-        component: lazy(() => import('views/pages/ticket/TicketCreate')),
+        component: lazy(() => import('views/pages/ticket/TicketMain')),
     },{
         path: 'channel_socmed', 
         exact: true, 

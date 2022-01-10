@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
@@ -9,6 +10,7 @@ import { apiCustomerUpdate, apiCustomerShow } from 'app/services/apiCustomer'
 import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 
 const CustomerEdit = () => {
+    const history = useHistory();
     let { customer_id } = useParams();
     const dispatch = useDispatch();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -61,6 +63,19 @@ const CustomerEdit = () => {
                         confirmButton: "btn btn-primary"
                     },
                     timer: 1500
+                });
+                history.push('/customer')
+            }
+            else if (payload.status === 201) {
+                Swal.fire({
+                    title: "Already Exists.",
+                    text: payload.data,
+                    buttonsStyling: false,
+                    icon: "warning",
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
                 });
             }
         }

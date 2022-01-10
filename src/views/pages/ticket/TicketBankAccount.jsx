@@ -20,9 +20,7 @@ const TicketBankAccount = () => {
                 <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
-                    allowedPageSizes={[10, 20, 50, 'all']}
                     displayMode='full'
-                    showPageSizeSelector={true}
                     showInfo={true}
                     showNavigationButtons={true} />
                 <Column caption="CustomerID" dataField="customer_id" />

@@ -1,44 +1,115 @@
 import React from 'react'
-import Icons from 'views/components/Icons'
-import { Container, MainContent, SubHeader } from 'views/layouts/partials'
-import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card'
-import TicketInformation from './TicketInformation'
-import TicketHistoryTransaction from './TicketHistoryTransaction'
-import TicketReportingInformation from './TicketReportingInformation'
-import TicketChannelInformation from './TicketChannelInformation'
-import TicketBankAccount from './TicketBankAccount'
+import { ButtonSubmit } from 'views/components/button'
+import FormGroup from 'views/components/FormGroup'
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 
 const TicketCreate = () => {
     return (
-        <MainContent>
-            <SubHeader active_page="Create Ticket" menu_name="Ticket" modul_name="Create Ticket" />
-            <Container>
-                <main className="row">
-                    <section className="col-lg-4">
-                        <TicketInformation />
-                    </section>
-                    <section className="col-lg-8 pl-1">
-                        <Card>
-                            <CardHeader className="border-bottom">
-                                <CardTitle title="Ticket Detail" subtitle="Information Customer Detail." />
-                                <CardToolbar>
-                                    <button className="btn btn-sm btn-primary font-weight-bolder" data-toggle="tooltip" title="Create Ticket">
-                                        <Icons iconName="plus" className="svg-icon svg-icon" />
-                                        Create Ticket
-                                    </button>
-                                </CardToolbar>
-                            </CardHeader>
-                            <CardBody className="p-4">
-                                <TicketChannelInformation />
-                                <TicketReportingInformation />
-                                <TicketBankAccount />
-                                <TicketHistoryTransaction />
-                            </CardBody>
-                        </Card>
-                    </section>
-                </main>
-            </Container>
-        </MainContent>
+        <Modal id="modalCreateTicket">
+            <ModalHeader title="Create Ticket" />
+            <form>
+                <ModalBody>
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <FormGroup label="Date Transaction">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-6"></div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Channel">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <FormGroup label="Agent Name">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Priority Scale">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Type Customer">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Source Information">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <FormGroup label="Category">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="SubCategory Product">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="SubCategory Case">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="SubCategory Detail">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <FormGroup label="Complaint">
+                                <textarea className="form-control form-control-sm" cols="10" rows="4"></textarea>
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-6">
+                            <FormGroup label="Response">
+                                <textarea className="form-control form-control-sm" cols="10" rows="4"></textarea>
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <FormGroup label="Type Complaint">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Ticket Status">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="Eskalation Unit">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                        <div className="col-lg-3">
+                            <FormGroup label="SLA (Days)">
+                                <input type="text" className="form-control form-control-sm" />
+                            </FormGroup>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <ButtonSubmit />
+                </ModalFooter>
+            </form>
+        </Modal>
     )
 }
 

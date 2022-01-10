@@ -1,7 +1,7 @@
 import React from 'react'
 import FormGroup from 'views/components/FormGroup'
 
-const TicketChannelInformation = () => {
+const TicketChannel = () => {
     return (
         <div className="border rounded p-4 my-2">
             <div className="d-flex align-items-center justify-content-between">
@@ -33,4 +33,4 @@ const TicketChannelInformation = () => {
     )
 }
 
-export default TicketChannelInformation
+export default TicketChannel

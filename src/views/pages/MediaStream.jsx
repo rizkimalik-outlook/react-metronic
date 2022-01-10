@@ -3,15 +3,16 @@ import React, { useEffect, useRef } from 'react'
 function MediaStream() {
     const refMyVideo = useRef();
 
-    function getMedia(){
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-            // setStream(stream)
-            myVideo.current.srcObject = stream
-        })
-    }
+    
 
     useEffect(() => {
+        function getMedia(){
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then((stream) => {
+                // setStream(stream)
+                myVideo.current.srcObject = stream
+            })
+        }
         getMedia();
     }, [])
 
