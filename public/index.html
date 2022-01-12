@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Mendawai</title>
-		<meta name="description" content="Mendawai" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-		<!--begin::Global Theme Styles(used by all pages)-->
-		<link href="%PUBLIC_URL%/assets/plugins/global/plugins.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<!-- <link href="%PUBLIC_URL%/assets/plugins/custom/prismjs/prismjs.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" /> -->
-		<link href="%PUBLIC_URL%/assets/css/style.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<link href="%PUBLIC_URL%/assets/css/splash-screen.css" rel="stylesheet" type="text/css" />
-		<!--end::Global Theme Styles-->
+<head>
+    <meta charset="utf-8" />
+    <title>Mendawai</title>
+    <meta name="description" content="Mendawai" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-		<!--begin::Layout Themes(used by all pages)-->
-		<link href="%PUBLIC_URL%/assets/css/themes/layout/header/base/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<link href="%PUBLIC_URL%/assets/css/themes/layout/header/menu/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<link href="%PUBLIC_URL%/assets/css/themes/layout/brand/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<link href="%PUBLIC_URL%/assets/css/themes/layout/aside/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
-		<!--end::Layout Themes-->
-        
-        <!-- <link rel="icon" href="%PUBLIC_URL%/assets/media/logos/mendawai-32x32.png" /> -->
-        <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
-        <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-	</head>
-	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading dx-viewport">
-	
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="%PUBLIC_URL%/assets/plugins/global/plugins.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <!-- <link href="%PUBLIC_URL%/assets/plugins/custom/prismjs/prismjs.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" /> -->
+    <link href="%PUBLIC_URL%/assets/css/style.bundle.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <link href="%PUBLIC_URL%/assets/css/splash-screen.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
 
-        <div id="root"></div>
+    <!--begin::Layout Themes(used by all pages)-->
+    <link href="%PUBLIC_URL%/assets/css/themes/layout/header/base/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <link href="%PUBLIC_URL%/assets/css/themes/layout/header/menu/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <link href="%PUBLIC_URL%/assets/css/themes/layout/brand/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <link href="%PUBLIC_URL%/assets/css/themes/layout/aside/light.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <!--end::Layout Themes-->
 
-		<!--begin::Global Theme Bundle(used by all pages)-->
-		<script src="%PUBLIC_URL%/assets/plugins/global/plugins.bundle.js?v=7.2.8"></script>
-		<!-- <script src="%PUBLIC_URL%/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.2.8"></script> -->
-		<script src="%PUBLIC_URL%/assets/js/scripts.bundle.js?v=7.2.8"></script>
-		<!--end::Global Theme Bundle-->
-	</body>
+    <!-- <link rel="icon" href="%PUBLIC_URL%/assets/media/logos/mendawai-32x32.png" /> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+</head>
+
+<body id="kt_body"
+    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable footer-fixed page-loading dx-viewport">
+
+
+    <div id="root"></div>
+
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script src="%PUBLIC_URL%/assets/plugins/global/plugins.bundle.js?v=7.2.8"></script>
+    <!-- <script src="%PUBLIC_URL%/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.2.8"></script> -->
+    <script src="%PUBLIC_URL%/assets/js/scripts.bundle.js?v=7.2.8"></script>
+    <!--end::Global Theme Bundle-->
+    <script>
+        function onSelectPicker(value) {
+            $('.selectpicker').val(value);
+            $('.selectpicker').selectpicker('refresh');
+        }
+    </script>
+</body>
+
 </html>

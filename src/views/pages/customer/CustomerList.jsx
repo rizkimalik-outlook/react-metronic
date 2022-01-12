@@ -152,6 +152,7 @@ const CustomerList = () => {
                                     <Column caption="Email" dataField="email" />
                                     <Column caption="Phone Number" dataField="telephone" />
                                     <Column caption="NIK" dataField="no_ktp" />
+                                    <Column caption="Gender" dataField="gender" />
                                     <Column caption="Address" dataField="address" />
                                     <Column caption="Status" dataField="status" cellRender={(data) => {
                                         return <span className={`label label-md label-light-${data.value === 'Registered' ? 'success' : 'warning'} label-inline`}>{data.value}</span>

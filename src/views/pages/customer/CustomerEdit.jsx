@@ -3,9 +3,10 @@ import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
-import { useDispatch } from 'react-redux'
 import { apiCustomerUpdate, apiCustomerShow } from 'app/services/apiCustomer'
 import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 
@@ -121,24 +122,22 @@ const CustomerEdit = () => {
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>Gender:</label>
-                                    <select className="form-control" {...register("gender", { required: true })}>
+                                    <select {...register("gender", { required: true })} className="form-control">
                                         <option value="">-- select gender--</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
-                                    {errors.gender && <span className="form-text text-danger">Select enter gender</span>}
+                                    {errors.gender && <span className="form-text text-danger">Select a gender</span>}
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Date of Birth:</label>
                                     <input type="date" {...register("birth")} className="form-control" placeholder="Enter birth" />
-                                    {errors.birth && <span className="form-text text-danger">Please enter birth</span>}
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>NIK:</label>
                                     <input type="number" {...register("no_ktp", { pattern: /^[0-9]+$/i })} className="form-control" placeholder="Enter NIK" />
-                                    {errors.no_ktp && <span className="form-text text-danger">Please enter NIK</span>}
                                 </div>
                             </div>
                             <div className="form-group row">

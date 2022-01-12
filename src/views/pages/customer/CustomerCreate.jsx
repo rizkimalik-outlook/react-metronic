@@ -90,14 +90,12 @@ const CustomerCreate = () => {
                                 <div className="col-lg-6">
                                     <label>Date of Birth:</label>
                                     <input type="date" {...register("birth")} className="form-control" placeholder="Enter birth" />
-                                    {errors.birth && <span className="form-text text-danger">Please enter birth</span>}
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <div className="col-lg-6">
                                     <label>NIK:</label>
                                     <input type="number" {...register("no_ktp", { pattern: /^[0-9]+$/i })} className="form-control" placeholder="Enter NIK" />
-                                    {errors.no_ktp && <span className="form-text text-danger">Please enter NIK</span>}
                                 </div>
                             </div>
                             <div className="form-group row">

@@ -2,15 +2,17 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from "redux";
 
+import { auth } from './services/apiAuth';
+import { user } from './services/apiUser';
+import { user_level } from './services/apiUserLevel';
+import { menu_access } from './services/apiMenu';
 import sliceAuth from './slice/sliceAuth';
 import sliceSosmed from './slice/sliceSosmed';
 import sliceMenu from './slice/sliceMenu';
 import sliceCustomer from './slice/sliceCustomer';
 import sliceTicket from './slice/sliceTicket';
-import { auth } from './services/apiAuth';
-import { user } from './services/apiUser';
-import { user_level } from './services/apiUserLevel';
-import { menu_access } from './services/apiMenu';
+import sliceMasterData from './slice/sliceMasterData';
+
 
 const persistConfig = {
     key: 'auth',
@@ -34,6 +36,7 @@ const rootReducer = {
     user_level: user_level.reducer,
     customer: sliceCustomer.reducer,
     ticket: sliceTicket.reducer,
+    master: sliceMasterData.reducer,
 }
 
 export default rootReducer;

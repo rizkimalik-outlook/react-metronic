@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Flatpickr from "react-flatpickr"
 import Swal from 'sweetalert2'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,13 +12,12 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'views/components/mod
 import { apiCustomerList, apiCustomerUpdate } from 'app/services/apiCustomer'
 import { setSelectedCustomer } from 'app/slice/sliceTicket';
 
-
 const TicketInformation = () => {
     const dispatch = useDispatch();
-    const [birthDate, setBirthDate] = useState(new Date());
     const [showModal, setShowModal] = useState(false);
     const customer = useSelector(state => state.ticket.selected_customer);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+
 
     useEffect(() => {
         async function getShowCustomer() {
@@ -33,27 +31,26 @@ const TicketInformation = () => {
                 telephone,
                 address
             } = customer;
+            window.onSelectPicker(gender);
+
             reset({
                 customer_id,
                 name,
                 email,
                 no_ktp,
-                birth: birth?.slice(0, 10),
+                birth:birth?.slice(0, 10),
                 gender,
                 telephone,
                 address
             });
-            setBirthDate(birth?.slice(0, 10))
         }
         getShowCustomer();
-    }, [customer, reset]);
+    }, [customer, reset, dispatch]);
 
     const onSubmitUpdateCustomer = async (data) => {
         try {
-            data.birth = birthDate?.toLocaleString().split(',')[0];
             const { payload } = await dispatch(apiCustomerUpdate(data))
             if (payload.status === 200) {
-                dispatch(setSelectedCustomer(data))
                 Swal.fire({
                     title: "Update Success.",
                     text: "Success update data customer!",
@@ -97,7 +94,8 @@ const TicketInformation = () => {
             <CardBody className="p-4">
                 <form onSubmit={handleSubmit(onSubmitUpdateCustomer)}>
                     <FormGroup label="CustomerID" formText="Identity customer id">
-                        <input type="text" className="form-control form-control-sm" readOnly {...register("customer_id", { required: true, maxLength: 100 })} />
+                        <input type="text" className="form-control form-control-sm" {...register("customer_id", { required: true })} readOnly />
+                        {errors.customer_id && <span className="form-text text-danger">Please enter CustomerID</span>}
                     </FormGroup>
                     <FormGroup label="Full Name">
                         <input type="text" className="form-control form-control-sm" {...register("name", { required: true, maxLength: 100 })} />
@@ -115,24 +113,15 @@ const TicketInformation = () => {
                         <input type="text" className="form-control form-control-sm" {...register("no_ktp", { maxLength: 100 })} />
                     </FormGroup>
                     <FormGroup label="Gender">
-                        <select className="form-control form-control-sm" {...register("gender", { required: true })}>
-                            <option value="">-- select gender--</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                        <select className="form-control selectpicker" {...register("gender", { required: true })}>
+                            <option value="">-- select gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                         {errors.gender && <span className="form-text text-danger">Please select gender</span>}
                     </FormGroup>
                     <FormGroup label="Date of birth">
-                        <Flatpickr
-                            className="form-control form-control-sm"
-                            value={birthDate}
-                            name="birth"
-                            // {...register("birth")}
-                            onChange={(date) => setBirthDate(date)}
-                            options={{
-                                allowInput: true
-                            }}
-                        />
+                        <input type="date" className="form-control form-control-sm" {...register("birth", { maxLength: 10 })} />
                     </FormGroup>
                     <FormGroup label="Address">
                         <textarea {...register("address")} className="form-control form-control-sm" cols="10" rows="4"></textarea>
