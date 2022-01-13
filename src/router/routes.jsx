@@ -10,9 +10,17 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
     },{
-        path: 'ticket_create', 
+        path: 'ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/ticket/TicketMain')),
+    },{
+        path: 'ticket/create', 
+        exact: false, 
+        component: lazy(() => import('views/pages/ticket/TicketCreate')),
+    },{
+        path: 'ticket/history', 
+        exact: true, 
+        component: lazy(() => import('views/pages/ticket/TicketHistory')),
     },{
         path: 'channel_socmed', 
         exact: true, 
@@ -46,7 +54,7 @@ const routes = [
         exact: false, 
         component: lazy(() => import('views/pages/user/UserEdit')),
     },{
-        path: 'user_privillage', 
+        path: 'user/privillage', 
         exact: true, 
         component: lazy(() => import('views/pages/settings/privillage/UserPrivillage')),
     },

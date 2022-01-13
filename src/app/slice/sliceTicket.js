@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiTicketStore } from "app/services/apiTicket";
+import { 
+    apiTicketStore,
+    apiHistoryTransaction
+} from "app/services/apiTicket";
 
 const ticketSlice = createSlice({
     name: "ticket",
     initialState: {
-        selected_customer: {},
         response: {},
+        selected_customer: {},
+        history_transaction: [],
     },
     reducers: {
         setSelectedCustomer: (state, action) => {
@@ -15,6 +19,9 @@ const ticketSlice = createSlice({
     extraReducers: {
         [apiTicketStore.fulfilled]: (state, action) => {
             state.response = action.payload
+        },
+        [apiHistoryTransaction.fulfilled]: (state, action) => {
+            state.history_transaction = action.payload.data
         },
     },
 });

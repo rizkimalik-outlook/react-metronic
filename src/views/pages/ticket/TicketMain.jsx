@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import Swal from 'sweetalert2'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import Icons from 'views/components/Icons'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card'
 import {
-    TicketCreate,
-    TicketHistory,
+    TicketTransaction,
     TicketBankAccount,
     // TicketChannel,
     TicketReporting,
@@ -15,46 +13,11 @@ import {
 } from './index'
 
 const TicketMain = () => {
-    const [checked, getChecked] = useState(false);
-    const customer = useSelector(state => state.ticket.selected_customer);
-
-    function isSelected(){
-        if (!customer.customer_id) {
-            getChecked(false)
-            Swal.fire({
-                title: "Empty Customer.",
-                text: "Please select a customer!",
-                buttonsStyling: false,
-                icon: "warning",
-                confirmButtonText: "Ok",
-                customClass: {
-                    confirmButton: "btn btn-primary"
-                },
-            });
-        }
-        else if (customer.status !== 'Registered') {
-            getChecked(false)
-            Swal.fire({
-                title: "Invalid Customer.",
-                text: "Customer data not Registered!",
-                buttonsStyling: false,
-                icon: "warning",
-                confirmButtonText: "Ok",
-                customClass: {
-                    confirmButton: "btn btn-primary"
-                },
-            });
-        }
-        else {
-            getChecked(true)
-        }
-    }
-
+   
     return (
         <MainContent>
-            <SubHeader active_page="Create Ticket" menu_name="Ticket" modul_name="Create Ticket" />
+            <SubHeader active_page="Ticket" menu_name="Main Ticket" modul_name="" />
             <Container>
-                {checked && <TicketCreate customer={customer} />}
                 <main className="row">
                     <section className="col-lg-4">
                         <TicketInformation />
@@ -64,17 +27,17 @@ const TicketMain = () => {
                             <CardHeader className="border-bottom">
                                 <CardTitle title="Ticket Detail" subtitle="Information Customer Detail." />
                                 <CardToolbar>
-                                    <button onClick={isSelected} className="btn btn-sm btn-primary font-weight-bolder" title="Create Ticket" data-toggle="modal" data-target="#modalCreateTicket">
+                                    <NavLink to="/ticket/create" className="btn btn-sm btn-primary font-weight-bolder" title="Create Ticket" data-toggle="modal">
                                         <Icons iconName="plus" className="svg-icon svg-icon" />
                                         Create Ticket
-                                    </button>
+                                    </NavLink>
                                 </CardToolbar>
                             </CardHeader>
                             <CardBody className="p-4">
                                 {/* <TicketChannel /> */}
                                 <TicketReporting />
                                 <TicketBankAccount />
-                                <TicketHistory />
+                                <TicketTransaction />
                             </CardBody>
                         </Card>
                     </section>

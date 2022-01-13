@@ -1,13 +1,13 @@
-import TicketCreate from "./TicketCreate";
-import TicketHistory from "./TicketHistory";
+import TicketCreateModal from "./TicketCreateModal";
+import TicketTransaction from "./TicketTransaction";
 import TicketBankAccount from "./TicketBankAccount";
 import TicketChannel from "./TicketChannel";
 import TicketReporting from "./TicketReporting";
 import TicketInformation from "./TicketInformation";
 
 export {
-    TicketCreate,
-    TicketHistory,
+    TicketCreateModal,
+    TicketTransaction,
     TicketBankAccount,
     TicketChannel,
     TicketReporting,

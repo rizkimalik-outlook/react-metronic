@@ -88,7 +88,7 @@ function UserList() {
 
     return (
         <MainContent>
-            <SubHeader active_page="User Privillage" menu_name="Management User" modul_name="User Privillage" />
+            <SubHeader active_page="Settings" menu_name="Management User" modul_name="" />
             <Container>
                 <Card>
                     <CardHeader className="border-0">

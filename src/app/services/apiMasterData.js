@@ -8,3 +8,11 @@ export const apiMasterChannel = createAsyncThunk(
         return res.data;
     }
 )
+
+export const apiMasterStatus = createAsyncThunk(
+    "master/apiMasterStatus",
+    async () => {
+        const res = await axios.get('/master/status');
+        return res.data;
+    }
+)

@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Flatpickr from "react-flatpickr"
+import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts';
 
 
 
 
 function General() {
-    const [startDate, setStartDate] = useState(new Date());
     const chartDom = useRef();
 
     useEffect(() => {
@@ -130,17 +128,6 @@ function General() {
 
                                 <input type="datetime-local" className="form-control form-control-sm" />
 
-                                <h3>flatpickr</h3>
-                                <Flatpickr
-                                    className="form-control form-control-sm"
-                                    value={startDate}
-                                    onChange={(date) => setStartDate(date)}
-                                    options={{
-                                        enableTime: true,
-                                        dateFormat: "Y-m-d H:i:S",
-
-                                    }}
-                                />
                                 <div style={{ height: '500px', width: '100%' }} ref={chartDom} />
 
 

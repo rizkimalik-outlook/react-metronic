@@ -72,7 +72,7 @@ const SocialMedia = () => {
 
     return (
         <MainContent>
-            <SubHeader active_page="Sosial Media" menu_name="Channels" modul_name="Social Media" />
+            <SubHeader active_page="Channels" menu_name="Social Media" modul_name="" />
             <Container>
                 <div className="d-flex flex-row">
                     <div className="flex-row-auto offcanvas-mobile w-350px w-xl-400px offcanvas-mobile-on" id="kt_chat_aside">
