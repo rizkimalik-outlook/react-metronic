@@ -7,7 +7,6 @@ import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 import { authUser } from 'app/slice/sliceAuth';
 import { getListCustomer, getLoadConversation, getEndChat } from 'app/services/apiSosmed';
 import { setSelectedCustomer } from 'app/slice/sliceSosmed';
-import ScrollToBottom from 'react-scroll-to-bottom';
 
 const SocialMedia = () => {
     const dispatch = useDispatch();
@@ -129,7 +128,7 @@ const SocialMedia = () => {
                             </CardHeader>
                             <CardBody className="p-4">
                                 <div data-mobile-height={350} style={{ height: 'calc(75vh - 160px)', overflow: 'auto' }}>
-                                    <ScrollToBottom className="messages p-4">
+                                    <div className="messages p-4">
                                         {
                                             conversation?.map((item, index) => {
                                                 return (
@@ -140,7 +139,7 @@ const SocialMedia = () => {
                                                 )
                                             })
                                         }
-                                    </ScrollToBottom>
+                                    </div>
                                 </div>
                             </CardBody>
                             <div className="card-footer p-2">

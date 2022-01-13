@@ -42,8 +42,14 @@ const TicketTransaction = () => {
                     </button>
                 }} />
                 <Column caption="Channel" dataField="ticket_source" />
-                <Column caption="Status" dataField="status" />
                 <Column caption="DateCreate" dataField="date_create" />
+                <Column caption="Status" dataField="status" />
+                <Column caption="Category" dataField="category_id" />
+                <Column caption="Subcategory Product" dataField="category_sublv1_id" />
+                <Column caption="Subcategory Case" dataField="category_sublv2_id" />
+                <Column caption="Subcategory Detail" dataField="category_sublv3_id" />
+                <Column caption="Complaint Detail" dataField="complaint_detail" />
+                <Column caption="Response Detail" dataField="response_detail" />
             </DataGrid>
         </div>
     )

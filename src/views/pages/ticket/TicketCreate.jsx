@@ -75,6 +75,7 @@ const TicketCreate = () => {
                         confirmButton: "btn btn-primary"
                     },
                 });
+                history.push('/ticket')
             }
         } catch (error) {
             console.log(error)
@@ -133,16 +134,16 @@ const TicketCreate = () => {
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="Priority Scale">
-                                        <input type="datetime-local" className="form-control form-control-md" />
+                                        <input type="text" className="form-control form-control-md" />
                                     </FormGroup>
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="Type Customer">
-                                        <select className="form-control form-control-md selectpicker" name="param" data-size="7" data-live-search="true">
-                                            <option data-icon="fa fa-search text-primary" value="AZ">Arizona</option>
-                                            <option data-icon="fa fa-user text-warning" value="CO">Colorado</option>
-                                            <option data-icon="fa fa-home text-primary" value="ID">Idaho</option>
+                                        <select {...register("type_customer", { required: true })} className="form-control form-control-md selectpicker" >
+                                            <option data-icon="fa fa-user text-primary" value="Personal">Personal</option>
+                                            <option data-icon="fa fa-building text-primary" value="Company">Company</option>
                                         </select>
+                                        {errors.type_customer && <span className="form-text text-danger">Please select type customer</span>}
                                     </FormGroup>
                                 </div>
                                 <div className="col-lg-3">
@@ -154,22 +155,44 @@ const TicketCreate = () => {
                             <div className="row">
                                 <div className="col-lg-3">
                                     <FormGroup label="Category">
-                                        <input type="text" className="form-control form-control-md" />
+                                        <select {...register("category_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <option value="">-- select category --</option>
+                                            <option value="CAT-10001"> Complaint</option>
+                                            <option value="CAT-10002"> Feedback</option>
+                                            <option value="CAT-10003"> Information</option>
+                                            <option value="CAT-10004"> Request</option>
+                                        </select>
+                                        {errors.category_id && <span className="form-text text-danger">Please select category</span>}
                                     </FormGroup>
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="SubCategory Product">
-                                        <input type="text" className="form-control form-control-md" />
+                                        <select {...register("category_sublv1_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <option value="">-- select subcategory product --</option>
+                                            <option value="CT1-10001"> ATM</option>
+                                            <option value="CT1-10002"> Credit/Loan</option>
+                                        </select>
+                                        {errors.category_sublv1_id && <span className="form-text text-danger">Please select subcategory product</span>}
                                     </FormGroup>
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="SubCategory Case">
-                                        <input type="text" className="form-control form-control-md" />
+                                        <select {...register("category_sublv2_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <option value="">-- select subcategory case --</option>
+                                            <option value="CT2-20001"> Kartu ATM Hilang</option>
+                                            <option value="CT2-20002"> Credit Macet</option>
+                                        </select>
+                                        {errors.category_sublv2_id && <span className="form-text text-danger">Please select subcategory case</span>}
                                     </FormGroup>
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="SubCategory Detail">
-                                        <input type="text" className="form-control form-control-md" />
+                                        <select {...register("category_sublv3_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <option value="">-- select subcategory detail --</option>
+                                            <option value="CT3-30001"> Registrasi Ulang</option>
+                                            <option value="CT3-30002"> Pembayaran gagal</option>
+                                        </select>
+                                        {errors.category_sublv3_id && <span className="form-text text-danger">Please select subcategory detail</span>}
                                     </FormGroup>
                                 </div>
                             </div>
@@ -220,7 +243,7 @@ const TicketCreate = () => {
                                 </div>
                                 <div className="col-lg-3">
                                     <FormGroup label="SLA (Days)">
-                                        <input type="text" className="form-control form-control-md" />
+                                        <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" />
                                     </FormGroup>
                                 </div>
                             </div>
