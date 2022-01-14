@@ -27,12 +27,12 @@ function Auth({ children }) {
 
             {/* tooltip icon */}
             <ul className="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
-                <li className="nav-item mb-2" data-toggle="tooltip" title data-placement="left" data-original-title="Aux Login">
+                <li className="nav-item mb-2" data-toggle="tooltip" data-placement="left" data-original-title="Aux Login">
                     <button className="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary">
                         <i className="fa fa-user-cog" />
                     </button>
                 </li>
-                <li className="nav-item" data-toggle="tooltip" title data-placement="left" data-original-title="Todolist">
+                <li className="nav-item" data-toggle="tooltip" data-placement="left" data-original-title="Todolist">
                     <button className="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary">
                         <i className="fa fa-clipboard-list" />
                     </button>
