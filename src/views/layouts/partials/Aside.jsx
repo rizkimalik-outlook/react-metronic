@@ -1,20 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from './menu/MenuItem'
 import Icons from 'views/components/Icons';
 import MendawaiLogo from 'views/components/MendawaiLogo';
-import { getMainMenu } from 'app/services/apiMenu'
+import axios from 'axios';
+// import { getMainMenu } from 'app/services/apiMenu'
 
 function Aside() {
     const location = useLocation();
-    const dispatch = useDispatch();
-    const { main_menu } = useSelector(state => state.mainmenu);
+    const [main_menu, setMainMenu] = useState([]);
+
+    // const dispatch = useDispatch();
+    // const { main_menu } = useSelector(state => state.mainmenu);
+
+    // useEffect(() => {
+    //     console.log('load menu.')
+    //     dispatch(getMainMenu())
+    // }, [dispatch]); 
+    
 
     useEffect(() => {
-        console.log('load menu.')
-        dispatch(getMainMenu())
-    }, [dispatch]);
+        async function getMainMenu() {
+            try {
+                const res = await axios.get('/main_menu')
+                const data = res.data.data;
+                setMainMenu(data)
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        getMainMenu()
+    }, [])
+
 
     return (
         <aside className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
