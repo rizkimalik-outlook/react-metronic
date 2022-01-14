@@ -72,7 +72,7 @@ const routes = [
         path: '*',
         component: lazy(() => import('../pages/NotFound')),
         exact: false,
-    }, */
+    },
     {
         path: 'dxgrid', 
         exact: true, 
@@ -81,7 +81,7 @@ const routes = [
         path: 'chat', 
         exact: true, 
         component: lazy(() => import('views/pages/SocketClient')),
-    },
+    }, */
 ];
 
 export default routes;
