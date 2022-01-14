@@ -49,7 +49,7 @@ function Login() {
 
                 setLoading('');
                 dispatch(setAuth(data));
-                history.push("/todolist");
+                // history.push("/todolist");
                 window.location.reload();
             }
         }
