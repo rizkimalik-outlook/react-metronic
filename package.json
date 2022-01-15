@@ -1,6 +1,6 @@
 {
   "name": "app-mendawai",
-  "homepage": "https://master.dketzotcv80ns.amplifyapp.com",
+  "homepage": "https://app-mendawai.netlify.app/",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://api-mendawai.herokuapp.com",
