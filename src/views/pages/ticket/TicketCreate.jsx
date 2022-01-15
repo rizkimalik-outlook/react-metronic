@@ -24,8 +24,10 @@ const TicketCreate = () => {
         window.onSelectPicker();
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
+    }, [dispatch]);
+    
+    useEffect(() => {
         reset({ user_create: username })
-
         function onCheckCustomerID() {
             if (!customer.customer_id) {
                 Swal.fire({
@@ -57,7 +59,7 @@ const TicketCreate = () => {
             }
         }
         onCheckCustomerID();
-    }, [dispatch, reset, username, history, customer]);
+    }, [reset, username, history, customer]);
 
     const onSubmitCreateTicket = async (data) => {
         try {
@@ -108,7 +110,7 @@ const TicketCreate = () => {
                                 <div className="col-lg-6"></div>
                                 <div className="col-lg-3">
                                     <FormGroup label="Channel">
-                                        <select className="form-control selectpicker" {...register("ticket_source", { required: true })}>
+                                        <select className="form-control " {...register("ticket_source", { required: true })}>
                                             <option value="">-- select channel --</option>
                                             {
                                                 channels.map((item) => {
