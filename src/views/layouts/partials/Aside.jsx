@@ -1,38 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from './menu/MenuItem'
 import Icons from 'views/components/Icons';
 import MendawaiLogo from 'views/components/MendawaiLogo';
-import axios from 'axios';
-// import { getMainMenu } from 'app/services/apiMenu'
+// import axios from 'axios';
+import { getMainMenu } from 'app/services/apiMenu'
 
 function Aside() {
     const location = useLocation();
-    const [main_menu, setMainMenu] = useState([]);
-
-    // const dispatch = useDispatch();
-    // const { main_menu } = useSelector(state => state.mainmenu);
-
-    // useEffect(() => {
-    //     console.log('load menu.')
-    //     dispatch(getMainMenu())
-    // }, [dispatch]); 
-    
+    // const [main_menu, setMainMenu] = useState([]);
+    const dispatch = useDispatch();
+    const { main_menu } = useSelector(state => state.mainmenu);
 
     useEffect(() => {
-        async function getMainMenu() {
-            try {
-                const res = await axios.get('/main_menu')
-                const data = res.data.data;
-                setMainMenu(data)
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-        getMainMenu()
-    }, [])
+        console.log('load menu.')
+        dispatch(getMainMenu())
+    }, [dispatch]); 
+    
+
+    // useEffect(() => {
+    //     async function getMainMenu() {
+    //         try {
+    //             const res = await axios.get('/main_menu')
+    //             const data = res.data.data;
+    //             setMainMenu(data)
+    //         }
+    //         catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     getMainMenu()
+    // }, [])
 
 
     return (

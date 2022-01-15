@@ -6,24 +6,25 @@ import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import UserResetPassword from './UserResetPassword';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authUser } from 'app/slice/sliceAuth';
 import { baseUrl } from 'app/config';
 import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
-import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
+import { apiMasterUserLevel } from 'app/services/apiMasterData';
 
 
 function UserEdit() {
     let { id } = useParams();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { user_level } = useSelector(state => state.master)
     const { token } = useSelector(authUser);
-    const { data, isFetching} = useGetUserLevelQuery();
     const { refetch } = useGetUsersQuery();
-    // const { data, isFetching } = useGetUserShowQuery(id);
     const [updateUser] = useUpdateUserMutation();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     useEffect(() => {
+        dispatch(apiMasterUserLevel())
         async function getShowUser() {
             try {
                 const res = await fetch(`${baseUrl}/user/show/${id}`, {
@@ -34,7 +35,7 @@ function UserEdit() {
                     }
                 })
                 const json = await res.json();
-                const { 
+                const {
                     name,
                     username,
                     email_address,
@@ -96,7 +97,7 @@ function UserEdit() {
             }
         }
         getShowUser();
-    }, [id, reset, token]);
+    }, [id, reset, token, dispatch]);
 
     const onSubmitUpdateUser = async (data) => {
         try {
@@ -163,9 +164,8 @@ function UserEdit() {
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
                                         <option>-- User Level --</option>
-                                        {isFetching && <div>loading..</div>}
                                         {
-                                            data?.data.map((item)=>{
+                                            user_level?.map((item) => {
                                                 return <option value={item.level_name} key={item.id}>{item.level_name}</option>
                                             })
                                         }

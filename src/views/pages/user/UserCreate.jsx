@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useGetUsersQuery, useCreateUserMutation } from 'app/services/apiUser';
-import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
+import { apiMasterUserLevel } from 'app/services/apiMasterData';
 import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 
 function UserCreate() {
+    const dispatch = useDispatch();
     const history = useHistory();
-    const { data, isFetching } = useGetUserLevelQuery();
+    const { user_level } = useSelector(state => state.master)
     const { refetch } = useGetUsersQuery();
     const [createUser] = useCreateUserMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
+
+    useEffect(() => {
+        dispatch(apiMasterUserLevel())
+    }, [dispatch]);
 
     const onSubmitCreateUser = async (data) => {
         try {
@@ -78,9 +85,8 @@ function UserCreate() {
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
                                         <option value="">-- User Level --</option>
-                                        {isFetching && <div>loading..</div>}
                                         {
-                                            data?.data.map((item)=>{
+                                            user_level?.map((item) => {
                                                 return <option value={item.level_name} key={item.id}>{item.level_name}</option>
                                             })
                                         }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import Aside from './partials/Aside';
+import Aside from './partials/Aside';
 import Footer from './partials/Footer';
 import Header from './partials/Header';
 import { axiosDefault } from 'app/config';
@@ -18,7 +18,7 @@ function Auth({ children }) {
     return (
         <div className="d-flex flex-row flex-column-fluid page">
             <SocketIO />
-            {/* <Aside /> */}
+            <Aside />
             <div className="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <Header />
                 {children}

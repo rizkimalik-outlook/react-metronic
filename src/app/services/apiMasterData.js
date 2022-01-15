@@ -16,3 +16,11 @@ export const apiMasterStatus = createAsyncThunk(
         return res.data;
     }
 )
+
+export const apiMasterUserLevel = createAsyncThunk(
+    "master/apiMasterUserLevel",
+    async () => {
+        const res = await axios.get('/master/user_level');
+        return res.data;
+    }
+)

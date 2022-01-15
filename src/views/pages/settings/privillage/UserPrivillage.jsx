@@ -1,14 +1,20 @@
-import React from 'react';
-import SplashScreen from 'views/components/SplashScreen';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card';
 import DataGrid, { Column, MasterDetail } from 'devextreme-react/data-grid';
-import { useGetUserLevelQuery } from 'app/services/apiUserLevel';
+import { apiMasterUserLevel } from 'app/services/apiMasterData';
 import Menu from './Menu';
 
 function UserPrivillage() {
-    const { data, isFetching } = useGetUserLevelQuery();
-   
+    const dispatch = useDispatch();
+    const { user_level } = useSelector(state => state.master)
+
+    useEffect(() => {
+        dispatch(apiMasterUserLevel())
+    }, [dispatch]);
+
     return (
         <MainContent>
             <SubHeader active_page="User Privillage" menu_name="Management User" modul_name="User Privillage" />
@@ -18,9 +24,8 @@ function UserPrivillage() {
                         <CardTitle title="User Privillage" subtitle="Menu access user." />
                     </CardHeader>
                     <CardBody>
-                        {isFetching && <SplashScreen />}
                         <DataGrid
-                            dataSource={data?.data}
+                            dataSource={user_level}
                             keyExpr="id"
                             allowColumnReordering={true}
                             allowColumnResizing={true}

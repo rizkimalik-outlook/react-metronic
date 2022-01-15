@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
     apiMasterChannel,
     apiMasterStatus,
+    apiMasterUserLevel,
 } from "app/services/apiMasterData";
 
 const sliceMasterData = createSlice({
@@ -9,6 +10,7 @@ const sliceMasterData = createSlice({
     initialState: {
         channels: [],
         status: [],
+        user_level: [],
     },
     extraReducers: {
         [apiMasterChannel.fulfilled]: (state, action) => {
@@ -16,6 +18,9 @@ const sliceMasterData = createSlice({
         },
         [apiMasterStatus.fulfilled]: (state, action) => {
             state.status = action.payload.data
+        },
+        [apiMasterUserLevel.fulfilled]: (state, action) => {
+            state.user_level = action.payload.data
         },
     },
 });
