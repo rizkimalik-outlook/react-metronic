@@ -1,6 +1,9 @@
 function onSelectPicker(value) {
-    
-    $('.selectpicker').val(value);
-    $('.selectpicker').selectpicker('refresh');
-
+    if (value === undefined) {
+        $('.selectpicker').selectpicker('render');
+    }
+    else {
+        $('.selectpicker').val(value);
+        $('.selectpicker').selectpicker('refresh');
+    }
 }

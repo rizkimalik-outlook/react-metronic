@@ -5,20 +5,26 @@ import Header from './partials/Header';
 import { axiosDefault } from 'app/config';
 import { AskPermission } from 'views/components/Notification';
 import { authUser } from 'app/slice/sliceAuth';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SocketIO from 'views/components/SocketIO';
+import { getMainMenu } from 'app/services/apiMenu'
 
 function Auth({ children }) {
     const { token } = useSelector(authUser);
+    const dispatch = useDispatch();
+    const { main_menu } = useSelector(state => state.mainmenu);
+
     useEffect(() => {
         AskPermission();
         axiosDefault(token);
-    }, [token]);
+        dispatch(getMainMenu())
+    }, [dispatch, token]);
 
     return (
         <div className="d-flex flex-row flex-column-fluid page">
             <SocketIO />
-            <Aside />
+            <Aside main_menu={main_menu} />
+
             <div className="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <Header />
                 {children}
