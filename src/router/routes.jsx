@@ -62,7 +62,7 @@ const routes = [
     //? custom route
     {
         path: '/',
-        component: lazy(() => import('views/pages/todolist/TodoList')),
+        component: lazy(() => import('views/pages/Home')),
         exact: true,
     },{
         path: 'general', 

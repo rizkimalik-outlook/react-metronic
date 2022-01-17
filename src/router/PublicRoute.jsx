@@ -15,7 +15,7 @@ function PublicRoute({ children, isAuth, ...rest }) {
                     ) : (
                         <Redirect
                             to={{
-                                pathname: '/todolist',
+                                pathname: '/',
                                 state: { from: location }
                             }}
                         />

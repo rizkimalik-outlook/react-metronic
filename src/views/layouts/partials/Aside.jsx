@@ -20,7 +20,7 @@ function Aside({ main_menu }) {
     return (
         <aside className="aside aside-left aside-fixed d-flex flex-column flex-row-auto shadow-none border" id="kt_aside">
             <div className="brand flex-column-auto" id="kt_brand">
-                <NavLink to="/general" className="brand-logo">
+                <NavLink to="/" className="brand-logo">
                     <MendawaiLogo className="max-h-50px" />
                 </NavLink>
                 <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">

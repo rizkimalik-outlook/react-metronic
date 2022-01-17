@@ -82,8 +82,8 @@ const CustomerCreate = () => {
                                     <label>Gender:</label>
                                     <select className="form-control" {...register("gender", { required: true })}>
                                         <option value="">-- select gender--</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                     {errors.gender && <span className="form-text text-danger">Select enter gender</span>}
                                 </div>

@@ -113,7 +113,7 @@ const TicketInformation = () => {
                         <input type="text" className="form-control form-control-sm" {...register("no_ktp", { maxLength: 100 })} />
                     </FormGroup>
                     <FormGroup label="Gender">
-                        <select className="form-control selectpicker" {...register("gender", { required: true })}>
+                        <select className="form-control" {...register("gender", { required: true })}>
                             <option value="">-- select gender --</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
