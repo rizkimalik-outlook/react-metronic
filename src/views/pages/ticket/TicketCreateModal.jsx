@@ -84,7 +84,7 @@ const TicketCreateModal = ({ customer }) => {
                             </a>
                         </li>
                     </ul>
-                    
+
                     <div className="tab-content mt-5" id="contentCreateTicket">
                         <div className="tab-pane fade active show" id="contentFormCreateTicket" role="tabpanel" aria-labelledby="tabFormCreateTicket">
                             <form onSubmit={handleSubmit(onSubmitCreateTicket)}>
@@ -119,21 +119,23 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <FormGroup label="Agent Name">
-                                            <input {...register("user_create", { required: true })}
-                                                type="text"
-                                                className="form-control form-control-md"
-                                                readOnly
-                                            />
+                                            <input type="text" {...register("user_create", { required: true })} className="form-control form-control-md" readOnly />
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Priority Scale">
-                                            <input type="text" className="form-control form-control-md" />
+                                            <select {...register("priority_scale", { required: true })} className="form-control form-control-md">
+                                                <option value="">-- select priority scale --</option>
+                                                <option value="VIP"> VIP</option>
+                                                <option value="Reguler"> Reguler</option>
+                                            </select>
+                                            {errors.priority_scale && <span className="form-text text-danger">Please select priority</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Customer">
                                             <select {...register("type_customer", { required: true })} className="form-control form-control-md selectpicker" >
+                                                <option value="">-- select type --</option>
                                                 <option data-icon="fa fa-user text-primary" value="Personal">Personal</option>
                                                 <option data-icon="fa fa-building text-primary" value="Company">Company</option>
                                             </select>
@@ -142,7 +144,13 @@ const TicketCreateModal = ({ customer }) => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Source Information">
-                                            <input type="text" className="form-control form-control-md" />
+                                            <select {...register("source_information", { required: true })} className="form-control form-control-md">
+                                                <option value="">-- select source --</option>
+                                                <option value="Call"> Call</option>
+                                                <option value="Chat"> Chat</option>
+                                                <option value="Email"> Email</option>
+                                            </select>
+                                            {errors.source_information && <span className="form-text text-danger">Please select source</span>}
                                         </FormGroup>
                                     </div>
                                 </div>
@@ -231,8 +239,15 @@ const TicketCreateModal = ({ customer }) => {
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
-                                        <FormGroup label="Eskalation Unit">
-                                            <input type="text" className="form-control form-control-md" />
+                                        <FormGroup label="Escalation Unit">
+                                            <select {...register("escalation_unit", { required: true })} className="form-control form-control-md">
+                                                <option value="">-- select Escalation --</option>
+                                                <option value="1">Finance</option>
+                                                <option value="2">Technical</option>
+                                                <option value="3">Human Resource</option>
+                                                <option value="4">Marketing</option>
+                                            </select>
+                                            {errors.escalation_unit && <span className="form-text text-danger">Please select Escalation</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">

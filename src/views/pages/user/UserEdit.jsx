@@ -41,6 +41,7 @@ function UserEdit() {
                     email_address,
                     password,
                     user_level,
+                    organization,
                     inbound,
                     outbound,
                     sms,
@@ -70,6 +71,7 @@ function UserEdit() {
                     email_address,
                     password,
                     user_level,
+                    organization,
                     inbound,
                     outbound,
                     sms,
@@ -174,13 +176,14 @@ function UserEdit() {
                                 </div>
                                 <div className="col-lg-6">
                                     <label>Organization:</label>
-                                    <select className="form-control" {...register("organization")}>
-                                        <option>-- User Organization --</option>
-                                        <option value="Administrator">Administrator</option>
-                                        <option value="Supervisor">Supervisor</option>
-                                        <option value="Agent">Agent</option>
+                                    <select className="form-control" {...register("organization", { required: true })}>
+                                        <option value="">-- User Organization --</option>
+                                        <option value="1">Finance</option>
+                                        <option value="2">Technical</option>
+                                        <option value="3">Human Resource</option>
+                                        <option value="4">Marketing</option>
                                     </select>
-                                    {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
+                                    {errors.organization && <span className="form-text text-danger">Please select Organization</span>}
                                 </div>
 
                             </div>
