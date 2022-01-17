@@ -7,3 +7,9 @@ function onSelectPicker(value) {
         $('.selectpicker').selectpicker('refresh');
     }
 }
+
+function onSelectPickerChannel(value) {
+    console.log('chnel')
+    $('.selectpicker_channel').val(value);
+    $('.selectpicker_channel').selectpicker('refresh');
+}

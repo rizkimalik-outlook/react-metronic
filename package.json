@@ -1,9 +1,9 @@
 {
   "name": "app-mendawai",
-  "homepage": "https://master.d2tsd07i1q37v9.amplifyapp.com",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api-mendawai.herokuapp.com",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.11.4",

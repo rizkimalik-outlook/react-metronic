@@ -9,11 +9,15 @@ const ticketSlice = createSlice({
     initialState: {
         response: {},
         selected_customer: {},
+        reporting_customer: {},
         history_transaction: [],
     },
     reducers: {
         setSelectedCustomer: (state, action) => {
             state.selected_customer = action.payload;
+        },
+        setReportingCustomer: (state, action) => {
+            state.reporting_customer = action.payload;
         },
     },
     extraReducers: {
@@ -29,5 +33,6 @@ const ticketSlice = createSlice({
 //export actions & reducer
 export const {
     setSelectedCustomer,
+    setReportingCustomer,
 } = ticketSlice.actions;
 export default ticketSlice;

@@ -31,7 +31,6 @@ const TicketInformation = () => {
                 telephone,
                 address
             } = customer;
-            window.onSelectPicker(gender);
 
             reset({
                 customer_id,

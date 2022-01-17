@@ -55,7 +55,7 @@ const TicketCreate = () => {
                     },
                 }).then(() => {
                     history.push('/ticket')
-                });;
+                });
             }
         }
         onCheckCustomerID();
@@ -110,7 +110,7 @@ const TicketCreate = () => {
                                 <div className="col-lg-6"></div>
                                 <div className="col-lg-3">
                                     <FormGroup label="Channel">
-                                        <select className="form-control selectpicker" {...register("ticket_source", { required: true })}>
+                                        <select className="form-control" {...register("ticket_source", { required: true })}>
                                             <option value="">-- select channel --</option>
                                             {
                                                 channels.map((item) => {
