@@ -6,22 +6,42 @@ import Swal from 'sweetalert2'
 import { ButtonSubmit } from 'views/components/button'
 import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
-import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { authUser } from 'app/slice/sliceAuth'
+import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
+import {
+    apiCategoryList,
+    apiSubCategoryLv1,
+    apiSubCategoryLv2,
+    apiSubCategoryLv3,
+    apiSubCategoryLv3Show
+} from 'app/services/apiCategory';
 
 const TicketCreateModal = ({ customer }) => {
     const dispatch = useDispatch();
     const { username } = useSelector(authUser)
     const { channels, status } = useSelector(state => state.master);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const {
+        category,
+        category_sublv1,
+        category_sublv2,
+        category_sublv3,
+        category_sublv3_detail,
+    } = useSelector(state => state.category);
 
     useEffect(() => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
-        reset({ user_create: username })
-        window.onSelectPicker()
-    }, [dispatch, reset, username]);
+        dispatch(apiCategoryList())
+
+        const { sla, org_id } = category_sublv3_detail;
+        reset({
+            user_create: username,
+            sla: sla,
+            org_id: org_id
+        })
+    }, [dispatch, reset, username, category_sublv3_detail]);
 
     const onSubmitCreateTicket = async (data) => {
         try {
@@ -43,6 +63,25 @@ const TicketCreateModal = ({ customer }) => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const onLoadCategorySubLv1 = async (data) => {
+        const category_id = data.target.value;
+        dispatch(apiSubCategoryLv1({ category_id }))
+    }
+
+    const onLoadCategorySubLv2 = async (data) => {
+        const category_sublv1_id = data.target.value;
+        dispatch(apiSubCategoryLv2({ category_sublv1_id }))
+    }
+
+    const onLoadCategorySubLv3 = async (data) => {
+        const category_sublv2_id = data.target.value;
+        dispatch(apiSubCategoryLv3({ category_sublv2_id }))
+    }
+    const onGetSLA = async (data) => {
+        const category_sublv3_id = data.target.value;
+        dispatch(apiSubCategoryLv3Show({ category_sublv3_id }))
     }
 
     return (
@@ -126,18 +165,21 @@ const TicketCreateModal = ({ customer }) => {
                                         <FormGroup label="Priority Scale">
                                             <select {...register("priority_scale", { required: true })} className="form-control form-control-md">
                                                 <option value="">-- select priority scale --</option>
-                                                <option value="VIP"> VIP</option>
-                                                <option value="Reguler"> Reguler</option>
+                                                <option value="High"> High</option>
+                                                <option value="Medium"> Medium</option>
+                                                <option value="Low"> Low</option>
                                             </select>
                                             {errors.priority_scale && <span className="form-text text-danger">Please select priority</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Customer">
-                                            <select {...register("type_customer", { required: true })} className="form-control form-control-md selectpicker" >
+                                            <select {...register("type_customer", { required: true })} className="form-control form-control-md " >
                                                 <option value="">-- select type --</option>
-                                                <option data-icon="fa fa-user text-primary" value="Personal">Personal</option>
-                                                <option data-icon="fa fa-building text-primary" value="Company">Company</option>
+                                                <option value="Personal">Personal</option>
+                                                <option value="Company">Company</option>
+                                                <option value="VIP">VIP</option>
+                                                <option value="Non-VIP">Non-VIP</option>
                                             </select>
                                             {errors.type_customer && <span className="form-text text-danger">Please select type customer</span>}
                                         </FormGroup>
@@ -147,8 +189,7 @@ const TicketCreateModal = ({ customer }) => {
                                             <select {...register("source_information", { required: true })} className="form-control form-control-md">
                                                 <option value="">-- select source --</option>
                                                 <option value="Call"> Call</option>
-                                                <option value="Chat"> Chat</option>
-                                                <option value="Email"> Email</option>
+                                                <option value="E-mail"> E-mail</option>
                                             </select>
                                             {errors.source_information && <span className="form-text text-danger">Please select source</span>}
                                         </FormGroup>
@@ -157,42 +198,52 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <FormGroup label="Category">
-                                            <select {...register("category_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <select {...register("category_id", { required: true })} onChange={onLoadCategorySubLv1} className="form-control form-control-md ">
                                                 <option value="">-- select category --</option>
-                                                <option value="CAT-10001"> Complaint</option>
-                                                <option value="CAT-10002"> Feedback</option>
-                                                <option value="CAT-10003"> Information</option>
-                                                <option value="CAT-10004"> Request</option>
+                                                {
+                                                    category.map((item) => {
+                                                        return <option value={item.category_id} key={item.category_id}>{item.name}</option>
+                                                    })
+                                                }
                                             </select>
                                             {errors.category_id && <span className="form-text text-danger">Please select category</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="SubCategory Product">
-                                            <select {...register("category_sublv1_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <select {...register("category_sublv1_id", { required: true })} onChange={onLoadCategorySubLv2} className="form-control form-control-md ">
                                                 <option value="">-- select subcategory product --</option>
-                                                <option value="CT1-10001"> ATM</option>
-                                                <option value="CT1-10002"> Credit/Loan</option>
+                                                {
+                                                    category_sublv1?.map((item) => {
+                                                        return <option value={item.category_sublv1_id} key={item.category_sublv1_id}>{item.sub_name}</option>
+                                                    })
+                                                }
                                             </select>
                                             {errors.category_sublv1_id && <span className="form-text text-danger">Please select subcategory product</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="SubCategory Case">
-                                            <select {...register("category_sublv2_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <select {...register("category_sublv2_id", { required: true })} onChange={onLoadCategorySubLv3} className="form-control form-control-md ">
                                                 <option value="">-- select subcategory case --</option>
-                                                <option value="CT2-20001"> Kartu ATM Hilang</option>
-                                                <option value="CT2-20002"> Credit Macet</option>
+                                                {
+                                                    category_sublv2?.map((item) => {
+                                                        return <option value={item.category_sublv2_id} key={item.category_sublv2_id}>{item.sub_name}</option>
+                                                    })
+                                                }
                                             </select>
                                             {errors.category_sublv2_id && <span className="form-text text-danger">Please select subcategory case</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="SubCategory Detail">
-                                            <select {...register("category_sublv3_id", { required: true })} className="form-control form-control-md selectpicker">
+                                            <select {...register("category_sublv3_id", { required: true })} onChange={onGetSLA} className="form-control form-control-md ">
                                                 <option value="">-- select subcategory detail --</option>
-                                                <option value="CT3-30001"> Registrasi Ulang</option>
-                                                <option value="CT3-30002"> Pembayaran gagal</option>
+                                                {
+                                                    category_sublv3?.map((item) => {
+                                                        return <option value={item.category_sublv3_id} key={item.category_sublv3_id}>{item.sub_name}</option>
+                                                    })
+                                                }
                                             </select>
                                             {errors.category_sublv3_id && <span className="form-text text-danger">Please select subcategory detail</span>}
                                         </FormGroup>
@@ -217,7 +268,7 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Complaint">
-                                            <select {...register("type_complaint", { required: true })} className="form-control form-control-md selectpicker">
+                                            <select {...register("type_complaint", { required: true })} className="form-control form-control-md ">
                                                 <option value="">-- select type --</option>
                                                 <option data-icon="fa fa-edit text-primary" value="Written"> Written</option>
                                                 <option data-icon="fa fa-microphone text-primary" value="Verbal"> Verbal</option>
@@ -240,19 +291,19 @@ const TicketCreateModal = ({ customer }) => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Escalation Unit">
-                                            <select {...register("escalation_unit", { required: true })} className="form-control form-control-md">
+                                            <select {...register("org_id", { required: true })} className="form-control form-control-md">
                                                 <option value="">-- select Escalation --</option>
                                                 <option value="1">Finance</option>
                                                 <option value="2">Technical</option>
                                                 <option value="3">Human Resource</option>
                                                 <option value="4">Marketing</option>
                                             </select>
-                                            {errors.escalation_unit && <span className="form-text text-danger">Please select Escalation</span>}
+                                            {errors.org_id && <span className="form-text text-danger">Please select Escalation</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="SLA (Days)">
-                                            <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" />
+                                            <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" readOnly />
                                             {errors.sla && <span className="form-text text-danger">Please enter SLA</span>}
                                         </FormGroup>
                                     </div>

@@ -11,18 +11,17 @@ import sliceMenu from './slice/sliceMenu';
 import sliceCustomer from './slice/sliceCustomer';
 import sliceTicket from './slice/sliceTicket';
 import sliceMasterData from './slice/sliceMasterData';
-
+import storeCategory from './services/apiCategory';
 
 const persistConfig = {
     key: 'auth',
     version: 1,
     storage
-};
+}
 
 const reducer = combineReducers({
     authUser: sliceAuth.reducer
 })
-
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 const rootReducer = {
@@ -35,6 +34,7 @@ const rootReducer = {
     customer: sliceCustomer.reducer,
     ticket: sliceTicket.reducer,
     master: sliceMasterData.reducer,
+    category: storeCategory.reducer,
 }
 
 export default rootReducer;
