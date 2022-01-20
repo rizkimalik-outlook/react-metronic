@@ -1,6 +1,6 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport } from 'views/components/button';
+import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport, ButtonRefresh } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card';
 import DataGrid, { Column, FilterRow, HeaderFilter, MasterDetail, Pager, Paging } from 'devextreme-react/data-grid';
@@ -88,14 +88,16 @@ function UserList() {
 
     return (
         <MainContent>
-            <SubHeader active_page="Settings" menu_name="Management User" modul_name="" />
+            <SubHeader active_page="Settings" menu_name="Management User" modul_name="">
+                <ButtonExport onClick={onExportExcel} />
+                <ButtonCreate to="/user/create" />
+            </SubHeader>
             <Container>
                 <Card>
                     <CardHeader className="border-0">
                         <CardTitle title="User Privillage" subtitle="List account users member login." />
                         <CardToolbar>
-                            <ButtonExport onClick={onExportExcel} />
-                            <ButtonCreate to="/user/create" />
+                            <ButtonRefresh onClick={(e) => refetch()} />
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>

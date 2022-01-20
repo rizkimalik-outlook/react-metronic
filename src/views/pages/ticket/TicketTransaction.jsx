@@ -17,6 +17,9 @@ const TicketTransaction = () => {
     return (
         <div className="border rounded p-4 my-2">
             <h4>History Transactions</h4>
+            <button type="button" onClick={(e) => dispatch(apiHistoryTransaction({ customer_id }))} className="btn btn-info font-weight-bolder btn-sm m-1">
+                refresh
+            </button>
             <DataGrid
                 dataSource={history_transaction}
                 keyExpr="ticket_number"

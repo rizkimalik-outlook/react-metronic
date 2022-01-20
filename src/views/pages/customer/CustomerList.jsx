@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import Icons from 'views/components/Icons'
-import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport } from 'views/components/button';
+import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport, ButtonRefresh } from 'views/components/button';
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
@@ -94,7 +94,10 @@ const CustomerList = () => {
 
     return (
         <MainContent>
-            <SubHeader active_page="Customer" menu_name="Data Customer" modul_name="Customer" />
+            <SubHeader active_page="Customer" menu_name="Data Customer" modul_name="Customer">
+                <ButtonExport onClick={handlerExportExcel} />
+                <ButtonCreate to="/customer/create" />
+            </SubHeader>
             <Container>
                 <Card>
                     <CardHeader className="border-0">
@@ -119,8 +122,7 @@ const CustomerList = () => {
                             </ul>
                         </CardToolbar>
                         <CardToolbar>
-                            <ButtonExport onClick={handlerExportExcel} />
-                            <ButtonCreate to="/customer/create" />
+                            <ButtonRefresh onClick={() => dispatch(apiCustomerList())} />
                         </CardToolbar>
                     </CardHeader>
                     <CardBody>

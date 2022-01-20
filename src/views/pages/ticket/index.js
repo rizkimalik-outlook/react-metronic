@@ -4,6 +4,7 @@ import TicketBankAccount from "./TicketBankAccount";
 import TicketChannel from "./TicketChannel";
 import TicketReporting from "./TicketReporting";
 import TicketInformation from "./TicketInformation";
+import TicketPublish from "./TicketPublish";
 
 export {
     TicketCreateModal,
@@ -12,4 +13,5 @@ export {
     TicketChannel,
     TicketReporting,
     TicketInformation,
+    TicketPublish,
 }

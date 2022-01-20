@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 
-const TicketBankAccount = () => {
+const TicketPublish = () => {
     return (
-        <div className="border rounded p-4 my-2">
-            <h4>Bank Account</h4>
+        <div>
+            <h5>Publish Ticket</h5>
             <DataGrid
                 dataSource=""
                 keyExpr="id"
@@ -29,6 +29,6 @@ const TicketBankAccount = () => {
             </DataGrid>
         </div>
     )
-}
+};
 
-export default TicketBankAccount
+export default TicketPublish;
