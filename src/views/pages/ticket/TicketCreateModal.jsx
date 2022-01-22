@@ -9,7 +9,7 @@ import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
 import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
+import { apiDataPublish, apiHistoryTransaction, apiPublish, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
     apiSubCategoryLv1,
@@ -23,6 +23,7 @@ const TicketCreateModal = ({ customer }) => {
     const dispatch = useDispatch();
     const { username } = useSelector(authUser)
     const { channels, status } = useSelector(state => state.master);
+    const { reporting_customer } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const {
         category,
@@ -45,8 +46,10 @@ const TicketCreateModal = ({ customer }) => {
 
     const onSubmitCreateTicket = async (data) => {
         try {
-            data.date_create = (data.date_create).replace('T', ' ');
-            const { payload } = await dispatch(apiTicketStore(data));
+            const data_store = Object.assign({}, data, reporting_customer);
+            const { customer_id } = data_store;
+            data_store.date_create = (data_store.date_create).replace('T', ' ');
+            const { payload } = await dispatch(apiTicketStore(data_store));
             if (payload.status === 200) {
                 Swal.fire({
                     title: "Ticket Created.",
@@ -58,7 +61,8 @@ const TicketCreateModal = ({ customer }) => {
                         confirmButton: "btn btn-primary"
                     },
                 });
-                dispatch(apiHistoryTransaction({ customer_id: data.customer_id }))
+                dispatch(apiHistoryTransaction({ customer_id }))
+                dispatch(apiDataPublish({ customer_id }))
                 reset({ user_create: username })
             }
         } catch (error) {
@@ -66,6 +70,24 @@ const TicketCreateModal = ({ customer }) => {
         }
     }
 
+    const onSubmitPublish = async () => {
+        const { customer_id } = customer;
+        const { payload } = await dispatch(apiPublish({ customer_id }));
+        if (payload.status === 200) {
+            Swal.fire({
+                title: "Ticket Published.",
+                text: "Success publish ticket!",
+                buttonsStyling: false,
+                icon: "success",
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                },
+            });
+            dispatch(apiDataPublish({ customer_id }))
+            dispatch(apiHistoryTransaction({ customer_id }))
+        }
+    }
 
     return (
         <Modal id="modalCreateTicket">
@@ -136,9 +158,7 @@ const TicketCreateModal = ({ customer }) => {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <hr />
-
-                                <div className="row">
+                                <div className="row my-5">
                                     <div className="col-lg-3">
                                         <FormGroup label="Agent Name">
                                             <input type="text" {...register("user_create", { required: true })} className="form-control form-control-md" readOnly />
@@ -178,7 +198,7 @@ const TicketCreateModal = ({ customer }) => {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <div className="row">
+                                <div className="row my-5">
                                     <div className="col-lg-3">
                                         <FormGroup label="Category">
                                             <select
@@ -248,7 +268,7 @@ const TicketCreateModal = ({ customer }) => {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <div className="row">
+                                <div className="row my-5">
                                     <div className="col-lg-6">
                                         <FormGroup label="Complaint">
                                             <textarea {...register("complaint_detail", { required: true })} className="form-control form-control-md" cols="10" rows="4"></textarea>
@@ -262,9 +282,7 @@ const TicketCreateModal = ({ customer }) => {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <hr />
-
-                                <div className="row">
+                                <div className="row my-5">
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Complaint">
                                             <select {...register("type_complaint", { required: true })} className="form-control form-control-md ">
@@ -309,18 +327,14 @@ const TicketCreateModal = ({ customer }) => {
                                 </div>
 
                                 <ModalFooter>
-                                    <button type="button" className="btn btn-info font-weight-bolder btn-sm m-1">
+                                    <button onClick={() => onSubmitPublish()} type="button" className="btn btn-info font-weight-bolder btn-sm m-1">
                                         <Icons iconName="flag" className="svg-icon svg-icon-sm" />
                                         Publish
                                     </button>
                                     <ButtonSubmit />
                                 </ModalFooter>
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <TicketPublish />
-                                    </div>
-                                </div>
                             </form>
+                            <TicketPublish customer={customer} />
                         </div>
                         <div className="tab-pane fade" id="contentInteractionTicket" role="tabpanel" aria-labelledby="tabInteractionTicket">Tab content 2</div>
                         <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">Tab content 3</div>

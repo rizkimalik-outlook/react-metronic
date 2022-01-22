@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+import { apiDataPublish } from 'app/services/apiTicket';
 
-const TicketPublish = () => {
+const TicketPublish = ({ customer }) => {
+    const dispatch = useDispatch();
+    const { customer_id } = customer;
+    const { data_publish } = useSelector(state => state.ticket)
+
+    useEffect(() => {
+        dispatch(apiDataPublish({ customer_id }))
+    }, [dispatch, customer_id])
+
     return (
         <div>
             <h5>Publish Ticket</h5>
             <DataGrid
-                dataSource=""
-                keyExpr="id"
+                dataSource={data_publish}
+                keyExpr="ticket_number"
                 allowColumnReordering={true}
                 allowColumnResizing={true}
                 columnAutoWidth={true}
@@ -24,8 +34,15 @@ const TicketPublish = () => {
                     showInfo={true}
                     showNavigationButtons={true} />
                 <Column caption="CustomerID" dataField="customer_id" />
-                <Column caption="Customer Name" dataField="name" />
-                <Column caption="Channel" dataField="flag_channel" />
+                <Column caption="Ticket Number" dataField="ticket_number" />
+                <Column caption="Channel" dataField="ticket_source" />
+                <Column caption="Status" dataField="status" />
+                <Column caption="Category" dataField="category_id" />
+                <Column caption="SubCategory Product" dataField="category_sublv1_id" />
+                <Column caption="SubCategory Case" dataField="category_sublv2_id" />
+                <Column caption="SubCategory Detail" dataField="category_sublv3_id" />
+                <Column caption="Complaint Detail" dataField="complaint_detail" />
+                <Column caption="Response Detail" dataField="response_detail" />
             </DataGrid>
         </div>
     )

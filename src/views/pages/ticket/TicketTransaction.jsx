@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 import { apiHistoryTransaction } from 'app/services/apiTicket';
 import Icons from 'views/components/Icons';
+import { ButtonRefresh } from 'views/components/button';
 
 const TicketTransaction = () => {
     const dispatch = useDispatch();
@@ -16,10 +17,10 @@ const TicketTransaction = () => {
 
     return (
         <div className="border rounded p-4 my-2">
-            <h4>History Transactions</h4>
-            <button type="button" onClick={(e) => dispatch(apiHistoryTransaction({ customer_id }))} className="btn btn-info font-weight-bolder btn-sm m-1">
-                refresh
-            </button>
+            <div className="d-flex justify-content-between mb-5">
+                <h4>History Transactions</h4>
+                <ButtonRefresh onClick={() => dispatch(apiHistoryTransaction({ customer_id }))} />
+            </div>
             <DataGrid
                 dataSource={history_transaction}
                 keyExpr="ticket_number"
@@ -44,6 +45,7 @@ const TicketTransaction = () => {
                         {data.value}
                     </button>
                 }} />
+                <Column caption="Group Ticket" dataField="group_ticket_number" />
                 <Column caption="Channel" dataField="ticket_source" />
                 <Column caption="DateCreate" dataField="date_create" />
                 <Column caption="Status" dataField="status" />
