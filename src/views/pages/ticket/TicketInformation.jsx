@@ -7,7 +7,7 @@ import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devext
 import Icons from 'views/components/Icons'
 import FormGroup from 'views/components/FormGroup'
 import { Card, CardBody, CardHeader, CardTitle, CardToolbar } from 'views/components/card'
-import { ButtonSubmit } from 'views/components/button'
+import { ButtonRefresh, ButtonSubmit } from 'views/components/button'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'views/components/modal'
 import { apiCustomerList, apiCustomerUpdate } from 'app/services/apiCustomer'
 import { setSelectedCustomer } from 'app/slice/sliceTicket';
@@ -37,7 +37,7 @@ const TicketInformation = () => {
                 name,
                 email,
                 no_ktp,
-                birth:birth?.slice(0, 10),
+                birth: birth?.slice(0, 10),
                 gender,
                 telephone,
                 address
@@ -199,7 +199,9 @@ export const ModalListCustomer = () => {
                     }} />
                 </DataGrid>
             </ModalBody>
-            <ModalFooter />
+            <ModalFooter>
+                <ButtonRefresh onClick={() => dispatch(apiCustomerList())} />
+            </ModalFooter>
         </Modal>
     )
 }

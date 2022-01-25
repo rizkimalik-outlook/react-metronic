@@ -17,7 +17,12 @@ import {
     apiSubCategoryLv3,
     apiSubCategoryLv3Show
 } from 'app/services/apiCategory';
-import TicketPublish from './TicketPublish'
+import {
+    TicketPublish,
+    TicketInteraction,
+    TicketEscalation,
+    TicketAttachment
+} from './index'
 
 const TicketCreateModal = ({ customer }) => {
     const dispatch = useDispatch();
@@ -336,9 +341,15 @@ const TicketCreateModal = ({ customer }) => {
                             </form>
                             <TicketPublish customer={customer} />
                         </div>
-                        <div className="tab-pane fade" id="contentInteractionTicket" role="tabpanel" aria-labelledby="tabInteractionTicket">Tab content 2</div>
-                        <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">Tab content 3</div>
-                        <div className="tab-pane fade" id="contentAttachmentTicket" role="tabpanel" aria-labelledby="tabAttachmentTicket">Tab content 3</div>
+                        <div className="tab-pane fade" id="contentInteractionTicket" role="tabpanel" aria-labelledby="tabInteractionTicket">
+                            <TicketInteraction />
+                        </div>
+                        <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">
+                            <TicketEscalation />
+                        </div>
+                        <div className="tab-pane fade" id="contentAttachmentTicket" role="tabpanel" aria-labelledby="tabAttachmentTicket">
+                            <TicketAttachment />
+                        </div>
                     </div>
                 </div>
             </ModalBody>

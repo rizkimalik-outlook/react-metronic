@@ -5,6 +5,9 @@ import TicketChannel from "./TicketChannel";
 import TicketReporting from "./TicketReporting";
 import TicketInformation from "./TicketInformation";
 import TicketPublish from "./TicketPublish";
+import TicketInteraction from "./TicketInteraction";
+import TicketEscalation from "./TicketEscalation";
+import TicketAttachment from "./TicketAttachment";
 
 export {
     TicketCreateModal,
@@ -14,4 +17,7 @@ export {
     TicketReporting,
     TicketInformation,
     TicketPublish,
+    TicketInteraction,
+    TicketEscalation,
+    TicketAttachment,
 }

@@ -7,7 +7,7 @@ import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card'
 import {
     TicketTransaction,
-    TicketBankAccount,
+    // TicketBankAccount,
     // TicketChannel,
     TicketReporting,
     TicketInformation,
@@ -77,10 +77,10 @@ const TicketMain = () => {
                                 <CardTitle title="Ticket Detail" subtitle="Information Customer Detail." />
                             </CardHeader>
                             <CardBody className="p-4">
-                                {/* <TicketChannel /> */}
                                 <TicketReporting />
-                                <TicketBankAccount />
                                 <TicketTransaction />
+                                {/* <TicketChannel /> */}
+                                {/* <TicketBankAccount /> */}
                             </CardBody>
                         </Card>
                     </section>
