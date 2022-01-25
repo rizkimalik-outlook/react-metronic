@@ -18,6 +18,14 @@ export const apiTicketStore = createAsyncThunk(
     }
 )
 
+export const apiTicketShow = createAsyncThunk(
+    "ticket/apiTicketShow",
+    async ({ ticket_number }) => {
+        const res = await axios.get(`/ticket/show/${ticket_number}`);
+        return res.data;
+    }
+)
+
 export const apiHistoryTransaction = createAsyncThunk(
     "ticket/apiHistoryTransaction",
     async ({ customer_id }) => {
@@ -39,6 +47,14 @@ export const apiDataPublish = createAsyncThunk(
     "ticket/apiDataPublish",
     async ({ customer_id }) => {
         const res = await axios.get(`/ticket/data_publish/${customer_id}`);
+        return res.data;
+    }
+)
+
+export const apiInteraction = createAsyncThunk(
+    "ticket/apiInteraction",
+    async ({ ticket_number }) => {
+        const res = await axios.get(`/ticket/interaction/${ticket_number}`);
         return res.data;
     }
 )

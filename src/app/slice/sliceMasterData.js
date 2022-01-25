@@ -4,6 +4,7 @@ import {
     apiMasterStatus,
     apiMasterUserLevel,
 } from "app/services/apiMasterData";
+import { apiOrganizationList } from "app/services/apiOrganization";
 
 const sliceMasterData = createSlice({
     name: "master",
@@ -11,6 +12,7 @@ const sliceMasterData = createSlice({
         channels: [],
         status: [],
         user_level: [],
+        organizations: [],
     },
     extraReducers: {
         [apiMasterChannel.fulfilled]: (state, action) => {
@@ -21,6 +23,9 @@ const sliceMasterData = createSlice({
         },
         [apiMasterUserLevel.fulfilled]: (state, action) => {
             state.user_level = action.payload.data
+        },
+        [apiOrganizationList.fulfilled]: (state, action) => {
+            state.organizations = action.payload.data
         },
     },
 });

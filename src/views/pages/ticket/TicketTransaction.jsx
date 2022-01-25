@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
-import { apiHistoryTransaction } from 'app/services/apiTicket';
+import { apiHistoryTransaction, apiTicketShow } from 'app/services/apiTicket';
 import Icons from 'views/components/Icons';
 import { ButtonRefresh } from 'views/components/button';
+import { TicketUpdate } from './index';
 
 const TicketTransaction = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const TicketTransaction = () => {
                 <h4>History Transactions</h4>
                 <ButtonRefresh onClick={() => dispatch(apiHistoryTransaction({ customer_id }))} />
             </div>
+            <TicketUpdate />
             <DataGrid
                 dataSource={history_transaction}
                 keyExpr="ticket_number"
@@ -40,7 +42,7 @@ const TicketTransaction = () => {
                     showInfo={true}
                     showNavigationButtons={true} />
                 <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                    return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2">
+                    return <button type="button" onClick={(e) => dispatch(apiTicketShow({ ticket_number: data.value }))} className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                         <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                         {data.value}
                     </button>

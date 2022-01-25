@@ -14,10 +14,6 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/ticket/TicketMain')),
     },{
-        path: 'ticket/create', 
-        exact: false, 
-        component: lazy(() => import('views/pages/ticket/TicketCreate')),
-    },{
         path: 'ticket/history', 
         exact: true, 
         component: lazy(() => import('views/pages/ticket/TicketHistory')),

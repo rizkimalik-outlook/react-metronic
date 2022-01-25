@@ -1,4 +1,5 @@
-import TicketCreateModal from "./TicketCreateModal";
+import TicketCreate from "./TicketCreate";
+import TicketUpdate from "./TicketUpdate";
 import TicketTransaction from "./TicketTransaction";
 import TicketBankAccount from "./TicketBankAccount";
 import TicketChannel from "./TicketChannel";
@@ -10,7 +11,8 @@ import TicketEscalation from "./TicketEscalation";
 import TicketAttachment from "./TicketAttachment";
 
 export {
-    TicketCreateModal,
+    TicketCreate,
+    TicketUpdate,
     TicketTransaction,
     TicketBankAccount,
     TicketChannel,

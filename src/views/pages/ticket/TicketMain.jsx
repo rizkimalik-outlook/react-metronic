@@ -11,7 +11,7 @@ import {
     // TicketChannel,
     TicketReporting,
     TicketInformation,
-    TicketCreateModal,
+    TicketCreate,
 } from './index'
 
 const TicketMain = () => {
@@ -66,7 +66,7 @@ const TicketMain = () => {
                 </button>
             </SubHeader>
             <Container>
-                {customer.customer_id && reporting_customer.cust_email && <TicketCreateModal customer={customer} />}
+                {customer.customer_id && reporting_customer.cust_email && <TicketCreate customer={customer} />}
                 <main className="row">
                     <section className="col-lg-4">
                         <TicketInformation />

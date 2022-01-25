@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
     apiTicketStore,
+    apiTicketShow,
     apiHistoryTransaction,
     apiPublish,
     apiDataPublish,
+    apiInteraction,
 } from "app/services/apiTicket";
 
 const sliceTicket = createSlice({
     name: "ticket",
     initialState: {
         response: {},
+        ticket: {},
         selected_customer: {},
         reporting_customer: {},
         history_transaction: [],
         data_publish: [],
+        interaction: [],
     },
     reducers: {
         setSelectedCustomer: (state, action) => {
@@ -26,6 +30,9 @@ const sliceTicket = createSlice({
     extraReducers: {
         [apiTicketStore.fulfilled]: (state, action) => {
             state.response = action.payload
+        }, 
+        [apiTicketShow.fulfilled]: (state, action) => {
+            state.ticket = action.payload.data
         },
         [apiHistoryTransaction.fulfilled]: (state, action) => {
             state.history_transaction = action.payload.data
@@ -35,6 +42,9 @@ const sliceTicket = createSlice({
         },
         [apiDataPublish.fulfilled]: (state, action) => {
             state.data_publish = action.payload.data
+        },
+        [apiInteraction.fulfilled]: (state, action) => {
+            state.interaction = action.payload.data
         },
     },
 });

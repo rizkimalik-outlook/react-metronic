@@ -11,13 +11,14 @@ import { authUser } from 'app/slice/sliceAuth';
 import { baseUrl } from 'app/config';
 import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
 import { apiMasterUserLevel } from 'app/services/apiMasterData';
+import { apiOrganizationList } from 'app/services/apiOrganization';
 
 
 function UserEdit() {
     let { id } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-    const { user_level } = useSelector(state => state.master)
+    const { user_level, organizations } = useSelector(state => state.master)
     const { token } = useSelector(authUser);
     const { refetch } = useGetUsersQuery();
     const [updateUser] = useUpdateUserMutation();
@@ -25,6 +26,7 @@ function UserEdit() {
 
     useEffect(() => {
         dispatch(apiMasterUserLevel())
+        dispatch(apiOrganizationList())
         async function getShowUser() {
             try {
                 const res = await fetch(`${baseUrl}/user/show/${id}`, {
@@ -178,10 +180,11 @@ function UserEdit() {
                                     <label>Organization:</label>
                                     <select className="form-control" {...register("organization", { required: true })}>
                                         <option value="">-- User Organization --</option>
-                                        <option value="1">Finance</option>
-                                        <option value="2">Technical</option>
-                                        <option value="3">Human Resource</option>
-                                        <option value="4">Marketing</option>
+                                        {
+                                            organizations.map((item) => {
+                                                return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                            })
+                                        }
                                     </select>
                                     {errors.organization && <span className="form-text text-danger">Please select Organization</span>}
                                 </div>

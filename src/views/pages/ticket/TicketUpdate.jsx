@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
@@ -9,7 +9,8 @@ import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
 import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiDataPublish, apiHistoryTransaction, apiPublish, apiTicketStore } from 'app/services/apiTicket'
+import { apiOrganizationList } from 'app/services/apiOrganization'
+import { apiDataPublish, apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
     apiSubCategoryLv1,
@@ -18,38 +19,59 @@ import {
     apiSubCategoryLv3Show
 } from 'app/services/apiCategory';
 import {
-    TicketPublish,
     TicketInteraction,
     TicketEscalation,
     TicketAttachment
 } from './index'
 
-const TicketCreateModal = ({ customer }) => {
+const TicketUpdate = () => {
     const dispatch = useDispatch();
+    const [isInteractionOpen, setInteractionOpen] = useState(false);
     const { username } = useSelector(authUser)
-    const { channels, status } = useSelector(state => state.master);
-    const { reporting_customer } = useSelector(state => state.ticket);
-    const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
+    const { channels, status, organizations } = useSelector(state => state.master);
+    const { reporting_customer, ticket } = useSelector(state => state.ticket);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {
         category,
         category_sublv1,
         category_sublv2,
         category_sublv3,
-        category_sublv3_detail,
     } = useSelector(state => state.category);
 
     useEffect(() => {
-        const { sla, org_id } = category_sublv3_detail;
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
+        dispatch(apiOrganizationList())
+        reset({
+            user_create: ticket.user_create,
+            customer_id: ticket.customer_id,
+            date_create: ticket.date_create,
+            // date_create: (ticket.date_create).replace('T', ' '),
+            ticket_source: ticket.ticket_source,
+            ticket_number: ticket.ticket_number,
+            status: ticket.status,
+            category_id: ticket.category_id,
+            category_sublv1_id: ticket.category_sublv1_id,
+            category_sublv2_id: ticket.category_sublv2_id,
+            category_sublv3_id: ticket.category_sublv3_id,
+            complaint_detail: ticket.complaint_detail,
+            response_detail: ticket.response_detail,
+            sla: ticket.sla,
+            org_id: ticket.org_id,
+            type_customer: ticket.type_customer,
+            priority_scale: ticket.priority_scale,
+            type_complaint: ticket.type_complaint,
+            source_information: ticket.source_information,
+        })
 
-        setValue('user_create', username)
-        setValue('sla', sla)
-        setValue('org_id', org_id)
-    }, [dispatch, setValue, username, category_sublv3_detail]);
+        dispatch(apiSubCategoryLv1({ category_id: ticket.category_id }))
+        dispatch(apiSubCategoryLv2({ category_sublv1_id: ticket.category_sublv1_id }))
+        dispatch(apiSubCategoryLv3({ category_sublv2_id: ticket.category_sublv2_id }))
+        dispatch(apiSubCategoryLv3Show({ category_sublv3_id: ticket.category_sublv3_id }))
+    }, [dispatch, reset, ticket]);
 
-    const onSubmitCreateTicket = async (data) => {
+    const onSubmitUpdateTicket = async (data) => {
         try {
             const data_store = Object.assign({}, data, reporting_customer);
             const { customer_id } = data_store;
@@ -75,28 +97,9 @@ const TicketCreateModal = ({ customer }) => {
         }
     }
 
-    const onSubmitPublish = async () => {
-        const { customer_id } = customer;
-        const { payload } = await dispatch(apiPublish({ customer_id }));
-        if (payload.status === 200) {
-            Swal.fire({
-                title: "Ticket Published.",
-                text: "Success publish ticket!",
-                buttonsStyling: false,
-                icon: "success",
-                confirmButtonText: "Ok",
-                customClass: {
-                    confirmButton: "btn btn-primary"
-                },
-            });
-            dispatch(apiDataPublish({ customer_id }))
-            dispatch(apiHistoryTransaction({ customer_id }))
-        }
-    }
-
     return (
-        <Modal id="modalCreateTicket">
-            <ModalHeader title="Create Ticket" />
+        <Modal id="modalUpdateTicket">
+            <ModalHeader title={`Form Update Ticket - #${ticket.ticket_number}`} />
             <ModalBody>
                 <div className="example-preview">
                     <ul className="nav nav-tabs" id="tablistCreateTicket" role="tablist">
@@ -105,11 +108,11 @@ const TicketCreateModal = ({ customer }) => {
                                 <span className="nav-icon">
                                     <Icons iconName="ticket" className="svg-icon svg-icon-sm" />
                                 </span>
-                                <span className="nav-text">Form Create Ticket</span>
+                                <span className="nav-text">Form Update Ticket</span>
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="tabInteractionTicket" data-toggle="tab" href="#contentInteractionTicket" aria-controls="contentInteractionTicket">
+                            <a onClick={(e) => setInteractionOpen(true)} className="nav-link" id="tabInteractionTicket" data-toggle="tab" href="#contentInteractionTicket" aria-controls="contentInteractionTicket">
                                 <span className="nav-icon">
                                     <Icons iconName="substract" className="svg-icon svg-icon-sm" />
                                 </span>
@@ -136,8 +139,9 @@ const TicketCreateModal = ({ customer }) => {
 
                     <div className="tab-content mt-5" id="contentCreateTicket">
                         <div className="tab-pane fade active show" id="contentFormCreateTicket" role="tabpanel" aria-labelledby="tabFormCreateTicket">
-                            <form onSubmit={handleSubmit(onSubmitCreateTicket)}>
-                                <input type="hidden" value={customer.customer_id} {...register("customer_id", { required: true })} />
+                            <form onSubmit={handleSubmit(onSubmitUpdateTicket)} id="formUpdateTicket">
+                                <input type="hidden" {...register("customer_id", { required: true })} />
+                                <input type="hidden" {...register("ticket_number", { required: true })} />
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <FormGroup label="Date Transaction">
@@ -151,7 +155,7 @@ const TicketCreateModal = ({ customer }) => {
                                     <div className="col-lg-6"></div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Channel">
-                                            <select className="form-control" {...register("ticket_source", { required: true })}>
+                                            <select className="form-control" {...register("ticket_source", { required: true })} disabled>
                                                 <option value="">-- select channel --</option>
                                                 {
                                                     channels.map((item) => {
@@ -166,12 +170,12 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row my-5">
                                     <div className="col-lg-3">
                                         <FormGroup label="Agent Name">
-                                            <input type="text" {...register("user_create", { required: true })} className="form-control form-control-md" readOnly />
+                                            <input type="text" {...register("user_create", { required: true })} className="form-control form-control-md" disabled />
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Priority Scale">
-                                            <select {...register("priority_scale", { required: true })} className="form-control form-control-md">
+                                            <select {...register("priority_scale", { required: true })} className="form-control form-control-md" disabled>
                                                 <option value="">-- select priority scale --</option>
                                                 <option value="High"> High</option>
                                                 <option value="Medium"> Medium</option>
@@ -182,7 +186,7 @@ const TicketCreateModal = ({ customer }) => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Customer">
-                                            <select {...register("type_customer", { required: true })} className="form-control form-control-md " >
+                                            <select {...register("type_customer", { required: true })} className="form-control form-control-md " disabled>
                                                 <option value="">-- select type --</option>
                                                 <option value="Personal">Personal</option>
                                                 <option value="Company">Company</option>
@@ -194,7 +198,7 @@ const TicketCreateModal = ({ customer }) => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Source Information">
-                                            <select {...register("source_information", { required: true })} className="form-control form-control-md">
+                                            <select {...register("source_information", { required: true })} className="form-control form-control-md" disabled>
                                                 <option value="">-- select source --</option>
                                                 <option value="Call"> Call</option>
                                                 <option value="E-mail"> E-mail</option>
@@ -209,7 +213,8 @@ const TicketCreateModal = ({ customer }) => {
                                             <select
                                                 {...register("category_id", { required: true })}
                                                 className="form-control form-control-md"
-                                                onChange={(e) => dispatch(apiSubCategoryLv1({ category_id: e.target.value }))}
+                                                // onChange={(e) => dispatch(apiSubCategoryLv1({ category_id: e.target.value }))}
+                                                disabled
                                             >
                                                 <option value="">-- select category --</option>
                                                 {
@@ -226,7 +231,8 @@ const TicketCreateModal = ({ customer }) => {
                                             <select
                                                 {...register("category_sublv1_id", { required: true })}
                                                 className="form-control form-control-md"
-                                                onChange={(e) => dispatch(apiSubCategoryLv2({ category_sublv1_id: e.target.value }))}
+                                                // onChange={(e) => dispatch(apiSubCategoryLv2({ category_sublv1_id: e.target.value }))}
+                                                disabled
                                             >
                                                 <option value="">-- select subcategory product --</option>
                                                 {
@@ -243,7 +249,8 @@ const TicketCreateModal = ({ customer }) => {
                                             <select
                                                 {...register("category_sublv2_id", { required: true })}
                                                 className="form-control form-control-md"
-                                                onChange={(e) => dispatch(apiSubCategoryLv3({ category_sublv2_id: e.target.value }))}
+                                                // onChange={(e) => dispatch(apiSubCategoryLv3({ category_sublv2_id: e.target.value }))}
+                                                disabled
                                             >
                                                 <option value="">-- select subcategory case --</option>
                                                 {
@@ -260,7 +267,8 @@ const TicketCreateModal = ({ customer }) => {
                                             <select
                                                 {...register("category_sublv3_id", { required: true })}
                                                 className="form-control form-control-md"
-                                                onChange={(e) => dispatch(apiSubCategoryLv3Show({ category_sublv3_id: e.target.value }))}
+                                                // onChange={(e) => dispatch(apiSubCategoryLv3Show({ category_sublv3_id: e.target.value }))}
+                                                disabled
                                             >
                                                 <option value="">-- select subcategory detail --</option>
                                                 {
@@ -276,7 +284,7 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row my-5">
                                     <div className="col-lg-6">
                                         <FormGroup label="Complaint">
-                                            <textarea {...register("complaint_detail", { required: true })} className="form-control form-control-md" cols="10" rows="4"></textarea>
+                                            <textarea {...register("complaint_detail", { required: true })} className="form-control form-control-md" cols="10" rows="4" disabled></textarea>
                                             {errors.complaint_detail && <span className="form-text text-danger">Please enter complaint</span>}
                                         </FormGroup>
                                     </div>
@@ -290,7 +298,7 @@ const TicketCreateModal = ({ customer }) => {
                                 <div className="row my-5">
                                     <div className="col-lg-3">
                                         <FormGroup label="Type Complaint">
-                                            <select {...register("type_complaint", { required: true })} className="form-control form-control-md ">
+                                            <select {...register("type_complaint", { required: true })} className="form-control form-control-md" disabled>
                                                 <option value="">-- select type --</option>
                                                 <option data-icon="fa fa-edit text-primary" value="Written"> Written</option>
                                                 <option data-icon="fa fa-microphone text-primary" value="Verbal"> Verbal</option>
@@ -313,36 +321,32 @@ const TicketCreateModal = ({ customer }) => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Escalation Unit">
-                                            <select {...register("org_id", { required: true })} className="form-control form-control-md">
+                                            <select {...register("org_id", { required: true })} className="form-control form-control-md" disabled>
                                                 <option value="">-- select Escalation --</option>
-                                                <option value="1">Finance</option>
-                                                <option value="2">Technical</option>
-                                                <option value="3">Human Resource</option>
-                                                <option value="4">Marketing</option>
+                                                {
+                                                    organizations.map((item) => {
+                                                        return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                                    })
+                                                }
                                             </select>
                                             {errors.org_id && <span className="form-text text-danger">Please select Escalation</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="SLA (Days)">
-                                            <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" readOnly />
+                                            <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" disabled />
                                             {errors.sla && <span className="form-text text-danger">Please enter SLA</span>}
                                         </FormGroup>
                                     </div>
                                 </div>
 
                                 <ModalFooter>
-                                    <button onClick={() => onSubmitPublish()} type="button" className="btn btn-info font-weight-bolder btn-sm m-1">
-                                        <Icons iconName="flag" className="svg-icon svg-icon-sm" />
-                                        Publish
-                                    </button>
-                                    <ButtonSubmit />
+                                    {ticket.status !== 'Closed' && <ButtonSubmit />}
                                 </ModalFooter>
                             </form>
-                            <TicketPublish customer={customer} />
                         </div>
                         <div className="tab-pane fade" id="contentInteractionTicket" role="tabpanel" aria-labelledby="tabInteractionTicket">
-                            <TicketInteraction />
+                            <TicketInteraction isInteractionOpen={isInteractionOpen} />
                         </div>
                         <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">
                             <TicketEscalation />
@@ -357,4 +361,4 @@ const TicketCreateModal = ({ customer }) => {
     )
 }
 
-export default TicketCreateModal
+export default TicketUpdate

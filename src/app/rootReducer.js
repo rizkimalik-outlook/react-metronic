@@ -12,6 +12,7 @@ import sliceCustomer from './slice/sliceCustomer';
 import sliceTicket from './slice/sliceTicket';
 import sliceMasterData from './slice/sliceMasterData';
 import sliceCategory from './slice/sliceCategory';
+import sliceOrganization from './slice/sliceOrganization';
 
 const persistConfig = {
     key: 'auth',
@@ -35,6 +36,7 @@ const rootReducer = {
     ticket: sliceTicket.reducer,
     master: sliceMasterData.reducer,
     category: sliceCategory.reducer,
+    organization: sliceOrganization.reducer,
 }
 
 export default rootReducer;

@@ -1,12 +1,29 @@
-import React from 'react'
-import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-const TicketInteraction = () => {
+import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+import { apiInteraction } from 'app/services/apiTicket';
+import { ButtonRefresh } from 'views/components/button';
+
+const TicketInteraction = ({isInteractionOpen}) => {
+    const dispatch = useDispatch();
+    const { interaction, ticket } = useSelector(state => state.ticket);
+
+    useEffect(() => {
+        if (isInteractionOpen === true) {
+            dispatch(apiInteraction({ ticket_number: ticket.ticket_number}))
+        }
+    }, [dispatch, isInteractionOpen, ticket])
+
     return (
         <div className="border rounded p-4 my-2">
+            <div className="d-flex justify-content-between mb-5">
+                <h4>Interaction Ticket </h4>
+                <ButtonRefresh onClick={(e) => dispatch(apiInteraction({ ticket_number: ticket.ticket_number}))} />
+            </div>
             <DataGrid
-                dataSource=""
-                keyExpr="id"
+                dataSource={interaction}
+                keyExpr="user_create"
                 allowColumnReordering={true}
                 allowColumnResizing={true}
                 columnAutoWidth={true}
@@ -23,9 +40,10 @@ const TicketInteraction = () => {
                     showInfo={true}
                     showNavigationButtons={true} />
                 <Column caption="Ticket Number" dataField="ticket_number" />
-                <Column caption="Channel" dataField="channel" />
                 <Column caption="Status" dataField="status" />
+                <Column caption="Channel" dataField="channel" />
                 <Column caption="User Create" dataField="user_create" />
+                <Column caption="Response Detail" dataField="response_complaint" />
                 <Column caption="Datetime" dataField="created_at" />
             </DataGrid>
         </div>
