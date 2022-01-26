@@ -26,7 +26,7 @@ const TicketCreate = ({ customer }) => {
     const dispatch = useDispatch();
     const { username } = useSelector(authUser)
     const { channels, status, organizations } = useSelector(state => state.master);
-    const { reporting_customer } = useSelector(state => state.ticket);
+    const { reporting_customer, data_publish } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const {
         category,
@@ -35,16 +35,16 @@ const TicketCreate = ({ customer }) => {
         category_sublv3,
         category_sublv3_detail,
     } = useSelector(state => state.category);
-    
+
     useEffect(() => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
         dispatch(apiOrganizationList())
-
+        dispatch(apiDataPublish({ customer_id: customer.customer_id }))
         setValue('user_create', username)
-    }, [dispatch, setValue, username]);
-    
+    }, [dispatch, setValue, username, customer]);
+
     useEffect(() => {
         setValue('sla', category_sublv3_detail?.sla)
         setValue('org_id', category_sublv3_detail?.org_id)
@@ -298,12 +298,12 @@ const TicketCreate = ({ customer }) => {
                     <ModalFooter>
                         <button onClick={() => onSubmitPublish()} type="button" className="btn btn-info font-weight-bolder btn-sm m-1">
                             <Icons iconName="flag" className="svg-icon svg-icon-sm" />
-                            Publish
+                            Publish Ticket
                         </button>
                         <ButtonSubmit />
                     </ModalFooter>
                 </form>
-                <TicketPublish customer={customer} />
+                {data_publish.length > 0 && <TicketPublish customer={customer} />}
             </ModalBody>
         </Modal>
     )

@@ -47,7 +47,6 @@ const TicketUpdate = () => {
             user_create: ticket.user_create,
             customer_id: ticket.customer_id,
             date_create: ticket.date_create,
-            // date_create: (ticket.date_create).replace('T', ' '),
             ticket_source: ticket.ticket_source,
             ticket_number: ticket.ticket_number,
             status: ticket.status,
