@@ -10,12 +10,12 @@ import {
 const sliceCategory = createSlice({
     name: "category",
     initialState: {
+        response: {},
         category: [],
         category_sublv1: [],
         category_sublv2: [],
         category_sublv3: [],
         category_sublv3_detail: {},
-        response: {},
     },
     extraReducers: {
         [apiCategoryList.fulfilled]: (state, action) => {

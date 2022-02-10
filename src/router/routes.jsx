@@ -6,6 +6,14 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/dashboard/DashboardTicket')),
     },{
+        path: 'category', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/category/CategoryList')),
+    },{
+        path: 'categorysublv1', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1')),
+    },{
         path: 'todolist', 
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
