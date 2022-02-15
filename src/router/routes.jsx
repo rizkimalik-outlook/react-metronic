@@ -14,6 +14,14 @@ const routes = [
         exact: true, 
         component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1')),
     },{
+        path: 'categorysublv1/create', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1Create')),
+    },{
+        path: 'categorysublv1/:category_sublv1_id/edit', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1Edit')),
+    },{
         path: 'todolist', 
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
