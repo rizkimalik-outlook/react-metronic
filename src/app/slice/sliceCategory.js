@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { 
     apiCategoryList, 
+    apiCategoryShow, 
+    apiCategoryStore, 
+    apiCategoryUpdate, 
+    apiCategoryDelete, 
     apiSubCategoryLv1, 
     apiSubCategoryLv1Show, 
     apiSubCategoryLv1Store, 
@@ -25,6 +29,18 @@ const sliceCategory = createSlice({
         //? Category
         [apiCategoryList.fulfilled]: (state, action) => {
             state.category = action.payload.data
+        },
+        [apiCategoryShow.fulfilled]: (state, action) => {
+            state.response = action.payload.data
+        },
+        [apiCategoryStore.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiCategoryUpdate.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiCategoryDelete.fulfilled]: (state, action) => {
+            state.response = action.payload
         },
 
         //? Category LV1
