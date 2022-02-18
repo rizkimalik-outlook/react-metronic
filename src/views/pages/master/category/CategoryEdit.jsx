@@ -37,7 +37,7 @@ const CategoryEdit = () => {
             }
         }
         getSubCategoryLv1Show();
-    }, [category_id, reset]);
+    }, [category_id, dispatch, reset]);
 
 
     const onSubmitEditCategory = async (data) => {

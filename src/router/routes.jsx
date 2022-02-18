@@ -32,6 +32,18 @@ const routes = [
         path: 'categorysublv1/:category_sublv1_id/edit', 
         exact: false, 
         component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1Edit')),
+    },{
+        path: 'categorysublv2', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2')),
+    },{
+        path: 'categorysublv2/create', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2Create')),
+    },{
+        path: 'categorysublv2/:category_sublv2_id/edit', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2Edit')),
     },
     
     //? todolist
