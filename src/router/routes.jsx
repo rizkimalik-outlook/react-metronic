@@ -5,27 +5,44 @@ const routes = [
         path: 'dash_ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/dashboard/DashboardTicket')),
-    },{
+    },
+
+    //? master data
+    {
         path: 'category', 
         exact: true, 
         component: lazy(() => import('views/pages/master/category/CategoryList')),
+    },{
+        path: 'category/create', 
+        exact: false, 
+        component: lazy(() => import('views/pages/master/category/CategoryCreate')),
+    },{
+        path: 'category/:category_id/edit', 
+        exact: false, 
+        component: lazy(() => import('views/pages/master/category/CategoryEdit')),
     },{
         path: 'categorysublv1', 
         exact: true, 
         component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1')),
     },{
         path: 'categorysublv1/create', 
-        exact: true, 
+        exact: false, 
         component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1Create')),
     },{
         path: 'categorysublv1/:category_sublv1_id/edit', 
-        exact: true, 
+        exact: false, 
         component: lazy(() => import('views/pages/master/categorysub1/CategorySubLv1Edit')),
-    },{
+    },
+    
+    //? todolist
+    {
         path: 'todolist', 
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
-    },{
+    },
+    
+    //? ticket
+    {
         path: 'ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/ticket/TicketMain')),
@@ -33,11 +50,17 @@ const routes = [
         path: 'ticket/history', 
         exact: true, 
         component: lazy(() => import('views/pages/ticket/TicketHistory')),
-    },{
+    },
+    
+    //? channels
+    {
         path: 'channel_socmed', 
         exact: true, 
         component: lazy(() => import('views/pages/channel/socmed/SocialMedia')),
-    },{
+    },
+    
+    //? customers
+    {
         path: 'customer', 
         exact: true, 
         component: lazy(() => import('views/pages/customer/CustomerList')),
@@ -49,7 +72,10 @@ const routes = [
         path: 'customer/:customer_id/edit', 
         exact: false, 
         component: lazy(() => import('views/pages/customer/CustomerEdit')),
-    },{
+    },
+    
+    //? setting users, privillage
+    {
         path: 'user', 
         exact: true, 
         component: lazy(() => import('views/pages/user/UserList')),

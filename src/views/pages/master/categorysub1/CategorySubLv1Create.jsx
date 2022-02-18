@@ -20,7 +20,7 @@ const CategorySubLv1Create = () => {
     }, [dispatch])
     
 
-    const onSubmitCreateCategoryProduct = async (data) => {
+    const onSubmitCreateCategoryLv1 = async (data) => {
         try {
             const { payload } = await dispatch(apiSubCategoryLv1Store(data))
             if (payload.status === 200) {
@@ -51,7 +51,7 @@ const CategorySubLv1Create = () => {
                     <CardHeader>
                         <CardTitle title="Form New Category Product" subtitle="Form add new category product." />
                     </CardHeader>
-                    <form onSubmit={handleSubmit(onSubmitCreateCategoryProduct)} className="form">
+                    <form onSubmit={handleSubmit(onSubmitCreateCategoryLv1)} className="form">
                         <CardBody>
                             <div className="form-group row">
                                 <div className="col-lg-12">
@@ -71,7 +71,7 @@ const CategorySubLv1Create = () => {
                                 <div className="col-lg-12">
                                     <label>Category Product Name:</label>
                                     <input type="text" {...register("sub_name", { required: true, maxLength: 100 })} className="form-control" placeholder="Enter category product name" />
-                                    {errors.name && <span className="form-text text-danger">Please enter category product name</span>}
+                                    {errors.sub_name && <span className="form-text text-danger">Please enter category product name</span>}
                                 </div>
                             </div>
                             <div className="form-group row">
