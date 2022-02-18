@@ -1,9 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts';
 
-
-
-
 function General() {
     const chartDom = useRef();
 

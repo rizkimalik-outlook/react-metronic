@@ -57,7 +57,7 @@ local:
 REACT_APP_REST_API = "http://localhost:3001"
 
 server:
-REACT_APP_REST_API = "https://selindo.mendawai.com/api-mendawai/",
+REACT_APP_REST_API = "https://selindo.mendawai.com/api-mendawai",
 ```
 
 
@@ -68,8 +68,8 @@ local:
 "proxy": "http://localhost:3001",
 
 server:
-"homepage": "https://selindo.mendawai.com/app-mendawai/",
-"proxy": "https://selindo.mendawai.com/api-mendawai/",
+"homepage": "https://selindo.mendawai.com/app-mendawai",
+"proxy": "https://selindo.mendawai.com/api-mendawai",
 ```
 
 
