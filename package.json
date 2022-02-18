@@ -1,9 +1,9 @@
 {
   "name": "app-mendawai",
-  "homepage": ".",
+  "homepage": "https://app-mendawai.vercel.app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "https://api-mendawai.herokuapp.com",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.11.4",

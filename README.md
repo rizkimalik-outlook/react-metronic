@@ -68,6 +68,7 @@ local:
 "proxy": "http://localhost:3001",
 
 server:
+"homepage": "https://app-mendawai.vercel.app",
 "homepage": "https://selindo.mendawai.com/app-mendawai",
 "proxy": "https://selindo.mendawai.com/api-mendawai",
 ```
