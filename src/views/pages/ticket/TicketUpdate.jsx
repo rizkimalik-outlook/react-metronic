@@ -226,7 +226,7 @@ const TicketUpdate = () => {
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
-                                        <FormGroup label="SubCategory Product">
+                                        <FormGroup label="Category Product">
                                             <select
                                                 {...register("category_sublv1_id", { required: true })}
                                                 className="form-control form-control-md"
@@ -244,7 +244,7 @@ const TicketUpdate = () => {
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
-                                        <FormGroup label="SubCategory Case">
+                                        <FormGroup label="Category Case">
                                             <select
                                                 {...register("category_sublv2_id", { required: true })}
                                                 className="form-control form-control-md"
@@ -262,7 +262,7 @@ const TicketUpdate = () => {
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
-                                        <FormGroup label="SubCategory Detail">
+                                        <FormGroup label="Category Detail">
                                             <select
                                                 {...register("category_sublv3_id", { required: true })}
                                                 className="form-control form-control-md"
