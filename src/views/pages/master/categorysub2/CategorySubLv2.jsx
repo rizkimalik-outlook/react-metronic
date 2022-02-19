@@ -88,6 +88,7 @@ const CategorySubLv2 = () => {
                             <Column caption="Category" dataField="category_name" />
                             <Column caption="Category Product" dataField="category_sublv1_name" />
                             <Column caption="Category Case" dataField="sub_name" />
+                            <Column caption="Description" dataField="description" />
                         </DataGrid>
                     </CardBody>
                 </Card>

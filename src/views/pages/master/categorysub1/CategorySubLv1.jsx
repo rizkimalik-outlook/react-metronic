@@ -88,6 +88,7 @@ function CategorySubLv1() {
                             }} />
                             <Column caption="Category" dataField="category_name" />
                             <Column caption="Category Product" dataField="sub_name" />
+                            <Column caption="Description" dataField="description" />
                         </DataGrid>
                     </CardBody>
                 </Card>

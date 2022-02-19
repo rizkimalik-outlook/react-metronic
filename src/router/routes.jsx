@@ -38,12 +38,24 @@ const routes = [
         component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2')),
     },{
         path: 'categorysublv2/create', 
-        exact: true, 
+        exact: false, 
         component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2Create')),
     },{
         path: 'categorysublv2/:category_sublv2_id/edit', 
-        exact: true, 
+        exact: false, 
         component: lazy(() => import('views/pages/master/categorysub2/CategorySubLv2Edit')),
+    },{
+        path: 'categorysublv3', 
+        exact: true, 
+        component: lazy(() => import('views/pages/master/categorysub3/CategorySubLv3')),
+    },{
+        path: 'categorysublv3/create', 
+        exact: false, 
+        component: lazy(() => import('views/pages/master/categorysub3/CategorySubLv3Create')),
+    },{
+        path: 'categorysublv3/:category_sublv3_id/edit', 
+        exact: false, 
+        component: lazy(() => import('views/pages/master/categorysub3/CategorySubLv3Edit')),
     },
     
     //? todolist
