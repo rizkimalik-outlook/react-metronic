@@ -29,7 +29,7 @@ export const apiTicketShow = createAsyncThunk(
 export const apiHistoryTransaction = createAsyncThunk(
     "ticket/apiHistoryTransaction",
     async ({ customer_id }) => {
-        const res = await axios.get(`/ticket/history_transaction/${customer_id}`);
+        const res = await axios.get(`/ticket/transaction/${customer_id}`);
         return res.data;
     }
 )
@@ -46,7 +46,7 @@ export const apiPublish = createAsyncThunk(
 export const apiDataPublish = createAsyncThunk(
     "ticket/apiDataPublish",
     async ({ customer_id }) => {
-        const res = await axios.get(`/ticket/data_publish/${customer_id}`);
+        const res = await axios.get(`/ticket/publish/${customer_id}`);
         return res.data;
     }
 )
@@ -55,6 +55,15 @@ export const apiInteraction = createAsyncThunk(
     "ticket/apiInteraction",
     async ({ ticket_number }) => {
         const res = await axios.get(`/ticket/interaction/${ticket_number}`);
+        return res.data;
+    }
+)
+
+export const apiHistoryTicket = createAsyncThunk(
+    "ticket/apiHistoryTicket",
+    async (data) => {
+        // const json = JSON.stringify(data);
+        const res = await axios.post(`/ticket/history`, data);
         return res.data;
     }
 )

@@ -6,6 +6,7 @@ import {
     apiPublish,
     apiDataPublish,
     apiInteraction,
+    apiHistoryTicket,
 } from "app/services/apiTicket";
 
 const sliceTicket = createSlice({
@@ -18,6 +19,7 @@ const sliceTicket = createSlice({
         history_transaction: [],
         data_publish: [],
         interaction: [],
+        history_ticket: [],
     },
     reducers: {
         setSelectedCustomer: (state, action) => {
@@ -45,6 +47,9 @@ const sliceTicket = createSlice({
         },
         [apiInteraction.fulfilled]: (state, action) => {
             state.interaction = action.payload.data
+        },
+        [apiHistoryTicket.fulfilled]: (state, action) => {
+            state.history_ticket = action.payload.data
         },
     },
 });

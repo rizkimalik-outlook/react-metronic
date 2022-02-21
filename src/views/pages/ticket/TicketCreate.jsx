@@ -22,6 +22,7 @@ import {
     TicketPublish,
 } from './index'
 
+
 const TicketCreate = ({ customer }) => {
     const dispatch = useDispatch();
     const { username } = useSelector(authUser)
@@ -37,12 +38,17 @@ const TicketCreate = ({ customer }) => {
     } = useSelector(state => state.category);
 
     useEffect(() => {
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        const datetime = now.toISOString().slice(0,16);
+        
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
         dispatch(apiOrganizationList())
         dispatch(apiDataPublish({ customer_id: customer.customer_id }))
         setValue('user_create', username)
+        setValue('date_create', datetime)
     }, [dispatch, setValue, username, customer]);
 
     useEffect(() => {
