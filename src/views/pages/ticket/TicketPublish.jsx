@@ -37,10 +37,10 @@ const TicketPublish = ({ customer }) => {
                 <Column caption="Ticket Number" dataField="ticket_number" />
                 <Column caption="Channel" dataField="ticket_source" />
                 <Column caption="Status" dataField="status" />
-                <Column caption="Category" dataField="category_id" />
-                <Column caption="SubCategory Product" dataField="category_sublv1_id" />
-                <Column caption="SubCategory Case" dataField="category_sublv2_id" />
-                <Column caption="SubCategory Detail" dataField="category_sublv3_id" />
+                <Column caption="Category" dataField="category_name" />
+                <Column caption="Category Product" dataField="category_sublv1_name" />
+                <Column caption="Category Case" dataField="category_sublv2_name" />
+                <Column caption="Category Detail" dataField="category_sublv3_name" />
                 <Column caption="Complaint Detail" dataField="complaint_detail" />
                 <Column caption="Response Detail" dataField="response_detail" />
             </DataGrid>
