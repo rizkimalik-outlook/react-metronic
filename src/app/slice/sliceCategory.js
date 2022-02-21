@@ -11,8 +11,15 @@ import {
     apiSubCategoryLv1Update, 
     apiSubCategoryLv1Delete, 
     apiSubCategoryLv2,
+    apiSubCategoryLv2Show, 
+    apiSubCategoryLv2Store, 
+    apiSubCategoryLv2Update, 
+    apiSubCategoryLv2Delete, 
     apiSubCategoryLv3,
-    apiSubCategoryLv3Show
+    apiSubCategoryLv3Show, 
+    apiSubCategoryLv3Store, 
+    apiSubCategoryLv3Update, 
+    apiSubCategoryLv3Delete
 } from "app/services/apiCategory";
 
 const sliceCategory = createSlice({
@@ -64,6 +71,18 @@ const sliceCategory = createSlice({
         [apiSubCategoryLv2.fulfilled]: (state, action) => {
             state.category_sublv2 = action.payload.data
         },
+        [apiSubCategoryLv2Show.fulfilled]: (state, action) => {
+            state.response = action.payload.data
+        },
+        [apiSubCategoryLv2Store.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiSubCategoryLv2Update.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiSubCategoryLv2Delete.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
 
         //? Category LV3
         [apiSubCategoryLv3.fulfilled]: (state, action) => {
@@ -71,6 +90,16 @@ const sliceCategory = createSlice({
         },
         [apiSubCategoryLv3Show.fulfilled]: (state, action) => {
             state.category_sublv3_detail = action.payload.data[0]
+            state.response = action.payload.data
+        },
+        [apiSubCategoryLv3Store.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiSubCategoryLv3Update.fulfilled]: (state, action) => {
+            state.response = action.payload
+        },
+        [apiSubCategoryLv3Delete.fulfilled]: (state, action) => {
+            state.response = action.payload
         },
     },
 });

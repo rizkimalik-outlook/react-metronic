@@ -36,8 +36,8 @@ export const apiCategoryUpdate = createAsyncThunk(
 
 export const apiCategoryDelete = createAsyncThunk(
     "category/apiCategoryDelete",
-    async ({ customer_id }) => {
-        const res = await axios.delete(`/category/delete/${customer_id}`);
+    async ({ category_id }) => {
+        const res = await axios.delete(`/category/delete/${category_id}`);
         return res.data;
     }
 )
@@ -94,6 +94,38 @@ export const apiSubCategoryLv2 = createAsyncThunk(
     }
 )
 
+export const apiSubCategoryLv2Show = createAsyncThunk(
+    "category/apiSubCategoryLv2Show",
+    async ({ category_sublv2_id }) => {
+        const res = await axios.get(`/categorysublv2/show/${category_sublv2_id}`);
+        return res.data;
+    }
+)
+
+export const apiSubCategoryLv2Store = createAsyncThunk(
+    "category/apiSubCategoryLv2Store",
+    async (data) => {
+        const res = await axios.post(`/categorysublv2/store`, data);
+        return res.data;
+    }
+)
+
+export const apiSubCategoryLv2Update = createAsyncThunk(
+    "category/apiSubCategoryLv2Update",
+    async (data) => {
+        const res = await axios.put('/categorysublv2/update', data);
+        return res.data;
+    }
+)
+
+export const apiSubCategoryLv2Delete = createAsyncThunk(
+    "category/apiSubCategoryLv2Delete",
+    async ({ category_sublv2_id }) => {
+        const res = await axios.delete(`/categorysublv2/delete/${category_sublv2_id}`);
+        return res.data;
+    }
+)
+
 //? sub-catgory lv3
 export const apiSubCategoryLv3 = createAsyncThunk(
     "category/apiSubCategoryLv3",
@@ -102,10 +134,36 @@ export const apiSubCategoryLv3 = createAsyncThunk(
         return res.data;
     }
 )
+
 export const apiSubCategoryLv3Show = createAsyncThunk(
-    "customer/apiSubCategoryLv3Show",
+    "category/apiSubCategoryLv3Show",
     async ({ category_sublv3_id }) => {
         const res = await axios.get(`/categorysublv3/show/${category_sublv3_id}`);
         return res.data;
     }
 )
+
+export const apiSubCategoryLv3Store = createAsyncThunk(
+    "category/apiSubCategoryLv3Store",
+    async (data) => {
+        const res = await axios.post(`/categorysublv3/store`, data);
+        return res.data;
+    }
+)
+
+export const apiSubCategoryLv3Update = createAsyncThunk(
+    "category/apiSubCategoryLv3Update",
+    async (data) => {
+        const res = await axios.put('/categorysublv3/update', data);
+        return res.data;
+    }
+)
+
+export const apiSubCategoryLv3Delete = createAsyncThunk(
+    "category/apiSubCategoryLv3Delete",
+    async ({ category_sublv3_id }) => {
+        const res = await axios.delete(`/categorysublv3/delete/${category_sublv3_id}`);
+        return res.data;
+    }
+)
+
