@@ -2,9 +2,9 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from "redux";
 
-import { auth } from './services/apiAuth';
-import { user } from './services/apiUser';
-import { menu_access } from './services/apiMenu';
+import auth from './services/apiAuth';
+import user from './services/apiUser';
+import menu_access from './services/apiMenu';
 import sliceAuth from './slice/sliceAuth';
 import sliceSosmed from './slice/sliceSosmed';
 import sliceMenu from './slice/sliceMenu';

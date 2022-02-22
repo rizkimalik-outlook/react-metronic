@@ -37,3 +37,4 @@ export const {
     useLogoutMutation,
     useUserSocketMutation
 } = auth;
+export default auth;
