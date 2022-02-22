@@ -155,7 +155,7 @@ const TicketHistory = () => {
                         showInfo={true}
                         showNavigationButtons={true} />
                     <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                        return <button type="button" /* onClick={(e) => dispatch(apiTicketShow({ ticket_number: data.value }))} */ className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
+                        return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                             <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                             {data.value}
                         </button>
@@ -170,7 +170,8 @@ const TicketHistory = () => {
                     <Column caption="Category Case" dataField="category_sublv2_name" />
                     <Column caption="Category Detail" dataField="category_sublv3_name" />
                     <Column caption="SLA (Days)" dataField="sla" />
-                    <Column caption="Department" dataField="organization_name" />
+                    <Column caption="Organization" dataField="organization_name" />
+                    <Column caption="Department" dataField="department_name" />
                     <Column caption="Complaint Detail" dataField="complaint_detail" />
                     <Column caption="Response Detail" dataField="response_detail" />
                 </DataGrid>

@@ -8,8 +8,7 @@ import { ButtonSubmit } from 'views/components/button'
 import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
-import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiOrganizationList } from 'app/services/apiOrganization'
+import { apiDepartment, apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { apiDataPublish, apiHistoryTransaction, apiPublish, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
@@ -25,8 +24,8 @@ import {
 
 const TicketCreate = ({ customer }) => {
     const dispatch = useDispatch();
-    const { username } = useSelector(authUser)
-    const { channels, status, organizations } = useSelector(state => state.master);
+    const { username, organization } = useSelector(authUser)
+    const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, data_publish } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const {
@@ -40,12 +39,12 @@ const TicketCreate = ({ customer }) => {
     useEffect(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        const datetime = now.toISOString().slice(0,16);
-        
+        const datetime = now.toISOString().slice(0, 16);
+
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
-        dispatch(apiOrganizationList())
+        dispatch(apiDepartment())
         dispatch(apiDataPublish({ customer_id: customer.customer_id }))
         setValue('user_create', username)
         setValue('date_create', datetime)
@@ -53,7 +52,7 @@ const TicketCreate = ({ customer }) => {
 
     useEffect(() => {
         setValue('sla', category_sublv3_detail?.sla)
-        setValue('org_id', category_sublv3_detail?.org_id)
+        setValue('department_id', category_sublv3_detail?.department_id)
     }, [setValue, category_sublv3_detail]);
 
     const onSubmitCreateTicket = async (data) => {
@@ -107,6 +106,7 @@ const TicketCreate = ({ customer }) => {
             <ModalBody>
                 <form onSubmit={handleSubmit(onSubmitCreateTicket)} id="formCreateTicket">
                     <input type="hidden" value={customer.customer_id} {...register("customer_id", { required: true })} />
+                    <input type="hidden" value={organization} {...register("org_id", { required: true })} />
                     <div className="row">
                         <div className="col-lg-3">
                             <FormGroup label="Date Transaction">
@@ -282,15 +282,15 @@ const TicketCreate = ({ customer }) => {
                         </div>
                         <div className="col-lg-3">
                             <FormGroup label="Escalation Unit">
-                                <select {...register("org_id", { required: true })} className="form-control form-control-md">
+                                <select {...register("department_id", { required: true })} className="form-control form-control-md">
                                     <option value="">-- select Escalation --</option>
                                     {
-                                        organizations.map((item) => {
-                                            return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                        departments.map((item) => {
+                                            return <option value={item.id} key={item.id}>{item.department_name}</option>
                                         })
                                     }
                                 </select>
-                                {errors.org_id && <span className="form-text text-danger">Please select Escalation</span>}
+                                {errors.department_id && <span className="form-text text-danger">Please select Escalation</span>}
                             </FormGroup>
                         </div>
                         <div className="col-lg-3">

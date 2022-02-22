@@ -8,7 +8,6 @@ function UserDetail(props) {
     const items = [
         'max_concurrent', 
         'aux', 
-        'organization', 
         'max_queue', 
         'facebook', 
         'twitter', 

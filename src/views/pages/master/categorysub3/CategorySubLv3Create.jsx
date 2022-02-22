@@ -8,19 +8,19 @@ import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 import { apiCategoryList, apiSubCategoryLv1, apiSubCategoryLv2, apiSubCategoryLv3Store } from 'app/services/apiCategory'
-import { apiOrganizationList } from 'app/services/apiOrganization';
+import { apiDepartment } from 'app/services/apiMasterData';
 
 const CategorySubLv3Create = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { category, category_sublv1, category_sublv2 } = useSelector(state => state.category);
-    const { organizations } = useSelector(state => state.master)
+    const { departments } = useSelector(state => state.master)
 
 
     useEffect(() => {
         dispatch(apiCategoryList())
-        dispatch(apiOrganizationList())
+        dispatch(apiDepartment())
     }, [dispatch])
 
 
@@ -113,16 +113,16 @@ const CategorySubLv3Create = () => {
                                     {errors.sla && <span className="form-text text-danger">Please enter sla.</span>}
                                 </div>
                                 <div className="col-lg-6">
-                                    <label>Organization:</label>
-                                    <select className="form-control" {...register("org_id", { required: true })}>
-                                        <option value="">-- User Organization --</option>
+                                    <label>Department:</label>
+                                    <select className="form-control" {...register("department_id", { required: true })}>
+                                        <option value="">-- Select Department --</option>
                                         {
-                                            organizations.map((item) => {
-                                                return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                            departments.map((item) => {
+                                                return <option value={item.id} key={item.id}>{item.department_name}</option>
                                             })
                                         }
                                     </select>
-                                    {errors.org_id && <span className="form-text text-danger">Please select Organization</span>}
+                                    {errors.department_id && <span className="form-text text-danger">Please select Department</span>}
                                 </div>
                             </div>
                             <div className="form-group row">

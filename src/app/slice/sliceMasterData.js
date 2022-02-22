@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+    apiDepartment,
     apiMasterChannel,
     apiMasterStatus,
     apiMasterUserLevel,
+    apiOrganization,
 } from "app/services/apiMasterData";
-import { apiOrganizationList } from "app/services/apiOrganization";
 
 const sliceMasterData = createSlice({
     name: "master",
@@ -13,6 +14,7 @@ const sliceMasterData = createSlice({
         status: [],
         user_level: [],
         organizations: [],
+        departments: [],
     },
     extraReducers: {
         [apiMasterChannel.fulfilled]: (state, action) => {
@@ -24,8 +26,11 @@ const sliceMasterData = createSlice({
         [apiMasterUserLevel.fulfilled]: (state, action) => {
             state.user_level = action.payload.data
         },
-        [apiOrganizationList.fulfilled]: (state, action) => {
+        [apiOrganization.fulfilled]: (state, action) => {
             state.organizations = action.payload.data
+        },
+        [apiDepartment.fulfilled]: (state, action) => {
+            state.departments = action.payload.data
         },
     },
 });

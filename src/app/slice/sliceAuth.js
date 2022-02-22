@@ -6,6 +6,8 @@ const initialState = {
     username: '',
     token: '',
     user_level: '',
+    organization: '',
+    department: '',
     email_address: '',
 }
 
@@ -19,6 +21,8 @@ const authSlice = createSlice({
             state.token = action.payload.token;
             state.username = action.payload.username;
             state.user_level = action.payload.user_level;
+            state.organization = action.payload.organization;
+            state.department = action.payload.department;
             state.email_address = action.payload.email_address;
         }
     },

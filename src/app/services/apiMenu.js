@@ -69,7 +69,7 @@ export const {
     useCreateMenuAccessMutation,
     useDeleteMenuAccessMutation,
 } = menu_access;
-
+export default menu_access;
 
 // export const getMenuAccess = async (user_level) => {
 //     const res = await axios.post('/menu_access', {

@@ -10,15 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authUser } from 'app/slice/sliceAuth';
 import { baseUrl } from 'app/config';
 import { useGetUsersQuery, useUpdateUserMutation } from 'app/services/apiUser';
-import { apiMasterUserLevel } from 'app/services/apiMasterData';
-import { apiOrganizationList } from 'app/services/apiOrganization';
+import { apiDepartment, apiMasterUserLevel, apiOrganization } from 'app/services/apiMasterData';
 
 
 function UserEdit() {
     let { id } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-    const { user_level, organizations } = useSelector(state => state.master)
+    const { user_level, organizations, departments } = useSelector(state => state.master)
     const { token } = useSelector(authUser);
     const { refetch } = useGetUsersQuery();
     const [updateUser] = useUpdateUserMutation();
@@ -26,7 +25,8 @@ function UserEdit() {
 
     useEffect(() => {
         dispatch(apiMasterUserLevel())
-        dispatch(apiOrganizationList())
+        dispatch(apiOrganization())
+        dispatch(apiDepartment())
         async function getShowUser() {
             try {
                 const res = await fetch(`${baseUrl}/user/show/${id}`, {
@@ -44,6 +44,7 @@ function UserEdit() {
                     password,
                     user_level,
                     organization,
+                    department,
                     inbound,
                     outbound,
                     sms,
@@ -74,6 +75,7 @@ function UserEdit() {
                     password,
                     user_level,
                     organization,
+                    department,
                     inbound,
                     outbound,
                     sms,
@@ -164,10 +166,10 @@ function UserEdit() {
                             </div>
 
                             <div className="form-group row">
-                                <div className="col-lg-6">
+                                <div className="col-lg-4">
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
-                                        <option>-- User Level --</option>
+                                        <option value="">-- User Level --</option>
                                         {
                                             user_level?.map((item) => {
                                                 return <option value={item.level_name} key={item.id}>{item.level_name}</option>
@@ -176,9 +178,9 @@ function UserEdit() {
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
-                                <div className="col-lg-6">
-                                    <label>Organization:</label>
-                                    <select className="form-control" {...register("organization", { required: true })}>
+                                <div className="col-lg-4">
+                                    <label>Organization (L1, L2):</label>
+                                    <select className="form-control" {...register("organization")}>
                                         <option value="">-- User Organization --</option>
                                         {
                                             organizations.map((item) => {
@@ -188,7 +190,18 @@ function UserEdit() {
                                     </select>
                                     {errors.organization && <span className="form-text text-danger">Please select Organization</span>}
                                 </div>
-
+                                <div className="col-lg-4">
+                                    <label>Department (L3):</label>
+                                    <select className="form-control" {...register("department")}>
+                                        <option value="">-- Select Department --</option>
+                                        {
+                                            departments.map((item) => {
+                                                return <option value={item.id} key={item.id}>{item.department_name}</option>
+                                            })
+                                        }
+                                    </select>
+                                    {errors.department && <span className="form-text text-danger">Please select Department</span>}
+                                </div>
                             </div>
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">

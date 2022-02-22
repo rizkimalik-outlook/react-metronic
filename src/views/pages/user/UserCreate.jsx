@@ -4,24 +4,24 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ButtonCancel, ButtonSubmit } from 'views/components/button';
 import { SubHeader, MainContent, Container } from 'views/layouts/partials';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from 'views/components/card';
 import { useGetUsersQuery, useCreateUserMutation } from 'app/services/apiUser';
-import { apiMasterUserLevel } from 'app/services/apiMasterData';
-import { ButtonCancel, ButtonSubmit } from 'views/components/button';
-import { apiOrganizationList } from 'app/services/apiOrganization';
+import { apiDepartment, apiMasterUserLevel, apiOrganization } from 'app/services/apiMasterData';
 
 function UserCreate() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { user_level, organizations } = useSelector(state => state.master)
+    const { user_level, organizations, departments } = useSelector(state => state.master)
     const { refetch } = useGetUsersQuery();
     const [createUser] = useCreateUserMutation();
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     useEffect(() => {
         dispatch(apiMasterUserLevel())
-        dispatch(apiOrganizationList())
+        dispatch(apiOrganization())
+        dispatch(apiDepartment())
     }, [dispatch]);
 
     const onSubmitCreateUser = async (data) => {
@@ -83,7 +83,7 @@ function UserCreate() {
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <div className="col-lg-6">
+                                <div className="col-lg-4">
                                     <label>User Level:</label>
                                     <select className="form-control" {...register("user_level", { required: true })}>
                                         <option value="">-- User Level --</option>
@@ -95,9 +95,9 @@ function UserCreate() {
                                     </select>
                                     {errors.user_level && <span className="form-text text-danger">Please enter User Level</span>}
                                 </div>
-                                <div className="col-lg-6">
-                                    <label>Organization:</label>
-                                    <select className="form-control" {...register("organization", { required: true })}>
+                                <div className="col-lg-4">
+                                    <label>Organization (L1, L2):</label>
+                                    <select className="form-control" {...register("organization")}>
                                         <option value="">-- User Organization --</option>
                                         {
                                             organizations.map((item) => {
@@ -107,7 +107,18 @@ function UserCreate() {
                                     </select>
                                     {errors.organization && <span className="form-text text-danger">Please select Organization</span>}
                                 </div>
-
+                                <div className="col-lg-4">
+                                    <label>Department (L3):</label>
+                                    <select className="form-control" {...register("department")}>
+                                        <option value="">-- Select Department --</option>
+                                        {
+                                            departments.map((item) => {
+                                                return <option value={item.id} key={item.id}>{item.department_name}</option>
+                                            })
+                                        }
+                                    </select>
+                                    {errors.department && <span className="form-text text-danger">Please select Department</span>}
+                                </div>
                             </div>
                             <div className="separator separator-dashed my-5" />
                             <div className="form-group row">

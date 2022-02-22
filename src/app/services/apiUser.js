@@ -81,3 +81,4 @@ export const {
     useDeleteUserMutation,
     useResetPasswordMutation,
 } = user;
+export default user;

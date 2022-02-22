@@ -28,7 +28,7 @@ const TicketUpdate = () => {
     const dispatch = useDispatch();
     const [isInteractionOpen, setInteractionOpen] = useState(false);
     const { username } = useSelector(authUser)
-    const { channels, status, organizations } = useSelector(state => state.master);
+    const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, ticket } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {
@@ -58,6 +58,7 @@ const TicketUpdate = () => {
             response_detail: ticket.response_detail,
             sla: ticket.sla,
             org_id: ticket.org_id,
+            department_id: ticket.department_id,
             type_customer: ticket.type_customer,
             priority_scale: ticket.priority_scale,
             type_complaint: ticket.type_complaint,
@@ -141,6 +142,7 @@ const TicketUpdate = () => {
                             <form onSubmit={handleSubmit(onSubmitUpdateTicket)} id="formUpdateTicket">
                                 <input type="hidden" {...register("customer_id", { required: true })} />
                                 <input type="hidden" {...register("ticket_number", { required: true })} />
+                                <input type="hidden" {...register("org_id", { required: true })} />
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <FormGroup label="Date Transaction">
@@ -320,15 +322,15 @@ const TicketUpdate = () => {
                                     </div>
                                     <div className="col-lg-3">
                                         <FormGroup label="Escalation Unit">
-                                            <select {...register("org_id", { required: true })} className="form-control form-control-md" disabled>
+                                            <select {...register("department_id", { required: true })} className="form-control form-control-md">
                                                 <option value="">-- select Escalation --</option>
                                                 {
-                                                    organizations.map((item) => {
-                                                        return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                                    departments.map((item) => {
+                                                        return <option value={item.id} key={item.id}>{item.department_name}</option>
                                                     })
                                                 }
                                             </select>
-                                            {errors.org_id && <span className="form-text text-danger">Please select Escalation</span>}
+                                            {errors.department_id && <span className="form-text text-danger">Please select Escalation</span>}
                                         </FormGroup>
                                     </div>
                                     <div className="col-lg-3">
