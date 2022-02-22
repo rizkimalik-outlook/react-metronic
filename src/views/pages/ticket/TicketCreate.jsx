@@ -40,8 +40,8 @@ const TicketCreate = ({ customer }) => {
     useEffect(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        const datetime = now.toISOString().slice(0,16);
-        
+        const datetime = now.toISOString().slice(0, 16);
+
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())

@@ -132,6 +132,8 @@ function UserList() {
                             <Column caption="Name" dataField="name" />
                             <Column caption="Email" dataField="email_address" />
                             <Column caption="Level" dataField="user_level" />
+                            <Column caption="Organization (Unit Agent)" dataField="organization_name" />
+                            <Column caption="Department (Unit Case)" dataField="department_name" />
                         </DataGrid>
                     </CardBody>
                 </Card>

@@ -24,3 +24,19 @@ export const apiMasterUserLevel = createAsyncThunk(
         return res.data;
     }
 )
+
+export const apiOrganization = createAsyncThunk(
+    "master/apiOrganization",
+    async () => {
+        const res = await axios.get('/organization');
+        return res.data;
+    }
+)
+
+export const apiDepartment = createAsyncThunk(
+    "master/apiDepartment",
+    async () => {
+        const res = await axios.get('/department');
+        return res.data;
+    }
+)
