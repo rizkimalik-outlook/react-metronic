@@ -24,7 +24,7 @@ import {
 
 const TicketCreate = ({ customer }) => {
     const dispatch = useDispatch();
-    const { username } = useSelector(authUser)
+    const { username, organization } = useSelector(authUser)
     const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, data_publish } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
@@ -52,7 +52,7 @@ const TicketCreate = ({ customer }) => {
 
     useEffect(() => {
         setValue('sla', category_sublv3_detail?.sla)
-        setValue('org_id', category_sublv3_detail?.org_id)
+        setValue('department_id', category_sublv3_detail?.department_id)
     }, [setValue, category_sublv3_detail]);
 
     const onSubmitCreateTicket = async (data) => {
@@ -106,6 +106,7 @@ const TicketCreate = ({ customer }) => {
             <ModalBody>
                 <form onSubmit={handleSubmit(onSubmitCreateTicket)} id="formCreateTicket">
                     <input type="hidden" value={customer.customer_id} {...register("customer_id", { required: true })} />
+                    <input type="hidden" value={organization} {...register("org_id", { required: true })} />
                     <div className="row">
                         <div className="col-lg-3">
                             <FormGroup label="Date Transaction">
@@ -281,7 +282,7 @@ const TicketCreate = ({ customer }) => {
                         </div>
                         <div className="col-lg-3">
                             <FormGroup label="Escalation Unit">
-                                <select {...register("org_id", { required: true })} className="form-control form-control-md">
+                                <select {...register("department_id", { required: true })} className="form-control form-control-md">
                                     <option value="">-- select Escalation --</option>
                                     {
                                         departments.map((item) => {
@@ -289,7 +290,7 @@ const TicketCreate = ({ customer }) => {
                                         })
                                     }
                                 </select>
-                                {errors.org_id && <span className="form-text text-danger">Please select Escalation</span>}
+                                {errors.department_id && <span className="form-text text-danger">Please select Escalation</span>}
                             </FormGroup>
                         </div>
                         <div className="col-lg-3">
