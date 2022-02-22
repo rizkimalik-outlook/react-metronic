@@ -8,8 +8,7 @@ import { ButtonSubmit } from 'views/components/button'
 import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
-import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiOrganizationList } from 'app/services/apiOrganization'
+import { apiDepartment, apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { apiDataPublish, apiHistoryTransaction, apiPublish, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
@@ -26,7 +25,7 @@ import {
 const TicketCreate = ({ customer }) => {
     const dispatch = useDispatch();
     const { username } = useSelector(authUser)
-    const { channels, status, organizations } = useSelector(state => state.master);
+    const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, data_publish } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const {
@@ -45,7 +44,7 @@ const TicketCreate = ({ customer }) => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
-        dispatch(apiOrganizationList())
+        dispatch(apiDepartment())
         dispatch(apiDataPublish({ customer_id: customer.customer_id }))
         setValue('user_create', username)
         setValue('date_create', datetime)
@@ -285,8 +284,8 @@ const TicketCreate = ({ customer }) => {
                                 <select {...register("org_id", { required: true })} className="form-control form-control-md">
                                     <option value="">-- select Escalation --</option>
                                     {
-                                        organizations.map((item) => {
-                                            return <option value={item.id} key={item.id}>{item.organization_name}</option>
+                                        departments.map((item) => {
+                                            return <option value={item.id} key={item.id}>{item.department_name}</option>
                                         })
                                     }
                                 </select>
