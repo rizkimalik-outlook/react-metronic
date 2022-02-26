@@ -297,17 +297,7 @@ const TicketUpdate = () => {
                                     </div>
                                 </div>
                                 <div className="row my-5">
-                                    <div className="col-lg-3">
-                                        <FormGroup label="Type Complaint">
-                                            <select {...register("type_complaint", { required: true })} className="form-control form-control-md" disabled>
-                                                <option value="">-- select type --</option>
-                                                <option data-icon="fa fa-edit text-primary" value="Written"> Written</option>
-                                                <option data-icon="fa fa-microphone text-primary" value="Verbal"> Verbal</option>
-                                            </select>
-                                            {errors.type_complaint && <span className="form-text text-danger">Please select type</span>}
-                                        </FormGroup>
-                                    </div>
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-4">
                                         <FormGroup label="Ticket Status">
                                             <select className="form-control form-control-md" {...register("status", { required: true })}>
                                                 <option value="">-- select status --</option>
@@ -320,7 +310,7 @@ const TicketUpdate = () => {
                                             {errors.status && <span className="form-text text-danger">Please select status</span>}
                                         </FormGroup>
                                     </div>
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-4">
                                         <FormGroup label="Escalation Unit">
                                             <select {...register("department_id", { required: true })} className="form-control form-control-md">
                                                 <option value="">-- select Escalation --</option>
@@ -333,7 +323,7 @@ const TicketUpdate = () => {
                                             {errors.department_id && <span className="form-text text-danger">Please select Escalation</span>}
                                         </FormGroup>
                                     </div>
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-4">
                                         <FormGroup label="SLA (Days)">
                                             <input type="number" {...register("sla", { required: true })} className="form-control form-control-md" disabled />
                                             {errors.sla && <span className="form-text text-danger">Please enter SLA</span>}
