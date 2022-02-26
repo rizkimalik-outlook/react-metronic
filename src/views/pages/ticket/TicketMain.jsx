@@ -66,7 +66,14 @@ const TicketMain = () => {
                 </button>
             </SubHeader>
             <Container>
-                {customer.customer_id && reporting_customer.cust_email && <TicketCreate customer={customer} />}
+                {
+                    //? validation data customer
+                    customer.customer_id &&
+                    reporting_customer.cust_email &&
+                    customer.status === 'Registered' &&
+                    <TicketCreate customer={customer} />
+                }
+
                 <main className="row">
                     <section className="col-lg-4">
                         <TicketInformation />
