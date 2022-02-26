@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 const routes = [
     {
-        path: 'dash_ticket', 
+        path: 'dash/ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/dashboard/DashboardTicket')),
     },
@@ -78,7 +78,7 @@ const routes = [
     
     //? channels
     {
-        path: 'channel_socmed', 
+        path: 'channel/socmed', 
         exact: true, 
         component: lazy(() => import('views/pages/channel/socmed/SocialMedia')),
     },
