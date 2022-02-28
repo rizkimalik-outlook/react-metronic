@@ -11,6 +11,7 @@ import { ButtonRefresh, ButtonSubmit } from 'views/components/button'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'views/components/modal'
 import { apiCustomerList, apiCustomerUpdate } from 'app/services/apiCustomer'
 import { setSelectedCustomer } from 'app/slice/sliceTicket';
+import CustomerJourney from 'views/pages/customer/CustomerJourney'
 
 const TicketInformation = () => {
     const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const TicketInformation = () => {
                     </FormGroup>
 
                     <div className="d-flex justify-content-between py-4">
-                        <button type="button" className="btn btn-info btn-sm m-1">
+                        <button type="button" className="btn btn-info btn-sm m-1" title="Journey Customer" data-toggle="modal" data-target="#modalJourneyCustomer">
                             <Icons iconName="route" className="svg-icon svg-icon-sm" />
                             Journey
                         </button>
@@ -136,6 +137,7 @@ const TicketInformation = () => {
                 </form>
 
                 {showModal && <ModalListCustomer />}
+                {customer.customer_id && <CustomerJourney customer={customer} />}
             </CardBody>
         </Card>
     )
