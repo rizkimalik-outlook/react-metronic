@@ -8,8 +8,7 @@ import { ButtonSubmit } from 'views/components/button'
 import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
-import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiOrganizationList } from 'app/services/apiOrganization'
+import { apiDepartment, apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { apiDataPublish, apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
@@ -44,7 +43,7 @@ const TicketUpdate = () => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
-        dispatch(apiOrganizationList())
+        dispatch(apiDepartment())
         reset({
             user_create: ticket.user_create,
             customer_id: ticket.customer_id,
@@ -335,7 +334,11 @@ const TicketUpdate = () => {
                                 </div>
 
                                 <ModalFooter>
-                                    {ticket.status !== 'Closed' && user_level !== 'Layer1' && <ButtonSubmit />}
+                                    {
+                                        ticket.status !== 'Closed' 
+                                        && user_level.substring(user_level.length - 1) === ticket.ticket_position 
+                                        && <ButtonSubmit />
+                                    }
                                 </ModalFooter>
                             </form>
                         </div>
