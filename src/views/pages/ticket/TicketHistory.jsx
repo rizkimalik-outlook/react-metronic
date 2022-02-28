@@ -155,10 +155,10 @@ const TicketHistory = () => {
                         showInfo={true}
                         showNavigationButtons={true} />
                     <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                        return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
+                        return <span className="label label-inline label-light-primary py-2 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                             <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                             {data.value}
-                        </button>
+                        </span>
                     }} />
                     <Column caption="Group Ticket" dataField="group_ticket_number" />
                     <Column caption="CustomerID" dataField="customer_id" />

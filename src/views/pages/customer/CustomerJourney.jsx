@@ -65,17 +65,33 @@ const CustomerJourney = ({ customer }) => {
                                             <i className={`${icon}`} />
                                         </div>
                                         <div className="timeline-content bg-white border">
-                                            <div className="d-flex align-items-center justify-content-between mb-3">
+                                            <div className="d-flex align-items-center justify-content-between mb-2">
                                                 <div className="mr-2">
                                                     <span className="text-hover-primary font-weight-bold">
                                                         <Icons iconName="ticket" className="svg-icon svg-icon-sm" />
                                                         {item.ticket_number}
                                                     </span>
-                                                    <span className={`label ${status} font-weight-bolder label-inline ml-2`}>{item.status}</span>
+                                                </div>
+                                                <div>
+                                                    <span className={`label ${status} font-weight-bolder label-inline`}>{item.status}</span>
                                                 </div>
                                             </div>
-                                            <p className="p-0">
-                                                {item.time} {item.date}</p>
+                                            <div className="d-flex align-items-center justify-content-between">
+                                                <div className="d-flex flex-column font-size-sm">
+                                                    <span>Channel : {item.ticket_source}</span>
+                                                    <span>SLA : {item.sla} days</span>
+                                                    <span>Priority : {item.priority_scale}</span>
+                                                    <span>Type : {item.type_customer}</span>
+                                                    <span>Source : {item.source_information}</span>
+                                                    <span>Category : {item.category_name}</span>
+                                                </div>
+                                                <div>
+                                                    <span className="font-size-xs">
+                                                        {item.time} {item.date}
+                                                    </span>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 })
@@ -85,7 +101,7 @@ const CustomerJourney = ({ customer }) => {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <ButtonRefresh onClick={() => dispatch(apiCustomerJourney({ customer_id: customer.customer_id}))} />
+                <ButtonRefresh onClick={() => dispatch(apiCustomerJourney({ customer_id: customer.customer_id }))} />
             </ModalFooter>
         </Modal>
     )
