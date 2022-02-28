@@ -167,6 +167,7 @@ const TicketCreate = ({ customer }) => {
                                     <option value="">-- select source --</option>
                                     <option value="Call"> Call</option>
                                     <option value="E-mail"> E-mail</option>
+                                    <option value="Chat">Chat</option>
                                 </select>
                                 {errors.source_information && <span className="form-text text-danger">Please select source</span>}
                             </FormGroup>
