@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ModalBody = ({ children }) => {
+const ModalBody = ({ children, className }) => {
     return (
-        <div className="modal-body">
+        <div className={`modal-body ${className}`}>
             {children}
         </div>
     )

@@ -49,3 +49,11 @@ export const apiCustomerChannel = createAsyncThunk(
         return res.data;
     }
 )
+
+export const apiCustomerJourney = createAsyncThunk(
+    "customer/apiCustomerJourney",
+    async ({ customer_id }) => {
+        const res = await axios.get(`/customer/journey/${customer_id}`);
+        return res.data;
+    }
+)

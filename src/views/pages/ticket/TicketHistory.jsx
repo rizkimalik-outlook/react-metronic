@@ -155,20 +155,21 @@ const TicketHistory = () => {
                         showInfo={true}
                         showNavigationButtons={true} />
                     <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                        return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
+                        return <span className="label label-inline label-light-primary py-2 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                             <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                             {data.value}
-                        </button>
+                        </span>
                     }} />
                     <Column caption="Group Ticket" dataField="group_ticket_number" />
                     <Column caption="CustomerID" dataField="customer_id" />
                     <Column caption="Channel" dataField="ticket_source" />
-                    <Column caption="DateCreate" dataField="date_create" />
+                    <Column caption="Date Create" dataField="date_create" />
                     <Column caption="Status" dataField="status" />
                     <Column caption="Category" dataField="category_name" />
                     <Column caption="Category Product" dataField="category_sublv1_name" />
                     <Column caption="Category Case" dataField="category_sublv2_name" />
                     <Column caption="Category Detail" dataField="category_sublv3_name" />
+                    <Column caption="User Create" dataField="user_create" />
                     <Column caption="SLA (Days)" dataField="sla" />
                     <Column caption="Organization" dataField="organization_name" />
                     <Column caption="Department" dataField="department_name" />
