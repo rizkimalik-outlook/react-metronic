@@ -27,7 +27,7 @@ import {
 const TicketUpdate = () => {
     const dispatch = useDispatch();
     const [isInteractionOpen, setInteractionOpen] = useState(false);
-    const { username } = useSelector(authUser)
+    const { username, user_level } = useSelector(authUser)
     const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, ticket } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -332,7 +332,7 @@ const TicketUpdate = () => {
                                 </div>
 
                                 <ModalFooter>
-                                    {ticket.status !== 'Closed' && <ButtonSubmit />}
+                                    {ticket.status !== 'Closed' && user_level !== 'Layer1' && <ButtonSubmit />}
                                 </ModalFooter>
                             </form>
                         </div>

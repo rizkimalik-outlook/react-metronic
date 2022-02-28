@@ -262,7 +262,7 @@ const TicketCreate = ({ customer }) => {
                                 <select className="form-control form-control-md" {...register("status", { required: true })}>
                                     <option value="">-- select status --</option>
                                     {
-                                        status.map((item) => {
+                                        status.filter((item) => item.status === 'Open' || item.status === 'Closed').map((item) => {
                                             return <option data-icon={`${item.icon} text-primary`} value={item.status} key={item.id}>{item.status}</option>
                                         })
                                     }

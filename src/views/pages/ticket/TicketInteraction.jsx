@@ -45,6 +45,8 @@ const TicketInteraction = ({isInteractionOpen}) => {
                 <Column caption="User Create" dataField="user_create" />
                 <Column caption="Response Detail" dataField="response_complaint" />
                 <Column caption="Datetime" dataField="created_at" />
+                <Column caption="Dispatch Layer" dataField="dispatch_to_layer" />
+                <Column caption="Type" dataField="interaction_type" />
             </DataGrid>
         </div>
     )
