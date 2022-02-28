@@ -59,6 +59,14 @@ export const apiInteraction = createAsyncThunk(
     }
 )
 
+export const apiEscalation = createAsyncThunk(
+    "ticket/apiEscalation",
+    async ({ ticket_number }) => {
+        const res = await axios.get(`/ticket/escalation/${ticket_number}`);
+        return res.data;
+    }
+)
+
 export const apiHistoryTicket = createAsyncThunk(
     "ticket/apiHistoryTicket",
     async (data) => {

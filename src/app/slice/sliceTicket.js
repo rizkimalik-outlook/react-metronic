@@ -6,6 +6,7 @@ import {
     apiPublish,
     apiDataPublish,
     apiInteraction,
+    apiEscalation,
     apiHistoryTicket,
 } from "app/services/apiTicket";
 
@@ -19,6 +20,7 @@ const sliceTicket = createSlice({
         history_transaction: [],
         data_publish: [],
         interaction: [],
+        escalations: [],
         history_ticket: [],
     },
     reducers: {
@@ -47,6 +49,9 @@ const sliceTicket = createSlice({
         },
         [apiInteraction.fulfilled]: (state, action) => {
             state.interaction = action.payload.data
+        },
+        [apiEscalation.fulfilled]: (state, action) => {
+            state.escalations = action.payload.data
         },
         [apiHistoryTicket.fulfilled]: (state, action) => {
             state.history_ticket = action.payload.data

@@ -27,6 +27,8 @@ import {
 const TicketUpdate = () => {
     const dispatch = useDispatch();
     const [isInteractionOpen, setInteractionOpen] = useState(false);
+    const [isEscalationOpen, setEscalationOpen] = useState(false);
+    const [isAttachmentOpen, setAttachmentOpen] = useState(false);
     const { username, user_level } = useSelector(authUser)
     const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, ticket } = useSelector(state => state.ticket);
@@ -120,7 +122,7 @@ const TicketUpdate = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="tabEscalationTicket" data-toggle="tab" href="#contentEscalationTicket" aria-controls="contentEscalationTicket">
+                            <a onClick={(e) => setEscalationOpen(true)} className="nav-link" id="tabEscalationTicket" data-toggle="tab" href="#contentEscalationTicket" aria-controls="contentEscalationTicket">
                                 <span className="nav-icon">
                                     <Icons iconName="layer" className="svg-icon svg-icon-sm" />
                                 </span>
@@ -128,7 +130,7 @@ const TicketUpdate = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="tabAttachmentTicket" data-toggle="tab" href="#contentAttachmentTicket" aria-controls="contentAttachmentTicket">
+                            <a onClick={(e) => setAttachmentOpen(true)} className="nav-link" id="tabAttachmentTicket" data-toggle="tab" href="#contentAttachmentTicket" aria-controls="contentAttachmentTicket">
                                 <span className="nav-icon">
                                     <Icons iconName="attachment" className="svg-icon svg-icon-sm" />
                                 </span>
@@ -340,10 +342,10 @@ const TicketUpdate = () => {
                             <TicketInteraction isInteractionOpen={isInteractionOpen} />
                         </div>
                         <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">
-                            <TicketEscalation />
+                            <TicketEscalation isEscalationOpen={isEscalationOpen} />
                         </div>
                         <div className="tab-pane fade" id="contentAttachmentTicket" role="tabpanel" aria-labelledby="tabAttachmentTicket">
-                            <TicketAttachment />
+                            <TicketAttachment isAttachmentOpen={isAttachmentOpen} />
                         </div>
                     </div>
                 </div>
