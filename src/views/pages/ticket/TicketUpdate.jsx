@@ -8,8 +8,7 @@ import { ButtonSubmit } from 'views/components/button'
 import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
-import { apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiOrganizationList } from 'app/services/apiOrganization'
+import { apiDepartment, apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
 import { apiDataPublish, apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
 import {
     apiCategoryList,
@@ -27,7 +26,9 @@ import {
 const TicketUpdate = () => {
     const dispatch = useDispatch();
     const [isInteractionOpen, setInteractionOpen] = useState(false);
-    const { username } = useSelector(authUser)
+    const [isEscalationOpen, setEscalationOpen] = useState(false);
+    const [isAttachmentOpen, setAttachmentOpen] = useState(false);
+    const { username, user_level } = useSelector(authUser)
     const { channels, status, departments } = useSelector(state => state.master);
     const { reporting_customer, ticket } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -42,7 +43,7 @@ const TicketUpdate = () => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
         dispatch(apiCategoryList())
-        dispatch(apiOrganizationList())
+        dispatch(apiDepartment())
         reset({
             user_create: ticket.user_create,
             customer_id: ticket.customer_id,
@@ -120,7 +121,7 @@ const TicketUpdate = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="tabEscalationTicket" data-toggle="tab" href="#contentEscalationTicket" aria-controls="contentEscalationTicket">
+                            <a onClick={(e) => setEscalationOpen(true)} className="nav-link" id="tabEscalationTicket" data-toggle="tab" href="#contentEscalationTicket" aria-controls="contentEscalationTicket">
                                 <span className="nav-icon">
                                     <Icons iconName="layer" className="svg-icon svg-icon-sm" />
                                 </span>
@@ -128,7 +129,7 @@ const TicketUpdate = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="tabAttachmentTicket" data-toggle="tab" href="#contentAttachmentTicket" aria-controls="contentAttachmentTicket">
+                            <a onClick={(e) => setAttachmentOpen(true)} className="nav-link" id="tabAttachmentTicket" data-toggle="tab" href="#contentAttachmentTicket" aria-controls="contentAttachmentTicket">
                                 <span className="nav-icon">
                                     <Icons iconName="attachment" className="svg-icon svg-icon-sm" />
                                 </span>
@@ -203,6 +204,7 @@ const TicketUpdate = () => {
                                                 <option value="">-- select source --</option>
                                                 <option value="Call"> Call</option>
                                                 <option value="E-mail"> E-mail</option>
+                                                <option value="Chat">Chat</option>
                                             </select>
                                             {errors.source_information && <span className="form-text text-danger">Please select source</span>}
                                         </FormGroup>
@@ -332,7 +334,11 @@ const TicketUpdate = () => {
                                 </div>
 
                                 <ModalFooter>
-                                    {ticket.status !== 'Closed' && <ButtonSubmit />}
+                                    {
+                                        ticket.status !== 'Closed' 
+                                        && user_level.substring(user_level.length - 1) === ticket.ticket_position 
+                                        && <ButtonSubmit />
+                                    }
                                 </ModalFooter>
                             </form>
                         </div>
@@ -340,10 +346,10 @@ const TicketUpdate = () => {
                             <TicketInteraction isInteractionOpen={isInteractionOpen} />
                         </div>
                         <div className="tab-pane fade" id="contentEscalationTicket" role="tabpanel" aria-labelledby="tabEscalationTicket">
-                            <TicketEscalation />
+                            <TicketEscalation isEscalationOpen={isEscalationOpen} />
                         </div>
                         <div className="tab-pane fade" id="contentAttachmentTicket" role="tabpanel" aria-labelledby="tabAttachmentTicket">
-                            <TicketAttachment />
+                            <TicketAttachment isAttachmentOpen={isAttachmentOpen} />
                         </div>
                     </div>
                 </div>
