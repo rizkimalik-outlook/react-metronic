@@ -51,7 +51,7 @@ const sliceTicket = createSlice({
             state.interaction = action.payload.data
         },
         [apiEscalation.fulfilled]: (state, action) => {
-            state.escalations = action.payload.data
+            state.response = action.payload
         },
         [apiHistoryTicket.fulfilled]: (state, action) => {
             state.history_ticket = action.payload.data
