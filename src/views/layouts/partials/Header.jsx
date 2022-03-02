@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { socket } from 'app/config';
 import { authUser } from 'app/slice/sliceAuth';
-import { useSelector } from 'react-redux';
 import Icons from 'views/components/Icons';
 import { useLogoutMutation } from 'app/services/apiAuth';
 
@@ -136,8 +137,8 @@ function Header() {
                             <div className="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2">
                                 <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                                 <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{user.name}</span>
-                                <span className="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                    <span className="symbol-label font-size-h5 font-weight-bold">A</span>
+                                <span className="symbol symbol-lg-35 symbol-25 symbol-light-primary">
+                                    <span className="symbol-label font-size-h5 font-weight-bold text-uppercase">{user.name.slice(0, 1)}</span>
                                 </span>
                             </div>
                         </div>
@@ -149,14 +150,7 @@ function Header() {
                                         <div className="navi-link">
                                             <div className="symbol symbol-20 mr-3">
                                                 <div className="symbol-label">
-                                                    <span className="svg-icon svg-icon-primary svg-icon-md">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" fill="none">
-                                                                <rect x={0} y={0} width={24} height={24} />
-                                                                <path d="M6,2 L18,2 C19.6568542,2 21,3.34314575 21,5 L21,19 C21,20.6568542 19.6568542,22 18,22 L6,22 C4.34314575,22 3,20.6568542 3,19 L3,5 C3,3.34314575 4.34314575,2 6,2 Z M12,11 C13.1045695,11 14,10.1045695 14,9 C14,7.8954305 13.1045695,7 12,7 C10.8954305,7 10,7.8954305 10,9 C10,10.1045695 10.8954305,11 12,11 Z M7.00036205,16.4995035 C6.98863236,16.6619875 7.26484009,17 7.4041679,17 C11.463736,17 14.5228466,17 16.5815,17 C16.9988413,17 17.0053266,16.6221713 16.9988413,16.5 C16.8360465,13.4332455 14.6506758,12 11.9907452,12 C9.36772908,12 7.21569918,13.5165724 7.00036205,16.4995035 Z" fill="#000000" />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
+                                                    <Icons iconName="profile" className="svg-icon svg-icon-lg svg-icon-primary" />
                                                 </div>
                                             </div>
                                             <div className="navi-text">
@@ -166,23 +160,15 @@ function Header() {
                                     </Link>
                                 </li>
                                 <li className="navi-item active">
-                                    <Link to="/empty" className="navi-item">
+                                    <Link to="/todolist" className="navi-item">
                                         <div className="navi-link">
                                             <div className="symbol symbol-20 mr-3">
                                                 <div className="symbol-label">
-                                                    <span className="svg-icon svg-icon-md svg-icon-primary">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" fill="none">
-                                                                <rect x={0} y={0} width={24} height={24} />
-                                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3" />
-                                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000" />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
+                                                    <Icons iconName="open" className="svg-icon svg-icon-lg svg-icon-primary" />
                                                 </div>
                                             </div>
                                             <div className="navi-text">
-                                                <div className="font-weight-bold">My Todolist</div>
+                                                <div className="font-weight-bold">Todolist</div>
                                             </div>
                                         </div>
                                     </Link>
@@ -192,17 +178,7 @@ function Header() {
                                         <div className="navi-link">
                                             <div className="symbol symbol-20 mr-3">
                                                 <div className="symbol-label">
-                                                    <span className="svg-icon svg-icon-primary svg-icon-md">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" fill="none">
-                                                                <rect x={0} y={0} width={24} height={24} />
-                                                                <path d="M14.0069431,7.00607258 C13.4546584,7.00607258 13.0069431,6.55855153 13.0069431,6.00650634 C13.0069431,5.45446114 13.4546584,5.00694009 14.0069431,5.00694009 L15.0069431,5.00694009 C17.2160821,5.00694009 19.0069431,6.7970243 19.0069431,9.00520507 L19.0069431,15.001735 C19.0069431,17.2099158 17.2160821,19 15.0069431,19 L3.00694311,19 C0.797804106,19 -0.993056895,17.2099158 -0.993056895,15.001735 L-0.993056895,8.99826498 C-0.993056895,6.7900842 0.797804106,5 3.00694311,5 L4.00694793,5 C4.55923268,5 5.00694793,5.44752105 5.00694793,5.99956624 C5.00694793,6.55161144 4.55923268,6.99913249 4.00694793,6.99913249 L3.00694311,6.99913249 C1.90237361,6.99913249 1.00694311,7.89417459 1.00694311,8.99826498 L1.00694311,15.001735 C1.00694311,16.1058254 1.90237361,17.0008675 3.00694311,17.0008675 L15.0069431,17.0008675 C16.1115126,17.0008675 17.0069431,16.1058254 17.0069431,15.001735 L17.0069431,9.00520507 C17.0069431,7.90111468 16.1115126,7.00607258 15.0069431,7.00607258 L14.0069431,7.00607258 Z" fill="#000000" fillRule="nonzero" opacity="0.3" transform="translate(9.006943, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-9.006943, -12.000000) " />
-                                                                <rect fill="#000000" opacity="0.3" transform="translate(14.000000, 12.000000) rotate(-270.000000) translate(-14.000000, -12.000000) " x={13} y={6} width={2} height={12} rx={1} />
-                                                                <path d="M21.7928932,9.79289322 C22.1834175,9.40236893 22.8165825,9.40236893 23.2071068,9.79289322 C23.5976311,10.1834175 23.5976311,10.8165825 23.2071068,11.2071068 L20.2071068,14.2071068 C19.8165825,14.5976311 19.1834175,14.5976311 18.7928932,14.2071068 L15.7928932,11.2071068 C15.4023689,10.8165825 15.4023689,10.1834175 15.7928932,9.79289322 C16.1834175,9.40236893 16.8165825,9.40236893 17.2071068,9.79289322 L19.5,12.0857864 L21.7928932,9.79289322 Z" fill="#000000" fillRule="nonzero" transform="translate(19.500000, 12.000000) rotate(-90.000000) translate(-19.500000, -12.000000) " />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
-
+                                                    <Icons iconName="sign-out" className="svg-icon svg-icon-lg svg-icon-primary" />
                                                 </div>
                                             </div>
                                             <div className="navi-text">
