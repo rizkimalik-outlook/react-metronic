@@ -9,7 +9,7 @@ import FormGroup from 'views/components/FormGroup'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'views/components/modal'
 import { authUser } from 'app/slice/sliceAuth'
 import { apiDepartment, apiMasterChannel, apiMasterStatus } from 'app/services/apiMasterData'
-import { apiDataPublish, apiHistoryTransaction, apiTicketStore } from 'app/services/apiTicket'
+import { apiHistoryTransaction, apiTicketShow, apiTicketUpdate } from 'app/services/apiTicket'
 import {
     apiCategoryList,
     apiSubCategoryLv1,
@@ -28,9 +28,9 @@ const TicketUpdate = () => {
     const [isInteractionOpen, setInteractionOpen] = useState(false);
     const [isEscalationOpen, setEscalationOpen] = useState(false);
     const [isAttachmentOpen, setAttachmentOpen] = useState(false);
-    const { username, user_level } = useSelector(authUser)
+    const { user_level } = useSelector(authUser)
     const { channels, status, departments } = useSelector(state => state.master);
-    const { reporting_customer, ticket } = useSelector(state => state.ticket);
+    const { ticket } = useSelector(state => state.ticket);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {
         category,
@@ -74,14 +74,14 @@ const TicketUpdate = () => {
 
     const onSubmitUpdateTicket = async (data) => {
         try {
-            const data_store = Object.assign({}, data, reporting_customer);
-            const { customer_id } = data_store;
-            data_store.date_create = (data_store.date_create).replace('T', ' ');
-            const { payload } = await dispatch(apiTicketStore(data_store));
+            const { customer_id } = data;
+            data.date_create = (data.date_create).replace('T', ' ');
+            data.ticket_position = user_level.substring(user_level.length - 1);
+            const { payload } = await dispatch(apiTicketUpdate(data));
             if (payload.status === 200) {
                 Swal.fire({
-                    title: "Ticket Created.",
-                    text: "Success into application!",
+                    title: "Ticket Update.",
+                    text: "Success update Ticket!",
                     buttonsStyling: false,
                     icon: "success",
                     confirmButtonText: "Ok",
@@ -90,8 +90,7 @@ const TicketUpdate = () => {
                     },
                 });
                 dispatch(apiHistoryTransaction({ customer_id }))
-                dispatch(apiDataPublish({ customer_id }))
-                reset({ user_create: username })
+                dispatch(apiTicketShow({ ticket_number: data.ticket_number }))
             }
         } catch (error) {
             console.log(error)

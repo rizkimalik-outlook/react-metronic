@@ -8,12 +8,12 @@ import { useLogoutMutation } from 'app/services/apiAuth';
 
 function Header() {
     const history = useHistory();
-    const getAuthUser = useSelector(authUser);
+    const user = useSelector(authUser);
     const [logout] = useLogoutMutation();
 
     async function onSignOut() {
         try {
-            const response = await logout({ username: getAuthUser.username });
+            const response = await logout({ username: user.username });
             if (response.data.status === 200) {
                 socket.disconnect();
                 localStorage.clear();
@@ -135,7 +135,7 @@ function Header() {
                         <div className="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
                             <div className="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2">
                                 <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{getAuthUser.name}</span>
+                                <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{user.name}</span>
                                 <span className="symbol symbol-lg-35 symbol-25 symbol-light-success">
                                     <span className="symbol-label font-size-h5 font-weight-bold">A</span>
                                 </span>
@@ -145,7 +145,7 @@ function Header() {
                         <div className="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                             <ul className="navi navi-hover py-4">
                                 <li className="navi-item active">
-                                    <Link to={`/user/${getAuthUser.id}/edit`} className="navi-item">
+                                    <Link to={`/user/${user.id}/edit`} className="navi-item">
                                         <div className="navi-link">
                                             <div className="symbol symbol-20 mr-3">
                                                 <div className="symbol-label">

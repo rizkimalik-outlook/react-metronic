@@ -18,6 +18,14 @@ export const apiTicketStore = createAsyncThunk(
     }
 )
 
+export const apiTicketUpdate = createAsyncThunk(
+    "ticket/apiTicketUpdate",
+    async (data) => {
+        const res = await axios.put('/ticket/update', data);
+        return res.data;
+    }
+)
+
 export const apiTicketShow = createAsyncThunk(
     "ticket/apiTicketShow",
     async ({ ticket_number }) => {

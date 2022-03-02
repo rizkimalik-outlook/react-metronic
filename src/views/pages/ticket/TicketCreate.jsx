@@ -57,7 +57,7 @@ const TicketCreate = ({ customer }) => {
 
     const onSubmitCreateTicket = async (data) => {
         try {
-            const data_store = Object.assign({}, data, reporting_customer);
+            const data_store = Object.assign({}, data, reporting_customer); //? merge data ticket & reporting_customer
             const { customer_id } = data_store;
             data_store.date_create = (data_store.date_create).replace('T', ' ');
             const { payload } = await dispatch(apiTicketStore(data_store));
