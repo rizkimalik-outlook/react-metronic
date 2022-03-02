@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
     apiTicketStore,
+    apiTicketUpdate,
     apiTicketShow,
     apiHistoryTransaction,
     apiPublish,
@@ -33,6 +34,9 @@ const sliceTicket = createSlice({
     },
     extraReducers: {
         [apiTicketStore.fulfilled]: (state, action) => {
+            state.response = action.payload
+        }, 
+        [apiTicketUpdate.fulfilled]: (state, action) => {
             state.response = action.payload
         }, 
         [apiTicketShow.fulfilled]: (state, action) => {
