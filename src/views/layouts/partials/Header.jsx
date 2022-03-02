@@ -32,7 +32,7 @@ function Header() {
                 <div className="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
                     <div id="kt_header_menu" className="header-menu header-menu-mobile header-menu-layout-default">
                         <ul className="menu-nav">
-                            <li className="menu-item menu-item-submenu" data-menu-toggle="click">
+                            {/* <li className="menu-item menu-item-submenu" data-menu-toggle="click">
                                 <Link to="/dashboard" className="menu-link menu-toggle">
                                     <span className="menu-text">Features</span>
                                     <i className="menu-arrow" />
@@ -43,7 +43,7 @@ function Header() {
                                     <span className="menu-text">Apps</span>
                                     <i className="menu-arrow" />
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
