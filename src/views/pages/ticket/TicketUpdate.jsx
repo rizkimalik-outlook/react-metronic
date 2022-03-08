@@ -42,8 +42,8 @@ const TicketUpdate = () => {
     useEffect(() => {
         dispatch(apiMasterChannel())
         dispatch(apiMasterStatus())
-        dispatch(apiCategoryList())
         dispatch(apiDepartment())
+
         reset({
             user_create: ticket.user_create,
             customer_id: ticket.customer_id,
@@ -65,7 +65,8 @@ const TicketUpdate = () => {
             type_complaint: ticket.type_complaint,
             source_information: ticket.source_information,
         })
-
+        
+        dispatch(apiCategoryList())
         dispatch(apiSubCategoryLv1({ category_id: ticket.category_id }))
         dispatch(apiSubCategoryLv2({ category_sublv1_id: ticket.category_sublv1_id }))
         dispatch(apiSubCategoryLv3({ category_sublv2_id: ticket.category_sublv2_id }))
@@ -220,8 +221,8 @@ const TicketUpdate = () => {
                                             >
                                                 <option value="">-- select category --</option>
                                                 {
-                                                    category.map((item) => {
-                                                        return <option value={item.category_id} key={item.category_id}>{item.name}</option>
+                                                    category.map((item, index) => {
+                                                        return <option value={item.category_id} key={index}>{item.name}</option>
                                                     })
                                                 }
                                             </select>
@@ -238,8 +239,9 @@ const TicketUpdate = () => {
                                             >
                                                 <option value="">-- select subcategory product --</option>
                                                 {
-                                                    category_sublv1?.map((item) => {
-                                                        return <option value={item.category_sublv1_id} key={item.category_sublv1_id}>{item.sub_name}</option>
+                                                    category_sublv1?.map((item, index) => {
+                                                        let selected = item.category_sublv1_id === ticket.category_sublv1_id ? 'true' : 'false';
+                                                        return <option value={item.category_sublv1_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
                                             </select>
@@ -256,8 +258,9 @@ const TicketUpdate = () => {
                                             >
                                                 <option value="">-- select subcategory case --</option>
                                                 {
-                                                    category_sublv2?.map((item) => {
-                                                        return <option value={item.category_sublv2_id} key={item.category_sublv2_id}>{item.sub_name}</option>
+                                                    category_sublv2?.map((item, index) => {
+                                                        let selected = item.category_sublv2_id === ticket.category_sublv2_id ? 'true' : 'false';
+                                                        return <option value={item.category_sublv2_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
                                             </select>
@@ -274,8 +277,9 @@ const TicketUpdate = () => {
                                             >
                                                 <option value="">-- select subcategory detail --</option>
                                                 {
-                                                    category_sublv3?.map((item) => {
-                                                        return <option value={item.category_sublv3_id} key={item.category_sublv3_id}>{item.sub_name}</option>
+                                                    category_sublv3?.map((item, index) => {
+                                                        let selected = item.category_sublv3_id === ticket.category_sublv3_id ? 'true' : 'false';
+                                                        return <option value={item.category_sublv3_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
                                             </select>
@@ -334,8 +338,8 @@ const TicketUpdate = () => {
 
                                 <ModalFooter>
                                     {
-                                        ticket.status !== 'Closed' 
-                                        && user_level.substring(user_level.length - 1) === ticket.ticket_position 
+                                        ticket.status !== 'Closed'
+                                        && user_level.substring(user_level.length - 1) === ticket.ticket_position
                                         && <ButtonSubmit />
                                     }
                                 </ModalFooter>
