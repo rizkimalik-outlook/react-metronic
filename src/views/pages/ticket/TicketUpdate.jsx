@@ -240,7 +240,7 @@ const TicketUpdate = () => {
                                                 <option value="">-- select subcategory product --</option>
                                                 {
                                                     category_sublv1?.map((item, index) => {
-                                                        let selected = item.category_sublv1_id === ticket.category_sublv1_id ? 'true' : 'false';
+                                                        let selected = item.category_sublv1_id === ticket.category_sublv1_id ? true : false;
                                                         return <option value={item.category_sublv1_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
@@ -259,7 +259,7 @@ const TicketUpdate = () => {
                                                 <option value="">-- select subcategory case --</option>
                                                 {
                                                     category_sublv2?.map((item, index) => {
-                                                        let selected = item.category_sublv2_id === ticket.category_sublv2_id ? 'true' : 'false';
+                                                        let selected = item.category_sublv2_id === ticket.category_sublv2_id ? true : false;
                                                         return <option value={item.category_sublv2_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
@@ -278,7 +278,7 @@ const TicketUpdate = () => {
                                                 <option value="">-- select subcategory detail --</option>
                                                 {
                                                     category_sublv3?.map((item, index) => {
-                                                        let selected = item.category_sublv3_id === ticket.category_sublv3_id ? 'true' : 'false';
+                                                        let selected = item.category_sublv3_id === ticket.category_sublv3_id ? true : false;
                                                         return <option value={item.category_sublv3_id} key={index} selected={selected}>{item.sub_name}</option>
                                                     })
                                                 }
