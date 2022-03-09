@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { axiosDefault } from 'app/config';
 import Aside from './partials/Aside';
 import Footer from './partials/Footer';
 import Header from './partials/Header';
-import { axiosDefault } from 'app/config';
+import SocketIO from 'views/components/SocketIO';
 import { AskPermission } from 'views/components/Notification';
 import { authUser } from 'app/slice/sliceAuth';
-import { useDispatch, useSelector } from 'react-redux';
-import SocketIO from 'views/components/SocketIO';
 import { getMainMenu } from 'app/services/apiMenu'
 
 function Auth({ children }) {
@@ -39,9 +41,9 @@ function Auth({ children }) {
                     </button>
                 </li>
                 <li className="nav-item" data-toggle="tooltip" data-placement="left" data-original-title="Todolist">
-                    <button className="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary">
+                    <NavLink to="/todolist" className="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary">
                         <i className="fa fa-clipboard-list" />
-                    </button>
+                    </NavLink>
                 </li>
             </ul>
         </div>
