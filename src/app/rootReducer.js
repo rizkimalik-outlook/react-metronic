@@ -14,6 +14,7 @@ import sliceMasterData from './slice/sliceMasterData';
 import sliceCategory from './slice/sliceCategory';
 import sliceOrganization from './slice/sliceOrganization';
 import sliceDepartment from './slice/sliceDepartment';
+import sliceTodolist from './slice/sliceTodolist';
 
 const persistConfig = {
     key: 'auth',
@@ -39,6 +40,7 @@ const rootReducer = {
     category: sliceCategory.reducer,
     organization: sliceOrganization.reducer,
     department: sliceDepartment.reducer,
+    todolist: sliceTodolist.reducer,
 }
 
 export default rootReducer;
