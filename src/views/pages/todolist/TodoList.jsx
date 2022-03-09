@@ -9,6 +9,8 @@ import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card'
 import { authUser } from 'app/slice/sliceAuth'
 import { apiTodolistDataTicket, apiTodolistTotalTicket } from 'app/services/apiTodolist'
+import { TicketUpdate } from 'views/pages/ticket'
+import { apiTicketShow } from 'app/services/apiTicket'
 
 
 function TodoList() {
@@ -142,7 +144,7 @@ function TodoList() {
                                         showInfo={true}
                                         showNavigationButtons={true} />
                                     <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                                        return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
+                                        return <button type="button" onClick={(e) => dispatch(apiTicketShow({ ticket_number: data.value }))} className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                                             <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                                             {data.value}
                                         </button>
@@ -166,6 +168,7 @@ function TodoList() {
                         </Card>
                     </div>
                 </div>
+                <TicketUpdate />
             </Container>
         </MainContent>
     )
