@@ -1,8 +1,10 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card'
 import Icons from 'views/components/Icons'
-import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 
 
 function TodoList() {
@@ -12,40 +14,40 @@ function TodoList() {
             <Container>
                 <div className="row">
                     <div className="col-md-3">
-                        <div className="card card-custom bg-success card-stretch gutter-b">
+                        <NavLink to="" className="card card-custom bg-success card-stretch gutter-b">
                             <div className="card-body">
                                 <Icons iconName="open" className="svg-icon svg-icon-2x svg-icon-white" />
                                 <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">0</span>
                                 <span className="font-weight-bold text-white font-size-sm">Ticket Open</span>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
                     <div className="col-md-3">
-                        <div className="card card-custom bg-warning card-stretch gutter-b">
+                        <NavLink to="" className="card card-custom bg-warning card-stretch gutter-b">
                             <div className="card-body">
                                 <Icons iconName="refresh" className="svg-icon svg-icon-2x svg-icon-white" />
                                 <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">0</span>
                                 <span className="font-weight-bold text-white font-size-sm">Ticket Pending</span>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
                     <div className="col-md-3">
-                        <div className="card card-custom bg-info card-stretch gutter-b">
+                        <NavLink to=""  className="card card-custom bg-info card-stretch gutter-b">
                             <div className="card-body">
                                 <Icons iconName="equalizer" className="svg-icon svg-icon-2x svg-icon-white" />
                                 <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">0</span>
                                 <span className="font-weight-bold text-white font-size-sm">Ticket Progress</span>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
                     <div className="col-md-3">
-                        <div className="card card-custom bg-primary card-stretch gutter-b">
+                        <NavLink to=""  className="card card-custom bg-primary card-stretch gutter-b">
                             <div className="card-body">
                                 <Icons iconName="flag" className="svg-icon svg-icon-2x svg-icon-white" />
                                 <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 text-hover-primary d-block">0</span>
                                 <span className="font-weight-bold text-white font-size-sm">Ticket Closed</span>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
 
