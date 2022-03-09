@@ -63,6 +63,10 @@ const routes = [
         path: 'todolist', 
         exact: true, 
         component: lazy(() => import('views/pages/todolist/TodoList')),
+    },{
+        path: 'todolist/:status', 
+        exact: true, 
+        component: lazy(() => import('views/pages/todolist/TodoList')),
     },
     
     //? ticket
