@@ -9,6 +9,8 @@ import { Container, MainContent, SubHeader } from 'views/layouts/partials'
 import { Card, CardBody, CardHeader, CardTitle } from 'views/components/card'
 import { authUser } from 'app/slice/sliceAuth'
 import { apiTodolistDataTicket, apiTodolistTotalTicket } from 'app/services/apiTodolist'
+import { TicketUpdate } from 'views/pages/ticket'
+import { apiTicketShow } from 'app/services/apiTicket'
 
 
 function TodoList() {
@@ -55,18 +57,20 @@ function TodoList() {
                 <div className="row">
                     {
                         total_ticket.map((item, index) => {
-                            let background;
+                            let background,icon;
                             if (item.total === 0) {
                                 background = 'bg-warning'
+                                icon = 'flag'
                             } else {
                                 background = 'bg-primary'
+                                icon = 'open'
                             }
 
                             return (
                                 <div className="col-md-3" key={index}>
                                     <NavLink to={`/todolist/${item.status}`} className={`card card-custom ${background} card-stretch gutter-b`}>
                                         <div className="card-body">
-                                            <Icons iconName="ticket" className="svg-icon svg-icon-3x svg-icon-white" />
+                                            <Icons iconName={`${icon}`} className="svg-icon svg-icon-3x svg-icon-white" />
                                             <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{item.total}</span>
                                             <span className="font-weight-bold text-white font-size-sm">Ticket {item.status}</span>
                                         </div>
@@ -140,7 +144,7 @@ function TodoList() {
                                         showInfo={true}
                                         showNavigationButtons={true} />
                                     <Column caption="Ticket Number" dataField="ticket_number" cellRender={(data) => {
-                                        return <button type="button" className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
+                                        return <button type="button" onClick={(e) => dispatch(apiTicketShow({ ticket_number: data.value }))} className="btn btn-sm btn-light-primary py-1 px-2" data-toggle="modal" data-target="#modalUpdateTicket">
                                             <Icons iconName="ticket" className="svg-icon svg-icon-sm p-0" />
                                             {data.value}
                                         </button>
@@ -164,6 +168,7 @@ function TodoList() {
                         </Card>
                     </div>
                 </div>
+                <TicketUpdate />
             </Container>
         </MainContent>
     )
