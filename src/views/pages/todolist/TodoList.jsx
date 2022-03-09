@@ -55,18 +55,20 @@ function TodoList() {
                 <div className="row">
                     {
                         total_ticket.map((item, index) => {
-                            let background;
+                            let background,icon;
                             if (item.total === 0) {
                                 background = 'bg-warning'
+                                icon = 'flag'
                             } else {
                                 background = 'bg-primary'
+                                icon = 'open'
                             }
 
                             return (
                                 <div className="col-md-3" key={index}>
                                     <NavLink to={`/todolist/${item.status}`} className={`card card-custom ${background} card-stretch gutter-b`}>
                                         <div className="card-body">
-                                            <Icons iconName="ticket" className="svg-icon svg-icon-3x svg-icon-white" />
+                                            <Icons iconName={`${icon}`} className="svg-icon svg-icon-3x svg-icon-white" />
                                             <span className="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{item.total}</span>
                                             <span className="font-weight-bold text-white font-size-sm">Ticket {item.status}</span>
                                         </div>
