@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
+import { useDispatch, useSelector } from 'react-redux'
+import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+
 import Icons from 'views/components/Icons'
 import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport, ButtonRefresh } from 'views/components/button';
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
-import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
 import CustomerChannel from './CustomerChannel'
-import { useDispatch, useSelector } from 'react-redux'
 import { apiCustomerList, apiCustomerDelete } from 'app/services/apiCustomer'
 
 
@@ -130,6 +131,7 @@ const CustomerList = () => {
                             <div className="tab-pane fade active show" id="tabDataCustomer" role="tabpanel" aria-labelledby="tabDataCustomer">
                                 <DataGrid
                                     dataSource={customers}
+                                    remoteOperations={true}
                                     keyExpr="id"
                                     allowColumnReordering={true}
                                     allowColumnResizing={true}
