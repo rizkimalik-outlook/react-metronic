@@ -131,13 +131,12 @@ const CustomerList = () => {
                             <div className="tab-pane fade active show" id="tabDataCustomer" role="tabpanel" aria-labelledby="tabDataCustomer">
                                 <DataGrid
                                     dataSource={customers}
-                                    // remoteOperations={true}
+                                    keyExpr="id"
                                     remoteOperations={{
                                         filtering: true,
                                         sorting: true,
                                         paging: true
                                     }}
-                                    keyExpr="id"
                                     allowColumnReordering={true}
                                     allowColumnResizing={true}
                                     columnAutoWidth={true}
