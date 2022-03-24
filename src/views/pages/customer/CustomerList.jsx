@@ -131,7 +131,12 @@ const CustomerList = () => {
                             <div className="tab-pane fade active show" id="tabDataCustomer" role="tabpanel" aria-labelledby="tabDataCustomer">
                                 <DataGrid
                                     dataSource={customers}
-                                    remoteOperations={true}
+                                    // remoteOperations={true}
+                                    remoteOperations={{
+                                        filtering: true,
+                                        sorting: true,
+                                        paging: true
+                                    }}
                                     keyExpr="id"
                                     allowColumnReordering={true}
                                     allowColumnResizing={true}
@@ -145,7 +150,7 @@ const CustomerList = () => {
                                     <Paging defaultPageSize={10} />
                                     <Pager
                                         visible={true}
-                                        allowedPageSizes={[10, 20, 50, 'all']}
+                                        allowedPageSizes={[10, 20, 50]}
                                         displayMode='full'
                                         showPageSizeSelector={true}
                                         showInfo={true}

@@ -28,7 +28,7 @@ const CustomerChannel = () => {
                 <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
-                    allowedPageSizes={[10, 20, 50, 'all']}
+                    allowedPageSizes={[10, 20, 50]}
                     displayMode='full'
                     showPageSizeSelector={true}
                     showInfo={true}
