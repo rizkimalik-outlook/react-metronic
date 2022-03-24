@@ -11,8 +11,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #f2f3f8;
-    font-family: Poppins, Helvetica, 'sans-serif';
+    background-color: rgba(242,243,248,0.5);
   }
   
   .splash-screen img {
