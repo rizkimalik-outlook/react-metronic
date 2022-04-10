@@ -1,6 +1,6 @@
 {
   "name": "app-mendawai",
-  "homepage": "https://app-mendawai.vercel.app",
+  "homepage": "http://192.168.25.88/AppMendawai",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://api-mendawai.herokuapp.com",
