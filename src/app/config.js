@@ -9,6 +9,7 @@ const socket = io(baseUrl);
 
 const axiosDefault = (token) => {
     axios.defaults.baseURL = baseUrl;
+    axios.defaults.credentials = 'include';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 } 

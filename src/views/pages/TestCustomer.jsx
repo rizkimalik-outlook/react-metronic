@@ -4,23 +4,71 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import { useDispatch, useSelector } from 'react-redux'
 import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+import CustomStore from 'devextreme/data/custom_store';
 
 import Icons from 'views/components/Icons'
 import { ButtonCreate, ButtonDelete, ButtonEdit, ButtonExport, ButtonRefresh } from 'views/components/button';
 import { Card, CardBody, CardHeader, CardToolbar } from 'views/components/card'
 import { Container, MainContent, SubHeader } from 'views/layouts/partials'
-import CustomerChannel from './CustomerChannel'
+import CustomerChannel from './customer/CustomerChannel'
 import { apiCustomerList, apiCustomerDelete } from 'app/services/apiCustomer'
 
-
-const CustomerList = () => {
+const TestCustomer = () => {
     const dispatch = useDispatch();
     const { customers } = useSelector(state => state.customer);
     const [isChannel, setIsChannel] = useState(false);
+    const [params, setParams] = useState('');
 
     useEffect(() => {
-        dispatch(apiCustomerList())
-    }, [dispatch]);
+        dispatch(apiCustomerList(params))
+    }, [dispatch, params]);
+
+    function isNotEmpty(value) {
+        return value !== undefined && value !== null && value !== '';
+    }
+
+    const store = new CustomStore({
+        key: 'customer_id',
+        load: async (loadOptions) => {
+            let params = '?';
+            [
+                'skip',
+                'take',
+                'requireTotalCount',
+                'requireGroupCount',
+                'sort',
+                'filter',
+                'totalSummary',
+                'group',
+                'groupSummary',
+            ].forEach((i) => {
+                if (i in loadOptions && isNotEmpty(loadOptions[i])) { params += `${i}=${JSON.stringify(loadOptions[i])}&`; }
+            });
+            params = params.slice(0, -1);
+            console.log(params)
+            setParams(params);
+
+            return ({
+                data: customers,
+                totalCount: customers.length,
+                summary: customers.summary,
+            })
+
+            // return await axios.get(`/customer${params}`)
+            //     .then(({ data }) => ({
+            //         data: data.data,
+            //         totalCount: data.data.length,
+            //         summary: data.summary,
+            //     }))
+            //     .catch(() => {
+            //         throw new Error('Data Loading Error');
+            //     });
+        },
+        // insert: (values) => {},
+        // update: (key, values) => {},
+        // remove: (key) => {}
+    });
+
 
 
     function handlerExportExcel() {
@@ -130,13 +178,8 @@ const CustomerList = () => {
                         <div className="tab-content">
                             <div className="tab-pane fade active show" id="tabDataCustomer" role="tabpanel" aria-labelledby="tabDataCustomer">
                                 <DataGrid
-                                    dataSource={customers}
-                                    keyExpr="id"
-                                    remoteOperations={{
-                                        filtering: true,
-                                        sorting: true,
-                                        paging: true
-                                    }}
+                                    dataSource={store}
+                                    remoteOperations={true}
                                     allowColumnReordering={true}
                                     allowColumnResizing={true}
                                     columnAutoWidth={true}
@@ -178,4 +221,4 @@ const CustomerList = () => {
     )
 }
 
-export default CustomerList
+export default TestCustomer

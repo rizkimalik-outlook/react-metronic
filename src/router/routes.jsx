@@ -134,6 +134,10 @@ const routes = [
         path: 'general', 
         exact: true, 
         component: lazy(() => import('views/pages/General')),
+    },{
+        path: 'test', 
+        exact: true, 
+        component: lazy(() => import('views/pages/TestCustomer')),
     },/* {
         path: '*',
         component: lazy(() => import('../pages/NotFound')),
