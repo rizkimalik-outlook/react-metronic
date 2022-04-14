@@ -7,8 +7,8 @@ const queryRequest = (url) => ({ url, headers: apiHeaders })
 
 export const getMainMenu = createAsyncThunk(
     "mainmenu/main_menu",
-    async () => {
-        const res = await axios.get('/main_menu');
+    async ({ user_level }) => {
+        const res = await axios.get(`/main_menu/${user_level}`);
         return res.data;
     }
 );
@@ -17,7 +17,7 @@ export const getMainMenu = createAsyncThunk(
 export const menu_access = createApi({
     reducerPath: 'menu_access',
     baseQuery: fetchBaseQuery({
-        baseUrl, 
+        baseUrl,
         prepareHeaders: (headers, { getState }) => {
             const token = getState().persistedReducer.authUser.token;
             if (token) {
@@ -40,7 +40,7 @@ export const menu_access = createApi({
             query: (user_level) => queryRequest(`/menu_access?user_level=${user_level}`),
         }),
         getModulAccess: builder.query({
-            query: ({user_level, menu_id}) => queryRequest(`/modul_access?user_level=${user_level}&menu_id=${menu_id}`),
+            query: ({ user_level, menu_id }) => queryRequest(`/modul_access?user_level=${user_level}&menu_id=${menu_id}`),
         }),
         createMenuAccess: builder.mutation({
             query: (body) => ({
@@ -70,20 +70,3 @@ export const {
     useDeleteMenuAccessMutation,
 } = menu_access;
 export default menu_access;
-
-// export const getMenuAccess = async (user_level) => {
-//     const res = await axios.post('/menu_access', {
-//         user_level:user_level
-//     });
-//     return res.data;
-// }
-
-/* export const getMenuAccess = createAsyncThunk(
-    "mainmenu/menu_access",
-    async (user_level, thunkAPI) => {
-        const res = await axios.post('/menu_access', {
-            user_level:user_level
-        });
-        return res.data;
-    }
-); */
