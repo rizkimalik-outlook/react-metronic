@@ -45,7 +45,7 @@ const TestCustomer = () => {
                 if (i in loadOptions && isNotEmpty(loadOptions[i])) { params += `${i}=${JSON.stringify(loadOptions[i])}&`; }
             });
             params = params.slice(0, -1);
-            console.log(loadOptions)
+            console.log(params)
             setParams(params);
 
             return ({
