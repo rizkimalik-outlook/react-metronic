@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging } from 'devextreme-react/data-grid'
+import { Column, DataGrid, FilterRow, HeaderFilter, Pager, Paging, GroupPanel, Grouping } from 'devextreme-react/data-grid'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiCustomerChannel } from 'app/services/apiCustomer'
 
@@ -33,8 +33,10 @@ const CustomerChannel = () => {
                     showPageSizeSelector={true}
                     showInfo={true}
                     showNavigationButtons={true} />
-                <Column caption="CustomerID" dataField="customer_id" />
-                <Column caption="Customer Name" dataField="name" />
+                <GroupPanel visible={true} />
+                <Grouping autoExpandAll={true} />
+                <Column caption="Customer Name" dataField="name" groupIndex={0} />
+                <Column caption="CustomerID" dataField="customer_id" groupIndex={1} />
                 <Column caption="Channel" dataField="flag_channel" />
                 <Column caption="Type" dataField="value_channel" />
             </DataGrid>
