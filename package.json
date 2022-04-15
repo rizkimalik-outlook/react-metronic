@@ -1,9 +1,9 @@
 {
   "name": "app-mendawai",
-  "homepage": "http://192.168.25.88/AppMendawai",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api-mendawai.herokuapp.com",
+  "proxy": "http://192.168.25.88:5000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.11.4",
