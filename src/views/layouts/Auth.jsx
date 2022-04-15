@@ -12,15 +12,15 @@ import { authUser } from 'app/slice/sliceAuth';
 import { getMainMenu } from 'app/services/apiMenu'
 
 function Auth({ children }) {
-    const { token } = useSelector(authUser);
+    const auth = useSelector(authUser);
     const dispatch = useDispatch();
     const { main_menu } = useSelector(state => state.mainmenu);
 
     useEffect(() => {
         AskPermission();
-        axiosDefault(token);
-        dispatch(getMainMenu())
-    }, [dispatch, token]);
+        axiosDefault(auth.token);
+        dispatch(getMainMenu({ user_level: auth.user_level }))
+    }, [dispatch, auth]);
 
     return (
         <div className="d-flex flex-row flex-column-fluid page">
