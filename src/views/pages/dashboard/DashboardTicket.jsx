@@ -8,6 +8,7 @@ import { Container, MainContent, SubHeader } from 'views/layouts/partials';
 
 function DashboardTicket() {
     const chartDom = useRef();
+    const chartDom2 = useRef();
 
     useEffect(() => {
         function LoadChart() {
@@ -90,6 +91,31 @@ function DashboardTicket() {
             option && myChart.setOption(option);
         }
         LoadChart()
+
+        function LoadChart2() {
+            const myChart = echarts.init(chartDom2.current);
+            const option = {
+                xAxis: {
+                    type: 'category',
+                    data: ['Complaint', 'Request', 'Informasi', 'Feedback']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        data: [120, 200, 150, 80],
+                        type: 'bar',
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: 'rgba(180, 180, 180, 0.2)'
+                        }
+                    }
+                ]
+            };
+            option && myChart.setOption(option);
+        }
+        LoadChart2()
     })
 
     return (
@@ -156,7 +182,7 @@ function DashboardTicket() {
                     </div>
                     <div className="col-lg-4">
                         <div className="card">
-                            <div className="card-body bg-white" style={{ height: '400px', width: '100%' }} />
+                            <div className="card-body bg-white" style={{ height: '400px', width: '100%' }} ref={chartDom2} />
                         </div>
                     </div>
                 </div>
