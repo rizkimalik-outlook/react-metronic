@@ -5,6 +5,10 @@ const routes = [
         path: 'dash/ticket', 
         exact: true, 
         component: lazy(() => import('views/pages/dashboard/DashboardTicket')),
+    },{
+        path: 'dash/socmed', 
+        exact: true, 
+        component: lazy(() => import('views/pages/dashboard/DashboardSocmed')),
     },
 
     //? master data
