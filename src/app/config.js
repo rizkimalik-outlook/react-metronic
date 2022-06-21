@@ -1,6 +1,7 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 
+// const url = `${window.location.protocol}//${window.location.host}/ApiShopee`;
 const baseUrl = process.env.REACT_APP_REST_API_URL;
 const apiHeaders = {
     'Content-Type': 'application/json',
