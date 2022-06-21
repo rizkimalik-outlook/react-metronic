@@ -74,7 +74,7 @@ function Header() {
                                                 </g>
                                             </svg>
                                         </span>
-                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">Email Inbound</span>
+                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">Email</span>
                                     </Link>
                                 </div>
                                 <div className="col-6">
@@ -88,7 +88,7 @@ function Header() {
                                                 </g>
                                             </svg>
                                         </span>
-                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">SMS Blast</span>
+                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">Chat</span>
                                     </Link>
                                 </div>
                                 <div className="col-6">
@@ -102,7 +102,7 @@ function Header() {
                                                 </g>
                                             </svg>
                                         </span>
-                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">Outbound Call</span>
+                                        <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">Voice Call</span>
                                     </Link>
                                 </div>
                                 <div className="col-6">
@@ -124,13 +124,112 @@ function Header() {
                     </div>
 
                     <div className="dropdown">
+                        <div className="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                            <div className="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
+                                <Icons iconName="group-chat" className="svg-icon svg-icon-xl svg-icon-primary" />
+                                <span className="pulse-ring" />
+                            </div>
+                        </div>
+
+                        <div className="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                            <div className="d-flex flex-column flex-center py-5 bg-primary bgi-size-cover bgi-no-repeat rounded-top">
+                                <span className="btn btn-success btn-sm font-weight-bold font-size-lg mt-2">15 Notifications</span>
+                            </div>
+                            <div className="row row-paddingless">
+                                <div className="col-12" data-mobile-height={350} style={{ height: 300, overflow: 'auto' }}>
+                                    <div className="navi navi-hover scroll my-4 ps" data-scroll="true">
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon2-fax text-success" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">New report has been received</div>
+                                                    <div className="text-muted">23 hrs ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon-download-1 text-danger" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">Finance report has been generated</div>
+                                                    <div className="text-muted">25 hrs ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon-security text-warning" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">New customer comment recieved</div>
+                                                    <div className="text-muted">2 days ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon2-analytics-1 text-success" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">New customer is registered</div>
+                                                    <div className="text-muted">3 days ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon-download-1 text-danger" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">Finance report has been generated</div>
+                                                    <div className="text-muted">25 hrs ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon-security text-warning" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">New customer comment recieved</div>
+                                                    <div className="text-muted">2 days ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        <NavLink to="/empty" className="navi-item">
+                                            <div className="navi-link">
+                                                <div className="navi-icon mr-2">
+                                                    <i className="flaticon2-analytics-1 text-success" />
+                                                </div>
+                                                <div className="navi-text">
+                                                    <div className="font-weight-bold">New customer is registered</div>
+                                                    <div className="text-muted">3 days ago</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <div className="dropdown">
                         <div className="topbar-item" data-offset="10px,0px">
-                            <NavLink to="/channel_socmed" className="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
+                            <NavLink to="/channel/socmed" className="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
                                 <Icons iconName="group-chat" className="svg-icon svg-icon-xl svg-icon-primary" />
                                 <span className="pulse-ring" />
                             </NavLink>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="dropdown">
                         <div className="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
