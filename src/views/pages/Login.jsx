@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 import Icons from 'views/components/Icons';
 import { setAuth } from 'app/slice/sliceAuth';
 import { socket } from 'app/config';
@@ -52,20 +53,17 @@ function Login() {
                 history.push("/");
                 window.location.reload();
             }
-        }
-        catch (error) {
-            if (error.response) {
-                const data = error.response.data;
+            else{
                 if (data.value === 'username') {
                     setErrorUsername(true);
                 }
                 else if (data.value === 'password') {
                     setErrorPassword(true);
                 }
-
-            } else {
-                console.log('Error', error);
             }
+        }
+        catch (error) {
+            console.log(error)
         }
     }
 
@@ -74,7 +72,7 @@ function Login() {
         <div className="card card-custom gutter-b card-border" id="kt_blockui_card">
             <div className="card-body">
                 <div className="mb-10">
-                    <h3>Sign In to Mendawai</h3>
+                    <h3>Sign In to Keurais Desk</h3>
                     <div className="text-muted font-weight-bold">Enter your details to login to your account:</div>
                 </div>
 
